@@ -249,9 +249,9 @@ class Lim(object):
             return
 
         x = broker.ask(volgetter, ptop)
-        nbytes, nfiles = x.get()
+        self.c_vb_v, nfiles = x.get()
 
-        if self.vbmax and self.vbmax < nbytes + sz:
+        if self.vbmax and self.vbmax < self.c_vb_v + sz:
             raise Pebkac(400, "volume has exceeded max size")
 
         if self.vnmax and self.vnmax < nfiles + 1:

@@ -2618,9 +2618,23 @@ class HttpCli(object):
         else:
             f, fn = ren_open(fn, *open_a, **params)
 
+        max_sz = 0
+        if lim and remains < 0:
+            if lim.vbmax:
+                max_sz = lim.c_vb_v
+            if lim.smax and (not max_sz or max_sz > lim.smax):
+                max_sz = lim.smax
+
         try:
             path = os.path.join(fdir, fn)
-            post_sz, sha_hex, sha_b64 = copier(reader, f, hasher, 0, self.args.s_wr_slp)
+            post_sz, sha_hex, sha_b64 = copier(
+                reader, f, hasher, max_sz, self.args.s_wr_slp
+            )
+        except:
+            if max_sz and self.sr.nb >= max_sz:
+                f.close()  # windows
+                wunlink(self.log, path, vfs.flags)
+            raise
         finally:
             f.close()
 
