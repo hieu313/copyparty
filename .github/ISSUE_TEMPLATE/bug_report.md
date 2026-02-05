@@ -9,7 +9,9 @@ assignees: '9001'
 
 <!-- NOTE:
 **please use english, or include an english translation.** aside from that,  
-all of the below are optional, consider them as inspiration, delete and rewrite at will, thx md -->
+include all of the information that might possibly be necessary to help diagnose your issue,
+especially things like the server config and server logs; that said,
+any parts below which are obviously and definitely irrelevant can be skipped -->
 
 ### Describe the bug
 a description of what the bug is
