@@ -7323,10 +7323,15 @@ class HttpCli(object):
                         else:
                             fn, desc = ln.split(" ", 1)
                         try:
-                            items[fn.lower()]["tags"]["descript.ion"] = desc
+                            item = items[fn.lower().strip("/")]
                         except:
                             t = "<li><code>%s</code> %s</li>"
                             rem.append(t % (html_escape(fn), html_escape(desc)))
+                            continue
+                        try:
+                            item["tags"]["descript.ion"] = desc
+                        except:
+                            item["tags"] = {"descript.ion": desc}
                     except:
                         pass
             if "descript.ion" not in taglist:
