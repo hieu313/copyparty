@@ -2424,6 +2424,7 @@ buggy feature? rip it out  by setting any of the following environment variables
 
 | env-var              | what it does |
 | -------------------- | ------------ |
+| `PRTY_NO_CTYPES`     | do not use features from external libraries such as kernel32 |
 | `PRTY_NO_DB_LOCK`    | do not lock session/shares-databases for exclusive access |
 | `PRTY_NO_IFADDR`     | disable ip/nic discovery by poking into your OS with ctypes |
 | `PRTY_NO_IMPRESO`    | do not try to load js/css files using `importlib.resources` |
@@ -3088,6 +3089,7 @@ set any of the following environment variables to disable its associated optiona
 | `PRTY_NO_PILF`       | disable Pillow `ImageFont` text rendering, used for folder thumbnails |
 | `PRTY_NO_PIL_AVIF`   | disable Pillow avif support (internal and/or [plugin](https://pypi.org/project/pillow-avif-plugin/)) |
 | `PRTY_NO_PIL_HEIF`   | disable 3rd-party Pillow plugin for [HEIF support](https://pypi.org/project/pillow-heif/) |
+| `PRTY_NO_PIL_JXL`    | disable 3rd-party Pillow plugin for [JXL support](https://pypi.org/project/pillow-jxl-plugin/) |
 | `PRTY_NO_PIL_WEBP`   | disable use of native webp support in Pillow |
 | `PRTY_NO_PSUTIL`     | do not use [psutil](https://pypi.org/project/psutil/) for reaping stuck hooks and plugins on Windows |
 | `PRTY_NO_PYFTPD`     | disable ftp(s) server ([pyftpdlib](https://pypi.org/project/pyftpdlib/)-based) |

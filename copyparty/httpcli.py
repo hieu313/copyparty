@@ -90,6 +90,7 @@ from .util import (
     loadpy,
     log_reloc,
     min_ex,
+    open_nolock,
     pathmod,
     quotep,
     rand_name,
@@ -4833,7 +4834,7 @@ class HttpCli(object):
         f = None
         try:
             st = os.stat(abspath)
-            f = open(*open_args)
+            f = open_nolock(*open_args)
             f.seek(0, os.SEEK_END)
             eof = f.tell()
             f.seek(0)
@@ -4867,6 +4868,7 @@ class HttpCli(object):
                 pass
 
             gone = 0
+            unsent = False
             t_fd = t_ka = time.time()
             while True:
                 assert f  # !rm
@@ -4883,6 +4885,7 @@ class HttpCli(object):
                     t_fd = t_ka = now
                     self.s.sendall(buf)
                     sent += len(buf)
+                    unsent = False
                     dls[dl_id] = (time.time(), sent)
                     continue
 
@@ -4893,14 +4896,16 @@ class HttpCli(object):
                 if t_fd < now - sec_fd:
                     try:
                         st2 = os.stat(open_args[0])
+                        szd = st2.st_size - st.st_size
                         if (
                             st2.st_ino != st.st_ino
                             or st2.st_size < sent
-                            or st2.st_size < st.st_size
+                            or szd < 0
+                            or unsent
                         ):
                             assert f  # !rm
                             # open new file before closing previous to avoid toctous (open may fail; cannot null f before)
-                            f2 = open(*open_args)
+                            f2 = open_nolock(*open_args)
                             f.close()
                             f = f2
                             f.seek(0, os.SEEK_END)
@@ -4915,7 +4920,10 @@ class HttpCli(object):
                                 ofs = sent  # just new fd? resume from same ofs
                             f.seek(ofs)
                             self.log("reopened at byte %d: %r" % (ofs, abspath), 6)
+                            unsent = False
                             gone = 0
+                        elif szd:
+                            unsent = True
                         st = st2
                     except:
                         gone += 1
@@ -5029,7 +5037,7 @@ class HttpCli(object):
                 self.log("moved to tier %d (%s)" % (tier, tiers[tier]))
 
             try:
-                with open(ap_data, "rb", self.args.iobuf) as f:
+                with open_nolock(ap_data, "rb", self.args.iobuf) as f:
                     f.seek(lower)
                     page = f.read(min(winsz, data_end - lower, upper - lower))
                 if not page:
@@ -5062,7 +5070,7 @@ class HttpCli(object):
                     break
 
         if lower < upper and not broken:
-            with open(req_path, "rb") as f:
+            with open_nolock(req_path, "rb") as f:
                 remains = sendfile_py(
                     self.log,
                     lower,

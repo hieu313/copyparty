@@ -63,6 +63,7 @@ from .util import (
     Daemon,
     align_tab,
     b64enc,
+    ctypes,
     dedent,
     has_resource,
     load_resource,
@@ -70,6 +71,7 @@ from .util import (
     pybin,
     read_utf8,
     termsize,
+    wk32,
     wrap,
 )
 
@@ -504,8 +506,10 @@ def sighandler(sig: Optional[int] = None, frame: Optional[FrameType] = None) -> 
 
 
 def disable_quickedit() -> None:
+    if not ctypes:
+        raise Exception("no ctypes")
+
     import atexit
-    import ctypes
     from ctypes import wintypes
 
     def ecb(ok: bool, fun: Any, args: list[Any]) -> list[Any]:
@@ -515,10 +519,10 @@ def disable_quickedit() -> None:
                 raise ctypes.WinError(err)  # type: ignore
         return args
 
-    k32 = ctypes.WinDLL(str("kernel32"), use_last_error=True)  # type: ignore
     if PY2:
         wintypes.LPDWORD = ctypes.POINTER(wintypes.DWORD)
 
+    k32 = wk32
     k32.GetStdHandle.errcheck = ecb  # type: ignore
     k32.GetConsoleMode.errcheck = ecb  # type: ignore
     k32.SetConsoleMode.errcheck = ecb  # type: ignore

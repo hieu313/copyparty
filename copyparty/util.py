@@ -141,10 +141,22 @@ except:
     HAVE_FICLONE = False
 
 try:
-    import ctypes
     import termios
 except:
     pass
+
+try:
+    if os.environ.get("PRTY_NO_CTYPES"):
+        raise Exception()
+
+    import ctypes
+except:
+    ctypes = None
+
+try:
+    wk32 = ctypes.WinDLL(str("kernel32"), use_last_error=True)  # type: ignore
+except:
+    wk32 = None
 
 try:
     if os.environ.get("PRTY_NO_IFADDR"):
@@ -2887,7 +2899,7 @@ def get_df(abspath: str, prune: bool) -> tuple[int, int, str]:
             bfree = ctypes.c_ulonglong(0)
             btotal = ctypes.c_ulonglong(0)
             bavail = ctypes.c_ulonglong(0)
-            ctypes.windll.kernel32.GetDiskFreeSpaceExW(  # type: ignore
+            wk32.GetDiskFreeSpaceExW(  # type: ignore
                 ctypes.c_wchar_p(abspath),
                 ctypes.pointer(bavail),
                 ctypes.pointer(btotal),
@@ -4281,8 +4293,8 @@ def termsize() -> tuple[int, int]:
 def hidedir(dp) -> None:
     if ANYWIN:
         try:
-            assert ctypes  # type: ignore  # !rm
-            k32 = ctypes.WinDLL("kernel32")
+            assert wk32  # type: ignore  # !rm
+            k32 = wk32
             attrs = k32.GetFileAttributesW(dp)
             if attrs >= 0:
                 k32.SetFileAttributesW(dp, attrs | 2)
@@ -4355,6 +4367,31 @@ elif HAVE_FCNTL:
     lock_file = _lock_file_ioctl
 else:
     lock_file = _lock_file_noop
+
+
+def _open_nolock_windows(bap: Union[str, bytes], *a, **ka) -> typing.BinaryIO:
+    assert ctypes  # !rm
+    assert wk32  # !rm
+    import msvcrt
+
+    try:
+        ap = bap.decode("utf-8", "replace")  # type: ignore
+    except:
+        ap = bap
+
+    fh = wk32.CreateFileW(ap, 0x80000000, 7, None, 3, 0x80, None)
+    # `-ap, GENERIC_READ, FILE_SHARE_READ|WRITE|DELETE, None, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, None
+    if fh == -1:
+        ec = ctypes.get_last_error()  # type: ignore
+        raise ctypes.WinError(ec)  # type: ignore
+    fd = msvcrt.open_osfhandle(fh, os.O_RDONLY)  # type: ignore
+    return os.fdopen(fd, "rb")
+
+
+if ANYWIN:
+    open_nolock = _open_nolock_windows
+else:
+    open_nolock = open
 
 
 try:
