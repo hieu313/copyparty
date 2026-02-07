@@ -1081,6 +1081,12 @@ class SvcHub(object):
             vs = [x.lower() for x in vs]
             setattr(al, n, vs)
 
+        ns = "ihead ohead"
+        for n in ns.split(" "):
+            vs = getattr(al, n) or []
+            vs = [x.lower() for x in vs]
+            setattr(al, n, vs)
+
         R = al.rp_loc
         if "//" in R or ":" in R:
             t = "found URL in --rp-loc; it should be just the location, for example /foo/bar"
@@ -1154,10 +1160,11 @@ class SvcHub(object):
         elif al.ban_url == "no":
             al.sus_urls = None
 
-        al.xff_hdr = al.xff_hdr.lower()
+        zs = "idp_h_grp idp_h_key pw_hdr pw_urlp xf_host xf_proto xf_proto_fb xff_hdr"
+        for k in zs.split(" "):
+            setattr(al, k, getattr(al, k).lower())
+
         al.idp_h_usr = [x.lower() for x in al.idp_h_usr or []]
-        al.idp_h_grp = al.idp_h_grp.lower()
-        al.idp_h_key = al.idp_h_key.lower()
 
         al.idp_hm_usr_p = {}
         for zs0 in al.idp_hm_usr or []:
