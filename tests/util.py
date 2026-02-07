@@ -212,6 +212,7 @@ class Cfg(Namespace):
             rm_retry="0/0",
             rotf_tz="UTC",
             rss_sort="m",
+            rw_edit="md",
             s_rd_sz=256 * 1024,
             s_wr_sz=256 * 1024,
             shr_who="auth",

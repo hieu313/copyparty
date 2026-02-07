@@ -448,7 +448,7 @@ Ls.swe = {
 
 	"mk_noname": "skriv ett namn i fältet till vänster först :p",
 	"nmd_i1": "lägg också till filändelsen du vill ha, till exempel <code>.md</code>", //m
-	"nmd_i2": "du kan bara skapa <code>.md</code>-filer eftersom du inte har borttagningsbehörighet", //m
+	"nmd_i2": "du kan bara skapa <code>.{0}</code>-filer eftersom du inte har borttagningsbehörighet", //m
 
 	"tv_load": "Laddar textfil:\n\n{0}\n\n{1}% ({2} av {3} MiB laddat)",
 	"tv_xe1": "kunde ej ladda textfil:\n\nfel ",

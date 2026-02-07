@@ -448,7 +448,7 @@ Ls.deu = {
 
 	"mk_noname": "Tipp' mal vorher lieber einen Namen in das Textfeld links, bevor du das machst :p",
 	"nmd_i1": "Füge auch die Dateiendung hinzu, z.B. <code>.md</code>",
-	"nmd_i2": "Du kannst nur <code>.md</code>-Dateien erstellen, da dir Lösch-Rechte fehlen",
+	"nmd_i2": "Du kannst nur <code>.{0}</code>-Dateien erstellen, da dir Lösch-Rechte fehlen",
 
 	"tv_load": "Textdatei wird geladen:\n\n{0}\n\n{1}% ({2} von {3} MiB geladen)",
 	"tv_xe1": "Konnte Textdatei nicht laden:\n\nFehler ",

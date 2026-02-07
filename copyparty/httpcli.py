@@ -3532,9 +3532,12 @@ class HttpCli(object):
         vfs, rem = self.asrv.vfs.get(self.vpath, self.uname, False, True)
         self._assert_safe_rem(rem)
 
-        if not self.can_delete and not new_file.lower().endswith(".md"):
-            t = "you can only create .md files because you don't have the delete-permission"
-            raise Pebkac(400, t)
+        if not self.can_delete and (
+            "." not in new_file
+            or new_file.rsplit(".", 1)[1].lower() not in self.args.rw_edit_set
+        ):
+            t = "you can only create %s files because you don't have the delete-permission"
+            raise Pebkac(400, t % (self.args.rw_edit.replace(",", "/")))
 
         sanitized = sanitize_fn(new_file)
         fdir = vfs.canonical(rem)
@@ -4051,8 +4054,11 @@ class HttpCli(object):
         rem = "{}/{}".format(rp, fn).strip("/")
         dbv, vrem = vfs.get_dbv(rem)
 
-        if not rem.lower().endswith(".md") and not self.can_delete:
-            raise Pebkac(400, "only markdown pls")
+        if not self.can_delete and (
+            "." not in rem or rem.rsplit(".", 1)[1].lower() not in self.args.rw_edit_set
+        ):
+            t = "you can only edit %s files because you don't have the delete-permission"
+            raise Pebkac(400, t % (self.args.rw_edit.replace(",", "/")))
 
         if nullwrite:
             response = json.dumps({"ok": True, "lastmod": 0})

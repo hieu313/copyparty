@@ -448,7 +448,7 @@ Ls.fra = {
 
 	"mk_noname": "entrez un nom dans le champ de texte à gauche avant de faire ça :p",
 	"nmd_i1": "ajoutez aussi l’extension souhaitée, par exemple <code>.md</code>", //m
-	"nmd_i2": "vous ne pouvez créer que des fichiers <code>.md</code> car vous n’avez pas la permission d’effacer", //m
+	"nmd_i2": "vous ne pouvez créer que des fichiers <code>.{0}</code> car vous n’avez pas la permission d’effacer", //m
 
 	"tv_load": "Chargement du document texte:\n\n{0}\n\n{1}% ({2} de {3} MiB chargés)",
 	"tv_xe1": "impossible de charger le fichier texte:\n\nerreur",

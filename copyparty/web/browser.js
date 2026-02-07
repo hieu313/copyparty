@@ -2,7 +2,8 @@
 
 var J_BRW = 1;
 
-if (!window.drcm) alert('FATAL ERROR: receiving stale data from the server; this may be due to a broken reverse-proxy (stuck cache). Try restarting copyparty and press CTRL-SHIFT-R in the browser');
+if (window.rw_edit === undefined)
+	alert('FATAL ERROR: receiving stale data from the server; this may be due to a broken reverse-proxy (stuck cache). Try restarting copyparty and press CTRL-SHIFT-R in the browser');
 
 var XHR = XMLHttpRequest,
 	img_re = /\.(a?png|avif|bmp|gif|heif|jpe?g|jfif|svg|webp|webm|mkv|mp4|m4v|mov)(\?|$)/i;
@@ -462,7 +463,7 @@ if (1)
 
 		"mk_noname": "type a name into the text field on the left before you do that :p",
 		"nmd_i1": "also add the file extension you want, for example <code>.md</code>",
-		"nmd_i2": "you can only create <code>.md</code> files because you don't have the delete-permission",
+		"nmd_i2": "you can only create <code>.{0}</code> files because you don't have the delete-permission",
 
 		"tv_load": "Loading text document:\n\n{0}\n\n{1}% ({2} of {3} MiB loaded)",
 		"tv_xe1": "could not load textfile:\n\nerror ",
@@ -7589,7 +7590,7 @@ var treectl = (function () {
 			reload_tree();
 			reload_browser();
 			tree_scrollto();
-			if (res.acct) {
+			if (res.cfg) {
 				acct = res.acct;
 				have_up2k_idx = res.idx;
 				have_tags_idx = res.itag;
@@ -7978,7 +7979,10 @@ function apply_perms(res) {
 	if (up2k)
 		up2k.set_fsearch();
 
-	ebi('new_mdi').innerHTML = has(perms, "delete") ? L.nmd_i1 : L.nmd_i2;
+	if (res.cfg)
+		rw_edit = res.rw_edit;
+	window.re_rw_edit = new RegExp('\.(' + rw_edit.replace(/,/g, '|') + ')$', 'i');
+	ebi('new_mdi').innerHTML = has(perms, "delete") ? L.nmd_i1 : L.nmd_i2.format(rw_edit.replace(/,/g, '/'));
 
 	widget.setvis();
 	thegrid.setvis();
@@ -8784,7 +8788,7 @@ var msel = (function () {
 		tb = QS('#op_new_md input[name="name"]');
 
 	form.onsubmit = function (e) {
-		if (!has(perms, "delete") && !/\.md$/.test(tb.value)) {
+		if (!has(perms, "delete") && !re_rw_edit.test(tb.value)) {
 			ev(e);
 			toast.err(10, L.nmd_i2);
 			return false;

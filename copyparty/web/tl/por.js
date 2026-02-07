@@ -448,7 +448,7 @@ Ls.por = {
 
 	"mk_noname": "digite um nome no campo de texto à esquerda antes de fazer isso :p",
 	"nmd_i1": "também adicione a extensão desejada, por exemplo <code>.md</code>",
-	"nmd_i2": "só pode criar arquivos <code>.md</code> porque não tem permissão para apagar",
+	"nmd_i2": "só pode criar arquivos <code>.{0}</code> porque não tem permissão para apagar",
 
 	"tv_load": "Carregando documento de texto:\n\n{0}\n\n{1}% ({2} de {3} MiB carregados)",
 	"tv_xe1": "não foi possível carregar o arquivo de texto:\n\nerro ",

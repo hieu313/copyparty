@@ -445,7 +445,7 @@ Ls.nno = {
 
 	"mk_noname": "skriv inn eit namn i tekstboksa åt venstre først :p",
 	"nmd_i1": "leggja også til filendinga du vil, til dømes <code>.md</code>", //m
-	"nmd_i2": "du kan berre laga <code>.md</code>-filer fordi du ikkje har delete-tilgang", //m
+	"nmd_i2": "du kan berre laga <code>.{0}</code>-filer fordi du ikkje har delete-tilgang", //m
 
 	"tv_load": "Lastar inn tekstfil:\n\n{0}\n\n{1}% ({2} av {3} MiB lasta ned)",
 	"tv_xe1": "kunne ikkje laste tekstfil:\n\nfeil ",

@@ -457,7 +457,7 @@ Ls.vie = {
 
 	"mk_noname": "hãy nhập tên vào ô bên trái trước khi thực hiện :p",
 	"nmd_i1": "hãy thêm cả phần mở rộng tệp bạn muốn, ví dụ <code>.md</code>",
-	"nmd_i2": "bạn chỉ có thể tạo tệp <code>.md</code> vì bạn không có quyền xóa",
+	"nmd_i2": "bạn chỉ có thể tạo tệp <code>.{0}</code> vì bạn không có quyền xóa",
 
 	"tv_load": "Đang tải tài liệu văn bản:\n\n{0}\n\n{1}% ({2} / {3} MiB)",
 	"tv_xe1": "không thể tải tệp văn bản:\n\nlỗi ",

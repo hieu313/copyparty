@@ -448,7 +448,7 @@ Ls.tur = {
 
 	"mk_noname": "bunu yapmadan önce soldaki boşluğa bir şeyler yazsana :p",
 	"nmd_i1": "ayrıca istediğin dosya uzantısını ekleyebilirsin, örneğin <code>.md</code>", //m
-	"nmd_i2": "silme iznin olmadığı için yalnızca <code>.md</code> dosyaları oluşturabilirsin", //m
+	"nmd_i2": "silme iznin olmadığı için yalnızca <code>.{0}</code> dosyaları oluşturabilirsin", //m
 
 	"tv_load": "Metin belgesi yükleniyor:\n\n{0}\n\n{1}% ({2} of {3} MiB yüklendi)",
 	"tv_xe1": "metin dosyası yüklenemedi:\n\nhata ",

@@ -451,7 +451,7 @@ Ls.pol = {
 
 	"mk_noname": "wpisz nazwę do pola po lewej zanim to zrobisz :p",
 	"nmd_i1": "możesz też dodać wybrane rozszerzenie, np. <code>.md</code>", //m
-	"nmd_i2": "możesz tworzyć tylko pliki <code>.md</code>, ponieważ nie masz uprawnień do usuwania", //m
+	"nmd_i2": "możesz tworzyć tylko pliki <code>.{0}</code>, ponieważ nie masz uprawnień do usuwania", //m
 
 	"tv_load": "Wczytywanie pliku tekstowego:\n\n{0}\n\n{1}% (wczytano {2} z {3} MiB)",
 	"tv_xe1": "nie udało się wczytać pliku:\n\nbłąd ",

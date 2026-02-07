@@ -448,7 +448,7 @@ Ls.epo = {
 
 	"mk_noname": "tajpu nomon en tekstokampo maldekstre antaŭ vi faras ĉi tion :p",
 	"nmd_i1": "vi povas aldoni la deziratan sufikson, ekzemple <code>.md</code>", //m
-	"nmd_i2": "vi povas krei nur <code>.md</code>-dosierojn ĉar vi ne havas forigan permeson", //m
+	"nmd_i2": "vi povas krei nur <code>.{0}</code>-dosierojn ĉar vi ne havas forigan permeson", //m
 
 	"tv_load": "Ŝargado de teksto-dokumento:\n\n{0}\n\n{1}% ({2} da {3} MiB ŝargita)",
 	"tv_xe1": "ne povas ŝargi teksto-dosieron:\n\neraro ",

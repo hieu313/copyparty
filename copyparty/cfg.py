@@ -139,6 +139,7 @@ def vf_vmap() -> dict[str, str]:
         "rss_sort",
         "rss_fmt_t",
         "rss_fmt_d",
+        "rw_edit",
         "shr_who",
         "sort",
         "tail_fd",
@@ -389,6 +390,7 @@ flagcats = {
         "opds_exts": "file formats to list in OPDS feeds; leave empty to show everything",
     },
     "textfiles": {
+        "rw_edit=md,txt": "only require read+write to edit .md and .txt",
         "md_no_br": "newline only on double-newline or two tailing spaces",
         "md_hist": "where to put markdown backups; s=subfolder, v=volHist, n=nope",
         "exp": "enable textfile expansion; see --help-exp",
