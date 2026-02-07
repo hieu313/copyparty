@@ -2372,6 +2372,12 @@ def exclude_dotfiles(filepaths: list[str]) -> list[str]:
     return [x for x in filepaths if not x.split("/")[-1].startswith(".")]
 
 
+def exclude_dotfiles_ls(
+    vfs_ls: list[tuple[str, os.stat_result]]
+) -> list[tuple[str, os.stat_result]]:
+    return [x for x in vfs_ls if not x[0].split("/")[-1].startswith(".")]
+
+
 def odfusion(
     base: Union[ODict[str, bool], ODict["LiteralString", bool]], oth: str
 ) -> ODict[str, bool]:

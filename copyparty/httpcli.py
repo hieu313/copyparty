@@ -64,6 +64,7 @@ from .util import (
     b64dec,
     eol_conv,
     exclude_dotfiles,
+    exclude_dotfiles_ls,
     formatdate,
     fsenc,
     gen_content_disposition,
@@ -1842,11 +1843,14 @@ class HttpCli(object):
             if not self.can_read:
                 vfs_ls = []
             if not self.can_dot:
-                names = set(exclude_dotfiles([x[0] for x in vfs_ls]))
-                vfs_ls = [x for x in vfs_ls if x[0] in names]
-
+                vfs_ls = exclude_dotfiles_ls(vfs_ls)
             fgen = [{"vp": vp, "st": st} for vp, st in vfs_ls]
-            fgen += [{"vp": v, "st": vst} for v in vfs_virt]
+
+            if vfs_virt:
+                zsl = list(vfs_virt)
+                if not self.can_dot:
+                    zsl = exclude_dotfiles(zsl)
+                fgen += [{"vp": v, "st": vst} for v in zsl]
 
         else:
             t = "invalid depth value '{}' (must be either '0' or '1'{})"
@@ -5813,7 +5817,7 @@ class HttpCli(object):
                 not self.args.no_scandir,
                 PERMS_rwh,
             )
-            dots = self.uname in vn.axs.udot
+            dots = self.uname in vn.axs.udot and "dots" in self.uparam
             dk_sz = vn.flags.get("dk")
         except:
             dk_sz = None
@@ -5826,7 +5830,7 @@ class HttpCli(object):
 
         dirs = [x[0] for x in vfs_ls if stat.S_ISDIR(x[1].st_mode)]
 
-        if not dots or "dots" not in self.uparam:
+        if not dots:
             dirs = exclude_dotfiles(dirs)
 
         dirs = [quotep(x) for x in dirs if x != excl]
@@ -5840,8 +5844,10 @@ class HttpCli(object):
                 kdirs.append(dn + "?k=" + zs)
             dirs = kdirs
 
-        for x in vfs_virt:
-            if x != excl:
+        if vfs_virt:
+            for x in vfs_virt:
+                if x == excl:
+                    continue
                 try:
                     dvn, drem = vfs.get(vjoin(top, x), self.uname, False, False)
                     if (
@@ -5853,7 +5859,9 @@ class HttpCli(object):
                     bos.stat(dvn.canonical(drem, False))
                 except:
                     x += "\n"
-                dirs.append(x)
+                dirs.append(quotep(x))
+            if not dots:
+                dirs = exclude_dotfiles(dirs)
 
         ret["a"] = dirs
         return ret
@@ -7064,7 +7072,7 @@ class HttpCli(object):
         )
         stats = {k: v for k, v in vfs_ls}
         ls_names = [x[0] for x in vfs_ls]
-        ls_names.extend(list(vfs_virt.keys()))
+        ls_names.extend(list(vfs_virt))
 
         if add_og and og_fn and not self.can_read:
             ls_names = [og_fn]

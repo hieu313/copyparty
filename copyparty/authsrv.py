@@ -1286,9 +1286,14 @@ class AuthSrv(object):
         if not bos.path.exists(src):
             self.log("warning: filesystem-path did not exist: %r" % (src,), 3)
 
+        vf = {}
+        if dst.startswith(".") or "/." in dst:
+            vf["unlistcr"] = True
+            vf["unlistcw"] = True
+
         mount[dst] = (src, dst0)
         daxs[dst] = AXS()
-        mflags[dst] = {}
+        mflags[dst] = vf
         return (src, dst)
 
     def _e(self, desc: Optional[str] = None) -> None:
