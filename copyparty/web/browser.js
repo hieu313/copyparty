@@ -5037,7 +5037,7 @@ var showfile = (function () {
 		}
 		r.mktree();
 		if (em) {
-			if (r.taildoc)
+			if (r.taildoc || em[2] == '( size of textfile exceeds serverside limit )')
 				r.show(em[0], true);
 			else
 				render(em);
@@ -9651,7 +9651,7 @@ var rcm = (function () {
 					break;
 				case 'ply': selFile.type == 'gf' ? thegrid.imshow(selFile.name) : play('f-' + selFile.id); break;
 				case 'pla': play('f-' + selFile.id); break;
-				case 'txt': location = selFile.dpath + '?doc=' + selFile.name; break;
+				case 'txt': showfile.show(selFile.name); break;
 				case 'md': location = selFile.path + (has(selFile.path, '?') ? '&v' : '?v'); break;
 				case 'cpl': cliptxt(selFile.url, function() {toast.ok(2, L.clipped)}); break;
 				case 'dl': ebi('seldl').click(); break;

@@ -7384,6 +7384,7 @@ class HttpCli(object):
                 else:
                     self.log("doc 2big: %r" % (doc,), 6)
                     doctxt = "( size of textfile exceeds serverside limit )"
+                    # NOTE: browser.js expects this exact message
             else:
                 self.log("doc 404: %r" % (doc,), 6)
                 doctxt = "( textfile not found )"
