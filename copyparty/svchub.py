@@ -1122,7 +1122,7 @@ class SvcHub(object):
                 vs = os.path.expandvars(os.path.expanduser(vs))
                 setattr(al, k, vs)
 
-        for k in "idp_adm rw_edit stats_u".split(" "):
+        for k in "idp_adm stats_u".split(" "):
             vs = getattr(al, k)
             vsa = [x.strip() for x in vs.split(",")]
             vsa = [x.lower() for x in vsa if x]

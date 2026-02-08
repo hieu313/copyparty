@@ -3534,10 +3534,10 @@ class HttpCli(object):
 
         if not self.can_delete and (
             "." not in new_file
-            or new_file.rsplit(".", 1)[1].lower() not in self.args.rw_edit_set
+            or new_file.rsplit(".", 1)[1].lower() not in vfs.flags["rw_edit_set"]
         ):
             t = "you can only create %s files because you don't have the delete-permission"
-            raise Pebkac(400, t % (self.args.rw_edit.replace(",", "/")))
+            raise Pebkac(400, t % (vfs.flags["rw_edit"].replace(",", "/")))
 
         sanitized = sanitize_fn(new_file)
         fdir = vfs.canonical(rem)
@@ -4055,10 +4055,11 @@ class HttpCli(object):
         dbv, vrem = vfs.get_dbv(rem)
 
         if not self.can_delete and (
-            "." not in rem or rem.rsplit(".", 1)[1].lower() not in self.args.rw_edit_set
+            "." not in rem
+            or rem.rsplit(".", 1)[1].lower() not in vfs.flags["rw_edit_set"]
         ):
             t = "you can only edit %s files because you don't have the delete-permission"
-            raise Pebkac(400, t % (self.args.rw_edit.replace(",", "/")))
+            raise Pebkac(400, t % (vfs.flags["rw_edit"].replace(",", "/")))
 
         if nullwrite:
             response = json.dumps({"ok": True, "lastmod": 0})
@@ -6881,12 +6882,19 @@ class HttpCli(object):
                     vpnodes.pop()
 
             if (
-                (is_md or self.can_delete)
-                and "nohtml" not in vn.flags
-                and (
+                (
                     (is_md and "v" in self.uparam)
                     or "edit" in self.uparam
                     or "edit2" in self.uparam
+                )
+                and "nohtml" not in vn.flags
+                and (
+                    is_md
+                    or self.can_delete
+                    or (
+                        "." in abspath
+                        and abspath.rsplit(".", 1)[1].lower() in vn.flags["rw_edit_set"]
+                    )
                 )
             ):
                 return self.tx_md(vn, abspath)

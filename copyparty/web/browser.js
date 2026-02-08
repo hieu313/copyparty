@@ -3818,6 +3818,12 @@ function fmt_ren(re, md, fmt) {
 }
 
 
+function enre_rw_edit() {
+	window.re_rw_edit = new RegExp('\.(' + rw_edit.replace(/,/g, '|') + ')$', 'i');
+}
+enre_rw_edit();
+
+
 function fs_abrt() {
 	toast.inf(30, L.fp_abrt);
 	fileman.sn++;
@@ -5161,7 +5167,7 @@ var showfile = (function () {
 		ebi('files').style.display = ebi('gfiles').style.display = ebi('lazy').style.display = ebi('pro').style.display = ebi('epi').style.display = 'none';
 		ebi('dldoc').setAttribute('href', url);
 		ebi('editdoc').setAttribute('href', addq(url, 'edit'));
-		ebi('editdoc').style.display = (has(perms, 'write') && (is_md || has(perms, 'delete'))) ? '' : 'none';
+		ebi('editdoc').style.display = (has(perms, 'write') && (re_rw_edit.test(name) || has(perms, 'delete'))) ? '' : 'none';
 
 		var wr = ebi('bdoc'),
 			nrend = r.nrend,
@@ -7981,7 +7987,7 @@ function apply_perms(res) {
 
 	if (res.cfg)
 		rw_edit = res.rw_edit;
-	window.re_rw_edit = new RegExp('\.(' + rw_edit.replace(/,/g, '|') + ')$', 'i');
+	enre_rw_edit();
 	ebi('new_mdi').innerHTML = has(perms, "delete") ? L.nmd_i1 : L.nmd_i2.format(rw_edit.replace(/,/g, '/'));
 
 	widget.setvis();
@@ -8790,7 +8796,7 @@ var msel = (function () {
 	form.onsubmit = function (e) {
 		if (!has(perms, "delete") && !re_rw_edit.test(tb.value)) {
 			ev(e);
-			toast.err(10, L.nmd_i2);
+			toast.err(10, L.nmd_i2.format(rw_edit.replace(/,/g, '/')));
 			return false;
 		}
 		if (tb.value) {
