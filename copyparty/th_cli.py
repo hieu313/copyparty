@@ -52,9 +52,9 @@ class ThumbCli(object):
         self.fmt_ffa = c["ffa"]
 
         # defer args.th_ff_jpg, can change at runtime
-        d = next((x for x in self.args.th_dec if x in ("vips", "pil")), None)
-        self.can_webp = HAVE_WEBP or d == "vips"
-        self.can_jxl = HAVE_JXL or d == "vips"
+        nonpil = next((x for x in self.args.th_dec if x in ("vips", "ff")), None)
+        self.can_webp = HAVE_WEBP or nonpil
+        self.can_jxl = HAVE_JXL or nonpil
 
     def log(self, msg: str, c: Union[int, str] = 0) -> None:
         self.log_func("thumbcli", msg, c)
@@ -104,18 +104,14 @@ class ThumbCli(object):
             if sfmt == "w":
                 if (
                     self.args.th_no_webp
-                    or (is_img and not self.can_webp)
+                    or not self.can_webp
                     or (self.args.th_ff_jpg and (not is_img or preferred == "ff"))
                 ):
                     sfmt = "j"
 
             if sfmt == "x":
-                if (
-                    self.args.th_no_jxl
-                    or (is_img and not self.can_jxl)
-                    or (self.args.th_ff_jpg and (not is_img or preferred == "ff"))
-                ):
-                    sfmt = "j"
+                if self.args.th_no_jxl or not self.can_jxl:
+                    sfmt = "w"
 
             vf_crop = dbv.flags["crop"]
             vf_th3x = dbv.flags["th3x"]
@@ -144,9 +140,12 @@ class ThumbCli(object):
 
         tpath = thumb_path(histpath, rem, mtime, fmt, self.fmt_ffa)
         tpaths = [tpath]
-        if fmt[:1] == "w" and fmt != "wav":
+        fmtc = fmt[:1]
+        if fmtc == "w" and fmt != "wav":
             # also check for jpg (maybe webp is unavailable)
             tpaths.append(tpath.rsplit(".", 1)[0] + ".jpg")
+        elif fmtc == "x":
+            tpaths.append(tpath.rsplit(".", 1)[0] + ".webp")
 
         ret = None
         abort = False

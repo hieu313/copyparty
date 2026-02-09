@@ -432,7 +432,7 @@ class ThumbSrv(object):
         zs = "th_dec th_no_webp th_no_jpg"
         for zs in zs.split(" "):
             ret.append("%s(%s)\n" % (zs, getattr(self.args, zs)))
-        zs = "th_qv thsize th_spec_p convt"
+        zs = "th_qv th_qvx thsize th_spec_p convt"
         for zs in zs.split(" "):
             ret.append("%s(%s)\n" % (zs, vn.flags.get(zs)))
         return "".join(ret)
@@ -646,7 +646,8 @@ class ThumbSrv(object):
             im.thumbnail(self.getres(vn, fmt))
 
         fmts = ["RGB", "L"]
-        args = {"quality": vn.flags["th_qv"]}
+        zs = "th_qvx" if tpath.endswith(".jxl") else "th_qv"
+        args = {"quality": vn.flags[zs]}
 
         if tpath.endswith(".webp"):
             # quality 80 = pillow-default
@@ -697,6 +698,10 @@ class ThumbSrv(object):
         if tpath.endswith("jpg"):
             qv = VIPS_JPG_Q[qv // 5]
             args["optimize_coding"] = True
+        elif tpath.endswith("jxl"):
+            qv = vn.flags["th_qvx"]
+            # args["effort"] = 8
+            #  `- not worth it; twice as slow, size drops 12%, no visual improvement unlike ffmpeg
         img.write_to_file(tpath, Q=qv, strip=True, **args)
         img.invalidate()
 
@@ -787,10 +792,20 @@ class ThumbSrv(object):
         ]
         # fmt: on
 
+        self._ffmpeg_im_o(tpath, vn, cmd)
+
+    def _ffmpeg_im_o(self, tpath: str, vn: VFS, cmd: list[bytes]) -> None:
         if tpath.endswith(".jpg"):
             cmd += [
                 b"-q:v",
                 FF_JPG_Q[vn.flags["th_qv"] // 5],  # default=??
+            ]
+        elif tpath.endswith(".jxl"):
+            cmd += [
+                b"-q:v",
+                unicode(vn.flags["th_qvx"]).encode("ascii"),  # default=??
+                b"-effort:v",
+                b"8",  # default=7, 1=fast, 9=max, 9~=8 but slower
             ]
         else:
             cmd += [
@@ -996,21 +1011,7 @@ class ThumbSrv(object):
         ]
         # fmt: on
 
-        if tpath.endswith(".jpg"):
-            cmd += [
-                b"-q:v",
-                FF_JPG_Q[vn.flags["th_qv"] // 5],  # default=??
-            ]
-        else:
-            cmd += [
-                b"-q:v",
-                unicode(vn.flags["th_qv"]).encode("ascii"),  # default=75
-                b"-compression_level:v",
-                b"6",  # default=4, 0=fast, 6=max
-            ]
-
-        cmd += [fsenc(tpath)]
-        self._run_ff(cmd, vn, "convt")
+        self._ffmpeg_im_o(tpath, vn, cmd)
 
     def conv_mp3(self, abspath: str, tpath: str, fmt: str, vn: VFS) -> None:
         quality = self.args.q_mp3.lower()
