@@ -8,7 +8,7 @@ import stat
 from .__init__ import TYPE_CHECKING
 from .authsrv import VFS
 from .bos import bos
-from .th_srv import EXTS_AC, HAVE_WEBP, HAVE_JXL, thumb_path
+from .th_srv import EXTS_AC, HAVE_JXL, HAVE_WEBP, thumb_path
 from .util import Cooldown, Pebkac
 
 if True:  # pylint: disable=using-constant-test

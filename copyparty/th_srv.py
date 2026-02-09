@@ -51,6 +51,8 @@ HAVE_AVIF = False
 HAVE_WEBP = False
 HAVE_JXL = False
 
+TH_CH = {"j": "jpg", "p": "png", "w": "webp", "x": "jxl"}
+
 EXTS_TH = set(["jpg", "webp", "jxl", "png"])
 EXTS_AC = set(["opus", "owa", "caf", "mp3", "flac", "wav"])
 EXTS_SPEC_SAFE = set("aif aiff flac mp3 opus wav".split())
@@ -240,8 +242,7 @@ def thumb_path(histpath: str, rem: str, mtime: float, fmt: str, ffa: set[str]) -
     if fmt in EXTS_AC:
         cat = "ac"
     else:
-        fc = fmt[:1]
-        fmt = "webp" if fc == "w" else "png" if fc == "p" else "jxl" if fc == "x" else "jpg"
+        fmt = TH_CH[fmt[:1]]
         cat = "th"
 
     return "%s/%s/%s/%s.%x.%s" % (histpath, cat, rd, fn, int(mtime), fmt)
@@ -670,8 +671,9 @@ class ThumbSrv(object):
         with Image.open(fsenc(abspath)) as im:
             self.conv_image_pil(im, tpath, fmt, vn)
 
-    def conv_image_vips(self, loader: "Callable[[int, dict], Any]",
-                        tpath: str, fmt: str, vn: VFS) -> None:
+    def conv_image_vips(
+        self, loader: "Callable[[int, dict], Any]", tpath: str, fmt: str, vn: VFS
+    ) -> None:
         crops = ["centre", "none"]
         if "f" in fmt:
             crops = ["none"]
@@ -700,8 +702,10 @@ class ThumbSrv(object):
 
     def conv_vips(self, abspath: str, tpath: str, fmt: str, vn: VFS) -> None:
         self.wait4ram(0.2, tpath)
+
         def _loader(w: int, kw: dict) -> Any:
             return pyvips.Image.thumbnail(abspath, w, **kw)
+
         self.conv_image_vips(_loader, tpath, fmt, vn)
 
     def conv_raw(self, abspath: str, tpath: str, fmt: str, vn: VFS) -> None:
@@ -714,12 +718,14 @@ class ThumbSrv(object):
             with open(tpath, "wb") as f:
                 f.write(thumb.data)
         if HAVE_VIPS:
+
             def _loader(w: int, kw: dict) -> Any:
                 if thumb.format == rawpy.ThumbFormat.BITMAP:
                     img = pyvips.Image.new_from_array(thumb.data, interpretation="rgb")
                     return img.thumbnail_image(w, **kw)
                 else:
                     return pyvips.Image.thumbnail_buffer(thumb.data, w, **kw)
+
             self.conv_image_vips(_loader, tpath, fmt, vn)
         elif HAVE_PIL:
             if thumb.format == rawpy.ThumbFormat.BITMAP:
