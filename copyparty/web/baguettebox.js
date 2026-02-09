@@ -39,7 +39,6 @@ window.baguetteBox = (function () {
         re_i = /^[^?]+\.(a?png|avif|bmp|gif|heif|jfif|jpe?g|jxl|svg|tiff?|webp)(\?|$)/i,
         re_v = /^[^?]+\.(webm|mkv|mp4|m4v|mov)(\?|$)/i,
         re_cbz = /^[^?]+\.(cbz)(\?|$)/i,
-        cbz_pics = ["png", "jpg", "jpeg", "gif", "bmp", "tga", "tif", "tiff", "webp", "avif"],
         anims = ['slideIn', 'fadeIn', 'none'],
         data = {},  // all galleries
         imagesElements = [],
@@ -251,8 +250,7 @@ window.baguetteBox = (function () {
                 var imagesList = fileList.map(function (file) {
                     return file["fn"];
                 }).filter(function (file) {
-                    return file.indexOf(".") !== -1
-                        && cbz_pics.indexOf(file.split(".").pop()) !== -1;
+                    return re_i.test(file);
                 }).sort();
 
                 if (imagesList.length === 0) {

@@ -64,7 +64,7 @@ def have_ff(scmd: str) -> bool:
 HAVE_FFMPEG = not os.environ.get("PRTY_NO_FFMPEG") and have_ff("ffmpeg")
 HAVE_FFPROBE = not os.environ.get("PRTY_NO_FFPROBE") and have_ff("ffprobe")
 
-CBZ_PICS = set("png jpg jpeg gif bmp tga tif tiff webp avif".split())
+CBZ_PICS = set("png jpg jpeg gif bmp tga tif tiff webp avif jxl".split())
 CBZ_01 = re.compile(r"(^|[^0-9v])0+[01]\b")
 
 FMT_AU = set("mp3 ogg flac wav".split())
