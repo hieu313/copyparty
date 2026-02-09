@@ -168,9 +168,9 @@ A_FILE = os.stat_result(
     (0o644, -1, -1, 1, 1000, 1000, 8, 0x39230101, 0x39230101, 0x39230101)
 )
 
-RE_CC = re.compile(r"[\x00-\x1f]")  # search always faster
-RE_USAFE = re.compile(r'[\x00-\x1f<>"]')  # search always faster
-RE_HSAFE = re.compile(r"[\x00-\x1f<>\"'&]")  # search always much faster
+RE_CC = re.compile(r"[\x00-\x1f\x7f]")  # search always faster
+RE_USAFE = re.compile(r'[\x00-\x1f\x7f<>"]')  # search always faster
+RE_HSAFE = re.compile(r"[\x00-\x1f\x7f<>\"'&]")  # search always much faster
 RE_HOST = re.compile(r"[^][0-9a-zA-Z.:_-]")  # search faster <=17ch
 RE_MHOST = re.compile(r"^[][0-9a-zA-Z.:_-]+$")  # match faster >=18ch
 RE_K = re.compile(r"[^0-9a-zA-Z_-]")  # search faster <=17ch
