@@ -36,7 +36,9 @@ window.baguetteBox = (function () {
         touchFlag = false,  // busy
         scrollCSS = ['', ''],
         scrollTimer = 0,
-        re_i = /^[^?]+\.(a?png|avif|bmp|gif|heif|jfif|jpe?g|jxl|svg|tiff?|webp)(\?|$)/i,
+        re_i = APPLE ?
+            /^[^?]+\.(a?png|avif|bmp|gif|hei[cf]s?|jfif|jpe?g|jxl|svg|tiff?|webp)(\?|$)/i :
+            /^[^?]+\.(a?png|avif|bmp|gif|jfif|jpe?g|jxl|svg|tiff?|webp)(\?|$)/i,
         re_v = /^[^?]+\.(webm|mkv|mp4|m4v|mov)(\?|$)/i,
         re_cbz = /^[^?]+\.(cbz)(\?|$)/i,
         anims = ['slideIn', 'fadeIn', 'none'],

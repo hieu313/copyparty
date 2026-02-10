@@ -5,8 +5,7 @@ var J_BRW = 1;
 if (window.rw_edit === undefined)
 	alert('FATAL ERROR: receiving stale data from the server; this may be due to a broken reverse-proxy (stuck cache). Try restarting copyparty and press CTRL-SHIFT-R in the browser');
 
-var XHR = XMLHttpRequest,
-	img_re = /\.(a?png|avif|bmp|gif|heif|jpe?g|jfif|svg|webp|webm|mkv|mp4|m4v|mov)(\?|$)/i;
+var XHR = XMLHttpRequest;
 
 if (1)
 	Ls.eng = {
@@ -1175,6 +1174,11 @@ function check_image_support(format, uri) {
 }
 check_image_support('webp', "data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==");
 check_image_support('jxl', "data:image/jxl;base64,/woIAAAMABKIAgC4AF3lEgA=");
+
+
+var img_re = APPLE ?
+	/\.(a?png|avif|bmp|gif|hei[cf]s?|jpe?g|jfif|svg|webp|webm|mkv|mp4|m4v|mov)(\?|$)/i :
+	/\.(a?png|avif|bmp|gif|jpe?g|jfif|svg|webp|webm|mkv|mp4|m4v|mov)(\?|$)/i;
 
 
 function set_files_html(html) {
