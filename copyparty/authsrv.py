@@ -2893,6 +2893,7 @@ class AuthSrv(object):
         have_e2d = False
         have_e2t = False
         have_dedup = False
+        have_symdup = False
         unsafe_dedup = []
         t = "volumes and permissions:\n"
         for zv in vfs.all_vols.values():
@@ -2932,14 +2933,17 @@ class AuthSrv(object):
 
             if "dedup" in zv.flags:
                 have_dedup = True
-                if (
-                    "e2d" not in zv.flags
-                    and "hardlink" not in zv.flags
-                    and "reflink" not in zv.flags
-                ):
-                    unsafe_dedup.append("/" + zv.vpath)
+                if "hardlink" not in zv.flags and "reflink" not in zv.flags:
+                    have_symdup = True
+                    if "e2d" not in zv.flags:
+                        unsafe_dedup.append("/" + zv.vpath)
 
             t += "\n"
+
+        if have_symdup and self.args.fika:
+            t = "WARNING: disabling fika due to symlink-based dedup in at least one volume; consider --reflink or --hardlink"
+            # self.args.fika = self.args.fika.replace("m", "").replace("d", "")  # probably not enough
+            self.args.fika = ""
 
         if self.warn_anonwrite and verbosity > 4:
             if not self.args.no_voldump:

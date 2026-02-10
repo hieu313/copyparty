@@ -1160,9 +1160,9 @@ class SvcHub(object):
         elif al.ban_url == "no":
             al.sus_urls = None
 
-        zs = "idp_h_grp idp_h_key pw_hdr pw_urlp xf_host xf_proto xf_proto_fb xff_hdr"
+        zs = "fika idp_h_grp idp_h_key pw_hdr pw_urlp xf_host xf_proto xf_proto_fb xff_hdr"
         for k in zs.split(" "):
-            setattr(al, k, getattr(al, k).lower())
+            setattr(al, k, str(getattr(al, k)).lower().strip())
 
         al.idp_h_usr = [x.lower() for x in al.idp_h_usr or []]
 

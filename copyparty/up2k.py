@@ -166,6 +166,7 @@ class Up2k(object):
         self.gt0 = 0
         self.gt1 = 0
         self.stop = False
+        self.fika = ""
         self.mutex = threading.Lock()
         self.reload_mutex = threading.Lock()
         self.reload_flag = 0
@@ -1475,6 +1476,23 @@ class Up2k(object):
 
             return True, bool(n_add or n_rm or do_vac)
 
+    def _fika(self, db: Dbw) -> None:
+        zs = self.fika
+        self.fika = ""
+        if zs not in self.args.fika:
+            return
+
+        t = "fika(%s); commit %d new files; %d updates"
+        self.log(t % (zs, db.nf, db.n))
+        db.c.connection.commit()
+        db.n = db.nf = 0
+        db.t = time.time()
+
+        self.mutex.release()
+        time.sleep(0.5)
+        self.mutex.acquire()
+        db.t = time.time()
+
     def _build_dir(
         self,
         db: Dbw,
@@ -1527,8 +1545,12 @@ class Up2k(object):
         gl = sorted(g)
         partials = set([x[0] for x in gl if "PARTIAL" in x[0]])
         for iname, inf in gl:
-            if self.stop:
-                return -1, 0, 0
+            if self.fika:
+                if not self.stop:
+                    self._fika(db)
+                if self.stop:
+                    self.fika = "f"
+                    return -1, 0, 0
 
             rp = rds + iname
             abspath = cdirs + iname
@@ -1675,8 +1697,12 @@ class Up2k(object):
 
         seen_files = set([x[2] for x in files])  # for dropcheck
         for sz, lmod, fn in files:
-            if self.stop:
-                return -1, 0, 0
+            if self.fika:
+                if not self.stop:
+                    self._fika(db)
+                if self.stop:
+                    self.fika = "f"
+                    return -1, 0, 0
 
             rp = rds + fn
             abspath = cdirs + fn
@@ -2978,6 +3004,7 @@ class Up2k(object):
             raise Pebkac(503, SBUSY % ("fs-reload",))
 
         got_lock = False
+        self.fika = "u"
         try:
             # bit expensive; 3.9=10x 3.11=2x
             if self.mutex.acquire(timeout=10):
@@ -3643,6 +3670,7 @@ class Up2k(object):
     def handle_chunks(
         self, ptop: str, wark: str, chashes: list[str]
     ) -> tuple[list[str], int, list[list[int]], str, float, int, bool]:
+        self.fika = "u"
         with self.mutex, self.reg_mutex:
             self.db_act = self.vol_act[ptop] = time.time()
             job = self.registry[ptop].get(wark)
@@ -3745,6 +3773,7 @@ class Up2k(object):
     def confirm_chunks(
         self, ptop: str, wark: str, written: list[str], locked: list[str]
     ) -> tuple[int, str]:
+        self.fika = "u"
         with self.mutex, self.reg_mutex:
             return self._confirm_chunks(ptop, wark, written, locked, True)
 
@@ -3784,6 +3813,7 @@ class Up2k(object):
 
     def finish_upload(self, ptop: str, wark: str, busy_aps: dict[str, int]) -> None:
         self.busy_aps = busy_aps
+        self.fika = "u"
         with self.mutex, self.reg_mutex:
             self._finish_upload(ptop, wark)
 
@@ -4138,6 +4168,7 @@ class Up2k(object):
             vn0, rem0 = self.vfs.get(vpath, uname, *permsets[0])
             vn, rem = vn0.get_dbv(rem0)
             ptop = vn.realpath
+            self.fika = "d"
             with self.mutex, self.reg_mutex:
                 abrt_cfg = vn.flags.get("u2abort", 1)
                 addr = (ip or "\n") if abrt_cfg in (1, 2) else ""
@@ -4266,6 +4297,7 @@ class Up2k(object):
                         continue
 
                 n_files += 1
+                self.fika = "d"
                 with self.mutex, self.reg_mutex:
                     cur = None
                     try:
@@ -4330,6 +4362,7 @@ class Up2k(object):
             raise Pebkac(400, "file does not exist case-sensitively")
 
         if stat.S_ISREG(st.st_mode) or stat.S_ISLNK(st.st_mode):
+            self.fika = "c"
             with self.mutex:
                 try:
                     ret = self._cp_file(uname, ip, svp, dvp, curs)
@@ -4351,6 +4384,7 @@ class Up2k(object):
 
         # don't use svn_dbv; would skip subvols due to _ls `if not rem:`
         g = svn.walk("", srem, [], uname, permsets, dots, scandir, True)
+        self.fika = "c"
         with self.mutex:
             try:
                 for dbv, vrem, _, atop, files, rd, vd in g:
@@ -4556,6 +4590,7 @@ class Up2k(object):
             raise Pebkac(400, "file does not exist case-sensitively")
 
         if stat.S_ISREG(st.st_mode) or stat.S_ISLNK(st.st_mode):
+            self.fika = "m"
             with self.mutex:
                 try:
                     ret = self._mv_file(uname, ip, svp, dvp, curs)
@@ -4579,6 +4614,7 @@ class Up2k(object):
                 raise Pebkac(400, "mv: source folder contains other volumes")
 
         g = svn.walk("", srem, [], uname, permsets, 2, scandir, True)
+        self.fika = "m"
         with self.mutex:
             try:
                 for dbv, vrem, _, atop, files, rd, vd in g:
@@ -5317,6 +5353,7 @@ class Up2k(object):
                 self.do_snapshot()
 
     def do_snapshot(self) -> None:
+        self.fika = "u"
         with self.mutex, self.reg_mutex:
             for k, reg in self.registry.items():
                 self._snap_reg(k, reg)
@@ -5597,6 +5634,7 @@ class Up2k(object):
 
     def shutdown(self) -> None:
         self.stop = True
+        self.fika = "f"
 
         if self.mth:
             self.mth.stop = True
