@@ -114,7 +114,7 @@ Ls.epo = {
 	"login": "Ensaluti",
 	"access": " atingo",
 	"ot_close": "fermi submenuon",
-	"ot_search": "serĉi dosierojn per atributoj, indiko / nomo, etikedoj de muziko aŭ ĉiu kombinaĵo de tiuj parametroj$N$N&lt;code&gt;foo bar&lt;/code&gt; = devas enhavi ambaŭ «foo» kaj «bar»,$N&lt;code&gt;foo -bar&lt;/code&gt; = devas enhavi «foo», sed ne «bar»,$N&lt;code&gt;^yana .opus$&lt;/code&gt; = komenci per «yana» kaj esti dosieron de formato «opus»$N&lt;code&gt;&quot;try unite&quot;&lt;/code&gt; = enhavi precipe «try unite»$N$Nformato de datoj estas iso-8601, ekzemple$N&lt;code&gt;2009-12-31&lt;/code&gt; aŭ &lt;code&gt;2020-09-12 23:30:00&lt;/code&gt;",
+	"ot_search": "`serĉi dosierojn per atributoj, indiko / nomo, etikedoj de muziko aŭ ĉiu kombinaĵo de tiuj parametroj$N$N`foo bar` = devas enhavi ambaŭ «foo» kaj «bar»,$N`foo -bar` = devas enhavi «foo», sed ne «bar»,$N`^yana .opus$` = komenci per «yana» kaj esti dosieron de formato «opus»$N`&quot;try unite&quot;` = enhavi precipe «try unite»$N$Nformato de datoj estas iso-8601, ekzemple$N`2009-12-31` aŭ `2020-09-12 23:30:00`",
 	"ot_unpost": "unpost: forigi viaj plej lastaj alŝutoj, aŭ ĉesigi nefinigitajn",
 	"ot_bup": "bup: fundamenta alŝutilo, funkias eĉ kun netscape 4.0",
 	"ot_mkdir": "mkdir: krei novan dosierujon",
@@ -232,7 +232,7 @@ Ls.epo = {
 	"ct_dots": 'montri kaŝitajn dosierojn (se servilo permesas)">kaŝitaj',
 	"ct_qdel": 'peti konfirmon nur unufoje antaŭ forigado">rapid-forig.',
 	"ct_dir1st": 'ordigi dosierujojn antaŭ dosieroj">📁 unue',
-	"ct_nsort": 'numera ordigo de dosiernomoj (ekz. &lt;code&gt;2&lt;/code&gt; antaŭ &lt;code&gt;11&lt;/code&gt;)">№.ord',
+	"ct_nsort": '`numera ordigo de dosiernomoj (ekz. `2` antaŭ `11`)">№.ord',
 	"ct_utc": 'montri ĉiuj datoj kaj tempoj per UTC">UTC',
 	"ct_readme": 'montri enhavon de README.md en listaĵo de dosieroj">📜 readme',
 	"ct_idxh": 'montri paĝon index.html anstataŭ listaĵo de dosieroj">htm',
@@ -263,7 +263,7 @@ Ls.epo = {
 
 	"cdt_lim": "maks. nombro de dosieroj por montri en dosierujo",
 	"cdt_ask": "je malsupro de paĝo, peti por ago$Nanstataŭ ŝarĝi pli da dosieroj",
-	"cdt_hsort": "kiom da ordigo-reguloj (&lt;code&gt;,sorthref&lt;/code&gt;) inkludi en adreso de la paĝo. Se agordita kiel 0, reguloj, inkluditaj en la adreso, estos ignoritaj",
+	"cdt_hsort": "`kiom da ordigo-reguloj (`,sorthref`) inkludi en adreso de la paĝo. Se agordita kiel 0, reguloj, inkluditaj en la adreso, estos ignoritaj",
 	"cdt_ren": "ebligi propran dekstra-klakan menuon, la normala menuo restas alirebla per MAJ + dekstra klako\">ŝalti",
 	"cdt_rdb": "montri la normalan dekstraklakan menuon, kiam la propra jam estas malfermita kaj oni denove dekstre klakas\">duobla",
 
@@ -283,6 +283,7 @@ Ls.epo = {
 	"ml_tint": "kolorado",
 	"ml_eq": "ekvalizilo",
 	"ml_drc": "kompresoro",
+	"ml_ss": "preterpasi silenton", //m
 
 	"mt_loop": "ripeti unu kanton\">🔁",
 	"mt_one": "haltigi post unu kanto\">1️⃣",
@@ -318,7 +319,7 @@ Ls.epo = {
 	"mt_c2ng": "via aparato ŝajne ne subtenas ĉi tiun formaton, sed ni provu uzi ĝin malgraŭe",
 	"mt_xowa": "estas difektoj en iOS, kiuj preventas fonan ludadon per ĉi tiu formato; bonvolu uzi caf aŭ mp3 anstataŭe",
 	"mt_tint": "travideblo (0-100) de ludadbreto$Nvi povas ŝanĝi ĝin, se ĝi aspektas tro distre dum ŝargado",
-	"mt_eq": "ŝaltas ekvalizilon kaj stirilon de plifortigado;$N$Nboost (plifortigado) &lt;code&gt;0&lt;/code&gt; = senmodifa 100%a laŭteco$N$Nwidth (larĝo) &lt;code&gt;1 &nbsp;&lt;/code&gt; = senmodifa dukanala sono$Nwidth (larĝo) &lt;code&gt;0.5&lt;/code&gt; = 50% miksado inter maldekstra kaj dekstra kanaloj$Nwidth (larĝo) &lt;code&gt;0 &nbsp;&lt;/code&gt; = unukanala sono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = senvokigo :^)$N$Nŝaltita ekvalizilo ankaŭ forigas paŭzojn inter muzikaĵoj en senpaŭzaj albumoj, agordi ĉion kiel 0 (sed 'width' kiel 1), se vi volas nur tion",
+	"mt_eq": "`ŝaltas ekvalizilon kaj stirilon de plifortigado;$N$Nboost (plifortigado) `0` = senmodifa 100%a laŭteco$N$Nwidth (larĝo) `1 &nbsp;` = senmodifa dukanala sono$Nwidth (larĝo) `0.5` = 50% miksado inter maldekstra kaj dekstra kanaloj$Nwidth (larĝo) `0 &nbsp;` = unukanala sono$N$Nboost `-0.8` &amp; width `10` = senvokigo :^)$N$Nŝaltita ekvalizilo ankaŭ forigas paŭzojn inter muzikaĵoj en senpaŭzaj albumoj, agordi ĉion kiel 0 (sed 'width' kiel 1), se vi volas nur tion",
 	"mt_drc": "ŝaltas kompresoron de dinamiko (glatigas laŭtecon de muzikaĵoj); ankaŭ ŝaltas ekvalizilon, do agordu ĉion (sed 'width') kiel 0, se vi ne volas ĝin; $N$Nplimalgrandigas laŭtecon de aŭdio super sojlo-valoro ('tresh') da dB; ĉiu proporcio-valoro ('ratio') da dB post 'tresh' 1 dB estos eligita, do implicitaj valoroj (tresh = -24, ratio = 12) faras, ke laŭteco neniam pli grandas ol -22 dB; tiel estas sendanĝera agordi 'boost'on kiel 0.8 aŭ eĉ 1.8 dum ATK = 0 kaj grandega RLS, kiel 90 (funkcias nur en Firefox, RLS estas maksimume 1 en aliaj retumiloj)$N$N(rigardu vikipedion, ĝi klariĝas pli bone)",
 	"mt_ss": "`ebligas salti silenton; multobligas la ludrapidon per `rap` ĉe komenco/fino de kantoj kiam la laŭteco estas sub `laŭt` kaj la pozicio estas ene de la unuaj `kom`% aŭ lastaj `fin`%", //m
 	"mt_ssvt": "laŭteca sojlo (0-255)\">laŭt", //m
@@ -404,8 +405,8 @@ Ls.epo = {
 	"fr_case": "uskleciva regula esprimo\">uskleco",
 	"fr_win": "Windows-taŭgaj nomoj; signoj <code>&lt;&gt;:&quot;\\|?*</code> estos anstataŭigitaj per japanaj duobla-larĝaj signoj\">win",
 	"fr_slash": "anstataŭigi <code>/</code>n per signo, kiu ne devigas kreadon de novaj dosierujoj\">sen /",
-	"fr_re": "ŝablono de regula esprimo, kiu estos aplikita al originalaj dosiernomoj; kaptogrupoj povas esti referencita en formatkampo, ekz. &lt;code&gt;(1)&lt;/code&gt;, &lt;code&gt;(2)&lt;/code&gt; k.t.p.",
-	"fr_fmt": "inspirita de foobar2000:$N&lt;code&gt;(title)&lt;/code&gt; anstataŭigitas per nomo de muzikaĵo,$N&lt;code&gt;[(artist) - ](title)&lt;/code&gt; preterpasas [ĉi tiun] parton, se artisto ne estas specifita$N&lt;code&gt;$lpad((tn),2,0)&lt;/code&gt; aldonas nulojn en trakonombro ĝis 2 ciferoj",
+	"fr_re": "`ŝablono de regula esprimo, kiu estos aplikita al originalaj dosiernomoj; kaptogrupoj povas esti referencita en formatkampo, ekz. `(1)`, `(2)` k.t.p.",
+	"fr_fmt": "`inspirita de foobar2000:$N`(title)` anstataŭigitas per nomo de muzikaĵo,$N`[(artist) - ](title)` preterpasas [ĉi tiun] parton, se artisto ne estas specifita$N`$lpad((tn),2,0)` aldonas nulojn en trakonombro ĝis 2 ciferoj",
 	"fr_pdel": "forigi",
 	"fr_pnew": "konservi kiel",
 	"fr_pname": "nomu vian novan ŝablonon",

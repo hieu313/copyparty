@@ -114,7 +114,7 @@ Ls.fin = {
 	"login": "Kirjaudu sisään", //m
 	"access": " -oikeudet",
 	"ot_close": "sulje alavalikko",
-	"ot_search": "etsi tiedostoja ominaisuuksien, tiedostopolun tai -nimen, musiikkitägien tai näiden yhdistelmän perusteella$N$N&lt;code&gt;foo bar&lt;/code&gt; = täytyy sisältää sekä «foo» että «bar»,$N&lt;code&gt;foo -bar&lt;/code&gt; = täytyy sisältää «foo» mutta ei «bar»,$N&lt;code&gt;^yana .opus$&lt;/code&gt; = alkaa «yana» ja on «opus»-tiedosto$N&lt;code&gt;&quot;try unite&quot;&lt;/code&gt; = sisältää täsmälleen «try unite»$N$Npäivämäärän muoto on iso-8601, kuten$N&lt;code&gt;2009-12-31&lt;/code&gt; tai &lt;code&gt;2020-09-12 23:30:00&lt;/code&gt;",
+	"ot_search": "`etsi tiedostoja ominaisuuksien, tiedostopolun tai -nimen, musiikkitägien tai näiden yhdistelmän perusteella$N$N`foo bar` = täytyy sisältää sekä «foo» että «bar»,$N`foo -bar` = täytyy sisältää «foo» mutta ei «bar»,$N`^yana .opus$` = alkaa «yana» ja on «opus»-tiedosto$N`&quot;try unite&quot;` = sisältää täsmälleen «try unite»$N$Npäivämäärän muoto on iso-8601, kuten$N`2009-12-31` tai `2020-09-12 23:30:00`",
 	"ot_unpost": "unpost: poista viimeaikaiset tai keskeytä keskeneräiset lataukset",
 	"ot_bup": "bup: tiedostojen 'perus'lähetysohjelma, tukee jopa netscape 4.0",
 	"ot_mkdir": "mkdir: luo uusi hakemisto",
@@ -263,7 +263,7 @@ Ls.fin = {
 
 	"cdt_lim": "tiedostojen enimmäismäärä näytettäväksi hakemistossa",
 	"cdt_ask": "sivun lopussa, sen sijaan että lataa $Nautomaattisesti lisää tiedostoja, kysy mitä tehdä",
-	"cdt_hsort": "kuinka monta lajittelusääntöä (&lt;code&gt;,sorthref&lt;/code&gt;) sisällyttää media-URL:eihin. Tämän asettaminen nollaan jättää myös huomioimatta media-linkeissä sisällytetyt lajittelusäännöt kun napsautat niitä",
+	"cdt_hsort": "`kuinka monta lajittelusääntöä (`,sorthref`) sisällyttää media-URL:eihin. Tämän asettaminen nollaan jättää myös huomioimatta media-linkeissä sisällytetyt lajittelusäännöt kun napsautat niitä",
 	"cdt_ren": "ota käyttöön mukautettu valikko, tavallinen valikko on käytettävissä painamalla shift ja napsauttamalla oikealla\">aktivoi", //m
 	"cdt_rdb": "näytä tavallinen oikean painikkeen valikko, kun mukautettu on jo auki ja oikeaa painiketta painetaan uudelleen\">x2", //m
 
@@ -283,6 +283,7 @@ Ls.fin = {
 	"ml_tint": "sävy",
 	"ml_eq": "taajuuskorjain",
 	"ml_drc": "dynaaminen alueen kompressori",
+	"ml_ss": "ohita hiljaisuus", //m
 
 	"mt_loop": "toista samaa kappaletta\">🔁",
 	"mt_one": "lopeta yhden toiston jälkeen\">1️⃣",
@@ -318,7 +319,7 @@ Ls.fin = {
 	"mt_c2ng": "laitteesi ei näytä tukevan tätä formaattia, mutta yritetään nyt silti",
 	"mt_xowa": "iOS:ssä on bugeja jotka estävät taustatoiston tällä formaatilla; käytä caf:ia tai mp3:a sen sijaan",
 	"mt_tint": "taustan taso (0-100) liukupalkissa$Ntehden puskuroinnista vähemmän häiritsevän",
-	"mt_eq": "aktivoi taajuuskorjaimen ja vahvistussäätimen;$N$Nvahvistus &lt;code&gt;0&lt;/code&gt; = normaali 100% äänenvoimakkuus (muokkaamaton)$N$Nleveys &lt;code&gt;1 &nbsp;&lt;/code&gt; = normaali stereo (muokkaamaton)$Nleveys &lt;code&gt;0.5&lt;/code&gt; = 50% vasen-oikea ristisyöttö$Nleveys &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nvahvistus &lt;code&gt;-0.8&lt;/code&gt; &amp; leveys &lt;code&gt;10&lt;/code&gt; = laulun poisto :^)$N$Nequalizerin käyttöönotto tekee saumattomista albumeista täysin saumattomia, joten jätä se päälle kaikilla arvoilla nollassa (paitsi leveys = 1) jos välität siitä",
+	"mt_eq": "`aktivoi taajuuskorjaimen ja vahvistussäätimen;$N$Nvahvistus `0` = normaali 100% äänenvoimakkuus (muokkaamaton)$N$Nleveys `1 &nbsp;` = normaali stereo (muokkaamaton)$Nleveys `0.5` = 50% vasen-oikea ristisyöttö$Nleveys `0 &nbsp;` = mono$N$Nvahvistus `-0.8` &amp; leveys `10` = laulun poisto :^)$N$Nequalizerin käyttöönotto tekee saumattomista albumeista täysin saumattomia, joten jätä se päälle kaikilla arvoilla nollassa (paitsi leveys = 1) jos välität siitä",
 	"mt_drc": "aktivoi dynaamisen alueen kompressorin; ottaa myös käyttöön taajuuskorjaimen tasapainottamaan spagettia, joten aseta kaikki EQ-kentät paitsi 'leveys' nollaan jos et halua sitä$N$Nalentaa äänenvoimakkuutta KYNNYS dB:n yläpuolella; jokaisesta SUHDE dB:stä KYNNYKSEN yli tulee 1 dB ulos, joten oletusarvot kynnys -24 ja suhde 12 tarkoittaa ettei sen pitäisi koskaan tulla kovempaa kuin -22 dB ja on turvallista nostaa equalizerin vahvistus 0.8:aan, tai jopa 1.8:aan ATK 0:lla ja valtavalla RLS:llä kuten 90 (toimii vain firefoxissa; RLS on max 1 muissa selaimissa)$N$N(katso wikipedia, he selittävät sen paljon paremmin)",
 	"mt_ss": "`ottaa käyttöön hiljaisuuden ohituksen; moninkertaistaa toistonopeuden `pik` lähellä kappaleen alkua/loppua, kun äänenvoimakkuus on alle `vol` ja sijainti on ensimmäisessä `alk`% tai viimeisessä `lop`%", //m
 	"mt_ssvt": "äänenvoimakkuuden kynnys (0-255)\">vol", //m
@@ -404,8 +405,8 @@ Ls.fin = {
 	"fr_case": "isot ja pienet kirjaimet erottava regex\">kirjainkoko",
 	"fr_win": "windows-yhteensopivat nimet; korvaa <code>&lt;&gt;:&quot;\\|?*</code> japanilaisilla leveillä merkeillä\">win",
 	"fr_slash": "korvaa <code>/</code> merkillä joka ei aiheuta uusien hakemistoiden luomista\">ei /",
-	"fr_re": "regex hakukuvio jota käytetään alkuperäisiin tiedostonimiin; kaappausryhmiin voi viitata alla olevassa muotoilukentässä kuten &lt;code&gt;(1)&lt;/code&gt; ja &lt;code&gt;(2)&lt;/code&gt; ja niin edelleen",
-	"fr_fmt": "foobar2000 innoittama:$N&lt;code&gt;(title)&lt;/code&gt; korvataan kappaleen nimellä,$N&lt;code&gt;[(artist) - ](title)&lt;/code&gt; sivuuttaa [tämän] osan jos artisti on tyhjä$N&lt;code&gt;$lpad((tn),2,0)&lt;/code&gt; ",
+	"fr_re": "`regex hakukuvio jota käytetään alkuperäisiin tiedostonimiin; kaappausryhmiin voi viitata alla olevassa muotoilukentässä kuten `(1)` ja `(2)` ja niin edelleen",
+	"fr_fmt": "`foobar2000 innoittama:$N`(title)` korvataan kappaleen nimellä,$N`[(artist) - ](title)` sivuuttaa [tämän] osan jos artisti on tyhjä$N`$lpad((tn),2,0)` ",
 	"fr_pdel": "poista",
 	"fr_pnew": "tallenna nimellä",
 	"fr_pname": "anna nimi uudelle esiasetuksellesi",

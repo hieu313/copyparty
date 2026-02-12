@@ -114,7 +114,7 @@ Ls.chi = {
 	"login": "登录", //m
 	"access": " 访问",
 	"ot_close": "关闭子菜单",
-	"ot_search": "按属性、路径/名称、音乐标签或上述内容的任意组合搜索文件$N$N&lt;code&gt;foo bar&lt;/code&gt; = 必须包含 «foo» 和 «bar»,$N&lt;code&gt;foo -bar&lt;/code&gt; = 包含 «foo» 而不包含 «bar»,$N&lt;code&gt;^yana .opus$&lt;/code&gt; = 以 «yama» 为开头的 «opus» 文件$N&lt;code&gt;&quot;try unite&quot;&lt;/code&gt; = 正好包含 «try unite»$N$N时间格式为 iso-8601, 比如:$N&lt;code&gt;2009-12-31&lt;/code&gt; or &lt;code&gt;2020-09-12 23:30:00&lt;/code&gt;",
+	"ot_search": "`按属性、路径/名称、音乐标签或上述内容的任意组合搜索文件$N$N`foo bar` = 必须包含 «foo» 和 «bar»,$N`foo -bar` = 包含 «foo» 而不包含 «bar»,$N`^yana .opus$` = 以 «yama» 为开头的 «opus» 文件$N`&quot;try unite&quot;` = 正好包含 «try unite»$N$N时间格式为 iso-8601, 比如:$N`2009-12-31` or `2020-09-12 23:30:00`",
 	"ot_unpost": "取消发布：删除最近上传的内容，或中止未完成的内容",
 	"ot_bup": "bup：基础上传器，甚至支持 Netscape 4.0",
 	"ot_mkdir": "mkdir：创建新目录",
@@ -263,7 +263,7 @@ Ls.chi = {
 
 	"cdt_lim": "文件夹中显示的最大文件数",
 	"cdt_ask": "滚动到底部时，$N不会加载更多文件，$N而是询问你该怎么做",
-	"cdt_hsort": "包含在媒体 URL 中的排序规则 (&lt;code&gt;,sorthref&lt;/code&gt;) 数量。将其设置为 0 时，点击媒体链接时也会忽略排序规则。", //m
+	"cdt_hsort": "`包含在媒体 URL 中的排序规则 (`,sorthref`) 数量。将其设置为 0 时，点击媒体链接时也会忽略排序规则。", //m
 	"cdt_ren": "启用自定义右键菜单，按住 shift 键并右键单击仍可访问常规菜单\">启用", //m
 	"cdt_rdb": "当自定义右键菜单已打开并再次右键点击时显示常规右键菜单\">x2", //m
 
@@ -283,6 +283,7 @@ Ls.chi = {
 	"ml_tint": "透明度",
 	"ml_eq": "音频均衡器",
 	"ml_drc": "动态范围压缩器",
+	"ml_ss": "跳过静音", //m
 
 	"mt_loop": "循环播放当前的歌曲\">🔁", //m
 	"mt_one": "只播放一首歌后停止\">1️⃣", //m
@@ -318,7 +319,7 @@ Ls.chi = {
 	"mt_c2ng": "您的设备似乎不支持此输出格式，不过我们还是试试看吧。", //m
 	"mt_xowa": "iOS 系统仍存在无法后台播放 owa 音乐的错误，请改用 caf 或 mp3 格式。", //m
 	"mt_tint": "在进度条上设置背景级别（0-100）",
-	"mt_eq": "启用均衡器和增益控制；$N$Nboost &lt;code&gt;0&lt;/code&gt; = 标准 100% 音量（默认）$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = 标准立体声（默认）$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% 左右交叉反馈$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = 单声道$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = 人声移除 )$N$N启用均衡器使无缝专辑完全无缝，所以如果你在乎这一点，请保持启用，所有值设为零（除了宽度 = 1）",
+	"mt_eq": "`启用均衡器和增益控制；$N$Nboost `0` = 标准 100% 音量（默认）$N$Nwidth `1 &nbsp;` = 标准立体声（默认）$Nwidth `0.5` = 50% 左右交叉反馈$Nwidth `0 &nbsp;` = 单声道$N$Nboost `-0.8` &amp; width `10` = 人声移除 )$N$N启用均衡器使无缝专辑完全无缝，所以如果你在乎这一点，请保持启用，所有值设为零（除了宽度 = 1）",
 	"mt_drc": "启用动态范围压缩器（音量平滑器 / 限幅器）；还会启用均衡器以平衡音频，因此如果你不想要它，请将均衡器字段除了 '宽度' 外的所有字段设置为 0$N$N降低 THRESHOLD dB 以上的音频的音量；每超过 THRESHOLD dB 的 RATIO 会有 1 dB 输出，所以默认值 tresh -24 和 ratio 12 意味着它的音量不应超过 -22 dB，可以安全地将均衡器增益提高到 0.8，甚至在 ATK 0 和 RLS 如 90 的情况下提高到 1.8（仅在 Firefox 中有效；其他浏览器中 RLS 最大为 1）$N$N（见维基百科，他们解释得更好）",
 	"mt_ss": "`启用跳过静音；当音量低于 `音量`，且播放位置在曲目前 `开始`% 或后 `结束`% 时，在接近歌曲开始/结束处将播放速度乘以 `快进`", //m
 	"mt_ssvt": "音量阈值 (0-255)\">音量", //m
@@ -404,8 +405,8 @@ Ls.chi = {
 	"fr_case": "区分大小写的正则表达式\">case",
 	"fr_win": "Windows 安全名称；将 <code>&lt;&gt;:&quot;\\|?*</code> 替换为日文全角字符\">win",
 	"fr_slash": "将 <code>/</code> 替换为不会导致新文件夹创建的字符\">不使用 /",
-	"fr_re": "正则表达式搜索模式应用于原始文件名；$N可以在下面的格式字段中引用捕获组，如&lt;code&gt;(1)&lt;/code&gt;和&lt;code&gt;(2)&lt;/code&gt;等等。",
-	"fr_fmt": "受到 foobar2000 的启发：$N&lt;code&gt;(title)&lt;/code&gt; 被歌曲名称替换,$N&lt;code&gt;[(artist) - ](title)&lt;/code&gt; 仅当歌曲艺术家不为空时才包含&lt;code&gt;[此]&lt;/code&gt;部分$N&lt;code&gt;$lpad((tn),2,0)&lt;/code&gt; 将曲目编号填充为 2 位数字",
+	"fr_re": "`正则表达式搜索模式应用于原始文件名；$N可以在下面的格式字段中引用捕获组，如`(1)`和`(2)`等等。",
+	"fr_fmt": "`受到 foobar2000 的启发：$N`(title)` 被歌曲名称替换,$N`[(artist) - ](title)` 仅当歌曲艺术家不为空时才包含`[此]`部分$N`$lpad((tn),2,0)` 将曲目编号填充为 2 位数字",
 	"fr_pdel": "删除",
 	"fr_pnew": "另存为",
 	"fr_pname": "为你的新预设提供一个名称",

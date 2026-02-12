@@ -114,7 +114,7 @@ Ls.spa = {
 	"login": "Iniciar sesión", //m
 	"access": " acceso",
 	"ot_close": "cerrar submenú",
-	"ot_search": "buscar archivos por atributos, ruta / nombre, etiquetas de música, o cualquier combinación$N$N&lt;code&gt;foo bar&lt;/code&gt; = debe contener «foo» y «bar»,$N&lt;code&gt;foo -bar&lt;/code&gt; = debe contener «foo» pero no «bar»,$N&lt;code&gt;^yana .opus$&lt;/code&gt; = empieza con «yana» y es un archivo «opus»$N&lt;code&gt;&quot;try unite&quot;&lt;/code&gt; = contiene exactamente «try unite»$N$Nel formato de fecha es iso-8601, como$N&lt;code&gt;2009-12-31&lt;/code&gt; o &lt;code&gt;2020-09-12 23:30:00&lt;/code&gt;",
+	"ot_search": "`buscar archivos por atributos, ruta / nombre, etiquetas de música, o cualquier combinación$N$N`foo bar` = debe contener «foo» y «bar»,$N`foo -bar` = debe contener «foo» pero no «bar»,$N`^yana .opus$` = empieza con «yana» y es un archivo «opus»$N`&quot;try unite&quot;` = contiene exactamente «try unite»$N$Nel formato de fecha es iso-8601, como$N`2009-12-31` o `2020-09-12 23:30:00`",
 	"ot_unpost": "dessubir: elimina tus subidas recientes, o aborta las inacabadas",
 	"ot_bup": "bup: uploader básico, soporta hasta netscape 4.0",
 	"ot_mkdir": "mkdir: crear un nuevo directorio",
@@ -262,7 +262,7 @@ Ls.spa = {
 
 	"cdt_lim": "número máximo de archivos a mostrar en una carpeta",
 	"cdt_ask": "al llegar al final,$Nen lugar de cargar más archivos,$Npreguntar qué hacer",
-	"cdt_hsort": "cuántas reglas de ordenación (&lt;code&gt;,sorthref&lt;/code&gt;) incluir en las URLs de medios. Ponerlo a 0 también ignorará las reglas de ordenación incluidas en los enlaces de medios al hacer clic en ellos",
+	"cdt_hsort": "`cuántas reglas de ordenación (`,sorthref`) incluir en las URLs de medios. Ponerlo a 0 también ignorará las reglas de ordenación incluidas en los enlaces de medios al hacer clic en ellos",
 	"cdt_ren": "habilitar menú contextual personalizado, el menú normal sigue siendo accesible con shift + clic derecho\">activar", //m
 	"cdt_rdb": "mostrar el menú normal de clic derecho cuando el personalizado ya está abierto y se vuelve a hacer clic\">x2", //m
 
@@ -282,6 +282,7 @@ Ls.spa = {
 	"ml_tint": "tinte",
 	"ml_eq": "ecualizador de audio",
 	"ml_drc": "compresor de rango dinámico",
+	"ml_ss": "saltar silencios", //m
 
 	"mt_loop": 'poner en bucle/repetir una canción">🔁',
 	"mt_one": 'parar después de una canción">1️⃣',
@@ -317,7 +318,7 @@ Ls.spa = {
 	"mt_c2ng": "tu dispositivo no parece soportar este formato de salida, pero intentémoslo de todas formas",
 	"mt_xowa": "hay errores en iOS que impiden la reproducción en segundo plano con este formato; por favor, usa caf o mp3 en su lugar",
 	"mt_tint": "nivel de fondo (0-100) en la barra de búsqueda$Npara hacer el buffering menos molesto",
-	"mt_eq": "activa el ecualizador y el control de ganancia;$N$Nganancia &lt;code&gt;0&lt;/code&gt; = volumen estándar 100% (sin modificar)$N$Nancho &lt;code&gt;1 &nbsp;&lt;/code&gt; = estéreo estándar (sin modificar)$Nancho &lt;code&gt;0.5&lt;/code&gt; = 50% de crossfeed izq-der$Nancho &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nganancia &lt;code&gt;-0.8&lt;/code&gt; y ancho &lt;code&gt;10&lt;/code&gt; = eliminación de voz :^)$N$Nactivar el ecualizador hace que los álbumes sin pausas sean completamente sin pausas, así que déjalo activado con todos los valores a cero (excepto ancho = 1) si eso te importa",
+	"mt_eq": "`activa el ecualizador y el control de ganancia;$N$Nganancia `0` = volumen estándar 100% (sin modificar)$N$Nancho `1 &nbsp;` = estéreo estándar (sin modificar)$Nancho `0.5` = 50% de crossfeed izq-der$Nancho `0 &nbsp;` = mono$N$Nganancia `-0.8` y ancho `10` = eliminación de voz :^)$N$Nactivar el ecualizador hace que los álbumes sin pausas sean completamente sin pausas, así que déjalo activado con todos los valores a cero (excepto ancho = 1) si eso te importa",
 	"mt_drc": "activa el compresor de rango dinámico (aplanador de volumen / brickwaller); también activará el EQ para equilibrar el espagueti, así que pon todos los campos de EQ excepto 'ancho' a 0 si no lo quieres$N$Nbaja el volumen del audio por encima de THRESHOLD dB; por cada RATIO dB pasado THRESHOLD hay 1 dB de salida, así que los valores por defecto de umbral -24 y ratio 12 significan que nunca debería sonar más fuerte de -22 dB y es seguro aumentar la ganancia del ecualizador a 0.8, o incluso 1.8 con ATK 0 y un RLS enorme como 90 (solo funciona en firefox; RLS es máx. 1 en otros navegadores)$N$N(ver wikipedia, lo explican mucho mejor)",
 	"mt_ss": "`activa salto de silencio; multiplica la velocidad por `av` cerca del inicio/fin cuando el volumen está bajo `vol` y la posición está en los primeros `ini`% o últimos `fin`%", //m
 	"mt_ssvt": "umbral de volumen (0-255)\">vol", //m
@@ -403,8 +404,8 @@ Ls.spa = {
 	"fr_case": "regex sensible a mayúsculas\">mayús",
 	"fr_win": "nombres seguros para windows; reemplaza <code>&lt;&gt;:&quot;\\|?*</code> con caracteres japoneses de ancho completo\">win",
 	"fr_slash": "reemplaza <code>/</code> con un carácter que no cree nuevas carpetas\">sin /",
-	"fr_re": "patrón de búsqueda regex para aplicar a los nombres de archivo originales; los grupos de captura se pueden referenciar en el campo de formato de abajo como &lt;code&gt;(1)&lt;/code&gt; y &lt;code&gt;(2)&lt;/code&gt; y así sucesivamente",
-	"fr_fmt": "inspirado en foobar2000:$N&lt;code&gt;(title)&lt;/code&gt; se reemplaza por el título de la canción,$N&lt;code&gt;[(artist) - ](title)&lt;/code&gt; omite la parte [entre corchetes] si el artista está en blanco$N&lt;code&gt;$lpad((tn),2,0)&lt;/code&gt; rellena el número de pista a 2 dígitos",
+	"fr_re": "`patrón de búsqueda regex para aplicar a los nombres de archivo originales; los grupos de captura se pueden referenciar en el campo de formato de abajo como `(1)` y `(2)` y así sucesivamente",
+	"fr_fmt": "`inspirado en foobar2000:$N`(title)` se reemplaza por el título de la canción,$N`[(artist) - ](title)` omite la parte [entre corchetes] si el artista está en blanco$N`$lpad((tn),2,0)` rellena el número de pista a 2 dígitos",
 	"fr_pdel": "eliminar",
 	"fr_pnew": "guardar como",
 	"fr_pname": "proporciona un nombre para tu nuevo preajuste",

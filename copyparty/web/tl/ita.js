@@ -114,7 +114,7 @@ Ls.ita = {
 	"login": "Accedi", //m
 	"access": " accesso",
 	"ot_close": "chiudi sottomenu",
-	"ot_search": "cerca file per attributi, percorso / nome, tag musicali, o qualsiasi combinazione di questi$N$N&lt;code&gt;foo bar&lt;/code&gt; = deve contenere sia «foo» che «bar»,$N&lt;code&gt;foo -bar&lt;/code&gt; = deve contenere «foo» ma non «bar»,$N&lt;code&gt;^yana .opus$&lt;/code&gt; = inizia con «yana» ed è un file «opus»$N&lt;code&gt;&quot;try unite&quot;&lt;/code&gt; = contiene esattamente «try unite»$N$Nil formato data è iso-8601, come$N&lt;code&gt;2009-12-31&lt;/code&gt; o &lt;code&gt;2020-09-12 23:30:00&lt;/code&gt;",
+	"ot_search": "`cerca file per attributi, percorso / nome, tag musicali, o qualsiasi combinazione di questi$N$N`foo bar` = deve contenere sia «foo» che «bar»,$N`foo -bar` = deve contenere «foo» ma non «bar»,$N`^yana .opus$` = inizia con «yana» ed è un file «opus»$N`&quot;try unite&quot;` = contiene esattamente «try unite»$N$Nil formato data è iso-8601, come$N`2009-12-31` o `2020-09-12 23:30:00`",
 	"ot_unpost": "unpost: elimina i tuoi caricamenti recenti, o interrompi quelli non completati",
 	"ot_bup": "bup: uploader di base, supporta anche netscape 4.0",
 	"ot_mkdir": "mkdir: crea una nuova directory",
@@ -263,7 +263,7 @@ Ls.ita = {
 
 	"cdt_lim": "numero massimo di file da mostrare in una cartella",
 	"cdt_ask": "quando scorri verso il fondo,$Ninvece di caricare più file,$Nchiedi cosa fare",
-	"cdt_hsort": "quante regole di ordinamento (&lt;code&gt;,sorthref&lt;/code&gt;) includere negli URL multimediali. Impostandolo a 0 ignorerà anche le regole di ordinamento incluse nei link multimediali quando li clicchi",
+	"cdt_hsort": "`quante regole di ordinamento (`,sorthref`) includere negli URL multimediali. Impostandolo a 0 ignorerà anche le regole di ordinamento incluse nei link multimediali quando li clicchi",
 	"cdt_ren": "abilita il menu contestuale personalizzato, il menu normale è accessibile con shift + clic destro\">abilita", //m
 	"cdt_rdb": "mostra il menu normale con il tasto destro quando quello personalizzato è già aperto e si clicca di nuovo\">x2", //m
 
@@ -283,6 +283,7 @@ Ls.ita = {
 	"ml_tint": "tinta",
 	"ml_eq": "equalizzatore audio",
 	"ml_drc": "compressore gamma dinamica",
+	"ml_ss": "salta i silenzi", //m
 
 	"mt_loop": "loop/ripeti una canzone\">🔁",
 	"mt_one": "fermati dopo una canzone\">1️⃣",
@@ -318,7 +319,7 @@ Ls.ita = {
 	"mt_c2ng": "il tuo dispositivo non sembra supportare questo formato di output, ma proviamo comunque",
 	"mt_xowa": "ci sono bug in iOS che prevengono la riproduzione in background usando questo formato; usa caf o mp3 invece",
 	"mt_tint": "livello sfondo (0-100) sulla barra di ricerca$Nper rendere il buffering meno distraente",
-	"mt_eq": "abilita l'equalizzatore e controllo guadagno;$N$Nboost &lt;code&gt;0&lt;/code&gt; = volume standard 100% (non modificato)$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = stereo standard (non modificato)$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% crossfeed sinistra-destra$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = rimozione vocale :^)$N$Nabilitando l'equalizzatore rende gli album senza interruzioni completamente senza interruzioni, quindi lascialo acceso con tutti i valori a zero (eccetto width = 1) se ti importa di quello",
+	"mt_eq": "`abilita l'equalizzatore e controllo guadagno;$N$Nboost `0` = volume standard 100% (non modificato)$N$Nwidth `1 &nbsp;` = stereo standard (non modificato)$Nwidth `0.5` = 50% crossfeed sinistra-destra$Nwidth `0 &nbsp;` = mono$N$Nboost `-0.8` &amp; width `10` = rimozione vocale :^)$N$Nabilitando l'equalizzatore rende gli album senza interruzioni completamente senza interruzioni, quindi lascialo acceso con tutti i valori a zero (eccetto width = 1) se ti importa di quello",
 	"mt_drc": "abilita il compressore gamma dinamica (appiattitore volume / brickwaller); abiliterà anche EQ per bilanciare gli spaghetti, quindi imposta tutti i campi EQ eccetto 'width' a 0 se non lo vuoi$N$NAbbassa il volume dell'audio sopra THRESHOLD dB; per ogni RATIO dB oltre THRESHOLD c'è 1 dB di output, quindi i valori di default di tresh -24 e ratio 12 significa che non dovrebbe mai diventare più forte di -22 dB ed è sicuro aumentare il boost equalizzatore a 0.8, o anche 1.8 con ATK 0 e un RLS enorme come 90 (funziona solo in firefox; RLS è max 1 in altri browser)$N$N(vedi wikipedia, lo spiegano molto meglio)",
 	"mt_ss": "`abilita il salto del silenzio; moltiplica la velocità di riproduzione per `av` vicino a inizio/fine quando il volume è sotto `vol` e la posizione è nei primi `ini`% o ultimi `fin`%", //m
 	"mt_ssvt": "soglia volume (0-255)\">vol", //m
@@ -404,8 +405,8 @@ Ls.ita = {
 	"fr_case": "regex case-sensitive\">maiusc",
 	"fr_win": "nomi sicuri per windows; sostituisce <code>&lt;&gt;:&quot;\\|?*</code> con caratteri giapponesi fullwidth\">win",
 	"fr_slash": "sostituisce <code>/</code> con un carattere che non causa la creazione di nuove cartelle\">no /",
-	"fr_re": "pattern di ricerca regex da applicare ai nomi file originali; i gruppi di cattura possono essere referenziati nel campo formato sottostante come &lt;code&gt;(1)&lt;/code&gt; e &lt;code&gt;(2)&lt;/code&gt; e così via",
-	"fr_fmt": "ispirato da foobar2000:$N&lt;code&gt;(title)&lt;/code&gt; è sostituito dal titolo della canzone,$N&lt;code&gt;[(artist) - ](title)&lt;/code&gt; salta [questa] parte se artista è vuoto$N&lt;code&gt;$lpad((tn),2,0)&lt;/code&gt; aggiunge padding al numero traccia a 2 cifre",
+	"fr_re": "`pattern di ricerca regex da applicare ai nomi file originali; i gruppi di cattura possono essere referenziati nel campo formato sottostante come `(1)` e `(2)` e così via",
+	"fr_fmt": "`ispirato da foobar2000:$N`(title)` è sostituito dal titolo della canzone,$N`[(artist) - ](title)` salta [questa] parte se artista è vuoto$N`$lpad((tn),2,0)` aggiunge padding al numero traccia a 2 cifre",
 	"fr_pdel": "elimina",
 	"fr_pnew": "salva come",
 	"fr_pname": "fornisci un nome per il tuo nuovo preset",
