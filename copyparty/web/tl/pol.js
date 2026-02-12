@@ -267,8 +267,8 @@ Ls.pol = {
 	"cdt_lim": "maksymalna liczba plików do pokazania na raz w folderze",
 	"cdt_ask": "przy przewijaniu w dół,$Nzapytaj co robić,$Nzamiast wczytywać kolejne pliki",
 	"cdt_hsort": "ile zasad sortowania (&lt;code&gt;,sorthref&lt;/code&gt;) zawierać w generowanych linkach multimediów. Wartość 0 sprawi, że zasady sortowania zawarte w linkach multimediów przy otwarciu również będą ignorowane",
-	"cdt_ren": "włącz niestandardowe menu kontekstowe, standardowe menu jest dostępne po wciśnięciu shift i kliknięciu prawym przyciskiem", //m
-	"cdt_rdb": "pokaż standardowe menu prawego przycisku, gdy niestandardowe jest już otwarte i nastąpi ponowne kliknięcie", //m
+	"cdt_ren": "włącz niestandardowe menu kontekstowe, standardowe menu jest dostępne po wciśnięciu shift i kliknięciu prawym przyciskiem\">włącz", //m
+	"cdt_rdb": "pokaż standardowe menu prawego przycisku, gdy niestandardowe jest już otwarte i nastąpi ponowne kliknięcie\">x2", //m
 
 	"tt_entree": "pokaż panel nawigacyjny (panel boczny z drzewem folderów)$NSkrót: B",
 	"tt_detree": "pokaż ślad nawigacyjny$NSkrót: B",
@@ -323,6 +323,12 @@ Ls.pol = {
 	"mt_tint": "jasność tła (0-100) paska,$Naby zmniejszyć widoczność buforowania",
 	"mt_eq": "włącza korektor dźwięku (equalizer) i kontrolę wzmocnienia dźwięku;$N$Nboost &lt;code&gt;0&lt;/code&gt; = standardowa głośność 100% (niezmodyfikowana)$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = standardowe stereo (niezmodyfikowane)$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% crossfeed lewo-prawo$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = usuwanie wokalu :^)$N$Nwłączenie korektora sprawia, że albumy bezprzerwowe są w pełni bez przerw, więc jeśli jest to dla ciebie ważne, zostaw wszystko na 0 (poza width = 1)",
 	"mt_drc": "włącza kompresor zakresu dynamiki (normalizacja głośności); włącza również korektor w celu zbalansowania tego spaghetti, więc ustaw wszystkie opcje korektora, oprócz 'width',na 0, jeśli go nie chcesz$N$Nobniża głośność audio nad THRESHOLD (próg) dB; dla każdego RATIO (współczynnika) dB, będącego ponad THRESHOLDem jest 1 dB wyjścia, więc domyślne wartości progu -24 i współczynnika 12 znaczą, że nigdy nie powinno być głośniej niż -22 dB i bezpieczne jest zwiększenie wzmocnienia korektora do 0.8, lub nawet 1.8 z ATK 0 i ogromnym RLS, jak 90 (działa tylko na firefoxie, inne przeglądarki mają limit RLS 1)$N$N(na wikipedii tłumaczą to dużo lepiej)",
+	"mt_ss": "`włącza pomijanie ciszy; mnoży prędkość odtwarzania przez `szyb` blisko początku/końca, gdy głośność jest poniżej `gł` i pozycja w pierwszych `pocz`% lub ostatnich `kon`%", //m
+	"mt_ssvt": "próg głośności (0-255)\">gł", //m
+	"mt_ssts": "aktywny próg (% utworu, początek)\">pocz", //m
+	"mt_sste": "aktywny próg (% utworu, koniec)\">kon", //m
+	"mt_ssrt": "czas narastania/opadania głośn./pręd.\">atk", //m
+	"mt_sssm": "mnożnik prędkości odtwarzania\">szyb", //m
 
 	"mb_play": "odtwórz",
 	"mm_hashplay": "odtworzyć ten plik audio?",

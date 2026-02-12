@@ -264,8 +264,8 @@ Ls.tur = {
 	"cdt_lim": "bir klasörde gösterilecek maksimum dosya sayısı",
 	"cdt_ask": "aşağı kaydırırken,$Ndaha fazla dosya yüklemek yerine,$Nne yapılacağını sor",
 	"cdt_hsort": "medya-URL'lerinde dahil edilecek sıralama kurallarının sayısı (&lt;code&gt;,sorthref&lt;/code&gt;). Bunu 0 olarak ayarlamak, tıklanırken medya bağlantılarına dahil edilen sıralama kurallarını da yok sayacaktır",
-	"cdt_ren": "özel sağ tık menüsünü etkinleştir, normal menü shift + sağ tık ile erişilebilir", //m
-	"cdt_rdb": "özel menü zaten açıkken tekrar sağ tıklanınca normal sağ tık menüsünü göster", //m
+	"cdt_ren": "özel sağ tık menüsünü etkinleştir, normal menü shift + sağ tık ile erişilebilir\">etkinleştir", //m
+	"cdt_rdb": "özel menü zaten açıkken tekrar sağ tıklanınca normal sağ tık menüsünü göster\">x2", //m
 
 	"tt_entree": "navigasyon panosunu göster (yan dizin panosu)$NHotkey: B",
 	"tt_detree": "içerik haritasını göster$Kısayol: B",
@@ -320,6 +320,12 @@ Ls.tur = {
 	"mt_tint": "seekbar'da arka plan seviyesi (0-100)$ön belleğin daha az dikkat dağıtıcı olmasını sağlar",
 	"mt_eq": "ekolayzer ve kazanç kontrolünü aktifleştirir;$N$Nboost &lt;code&gt;0&lt;/code&gt; = standart %100 ses (varsayılan)$N$Ngenişlik &lt;code&gt;1 &nbsp;&lt;/code&gt; = standart çift kanal (varsayılan)$Ngenişlik &lt;code&gt;0.5&lt;/code&gt; = %50 sol-sağ crossfeed$Ngenişlik &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nartış &lt;code&gt;-0.8&lt;/code&gt; &amp; artış &lt;code&gt;10&lt;/code&gt; = vokal kaldırma :^)$N$Nekolayzeri aktifleştirmek, aralıksız albümleri gerçekten aralıksız yapar, bu yüzden tüm değerleri 0'da bırakın (width = 1 hariç) tabii bunu umursuyorsnaız",
 	"mt_drc": "dinamik aralık sıkıştırıcıyı (ses düzleştiriciyi) aktifleştirir; spagettiyi dengelemek için aynı zamanda EQ'yu da açar, bunun olmasını istemiyorsanız EQ'daki 'genişlik' hariç tüm alanları 0 yapın$N$Nsınır dB'inin üstündeki tüm sesleri kısar; sınırı geçen her 1 dB için ancak 1 dB ses verilir, yani varsayılan eşik -24 ve oran 12 değerleri sesin -22 dB'den yükseğe çıkmayacağını ve EQ artışının 0,8'e, hatta ATK 0 ve hayvan gibi RLS (örneğin 90, bu sadece Firefox'ta çalışır; diğer tarayıcılarda RLS en fazla 1'dir) gibi değerlerle 1.,8'e kadar güvenle çıkabileceğini gösteriyor$N$N(git vikipediye bak, orada daha iyi açıklanıyor)",
+	"mt_ss": "`sessizlik atlamayı etkinleştirir; ses `ses` altındayken ve konum ilk `bas`% veya son `son`% içindeyken başlangıç/bitiş yakınında oynatma hızını `ileri` ile çarpar", //m
+	"mt_ssvt": "ses eşiği (0-255)\">ses", //m
+	"mt_ssts": "etkin eşik (% parça, başlangıç)\">bas", //m
+	"mt_sste": "etkin eşik (% parça, bitiş)\">son", //m
+	"mt_ssrt": "ses/hız rampa süresi\">atk", //m
+	"mt_sssm": "oynatma hızı çarpanı\">ileri", //m
 
 	"mb_play": "oynat",
 	"mm_hashplay": "bu ses dosyası oynatılsın mı?",

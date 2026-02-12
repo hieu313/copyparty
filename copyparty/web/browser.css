@@ -1476,12 +1476,14 @@ input.ssconf_v {
 	display: block;
 	padding: 0;
 }
+#au_ss,
 #au_drc,
 #au_eq {
 	display: block;
 	margin-top: .5em;
 	padding: 1.3em .3em;
 }
+#au_ss,
 #au_drc {
 	padding: .4em .3em;
 }

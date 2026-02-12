@@ -293,8 +293,8 @@ Ls.hmn = {
 	"cdt_lim": "max number of files to show in a folder",
 	"cdt_ask": "when scrolling to the bottom,$Ninstead of loading more files,$Nask what to do",
 	"cdt_hsort": "how many sorting rules (&lt;code&gt;,sorthref&lt;/code&gt;) to include in media-URLs. Setting this to 0 will also ignore sorting-rules included in media links when clicking them",
-	"cdt_ren": "enable custom right-click menu, you can still access the regular menu by pressing the shift key and right-clicking",
-	"cdt_rdb": "show the regular right-click menu when the custom one is already open and right-clicking again",
+	"cdt_ren": "enable custom right-click menu, you can still access the regular menu by pressing the shift key and right-clicking\">enable",
+	"cdt_rdb": "show the regular right-click menu when the custom one is already open and right-clicking again\">double",
 
 	"tt_entree": "show navpane (directory tree sidebar)$NHotkey: B",
 	"tt_detree": "show breadcrumbs$NHotkey: B",
@@ -312,6 +312,7 @@ Ls.hmn = {
 	"ml_tint": "tint",
 	"ml_eq": "audio equalizer",
 	"ml_drc": "dynamic range compressor",
+	"ml_ss": "skip silence",
 
 	"mt_loop": "loop/repeat one song\">🔁",
 	"mt_one": "stop after one song\">1️⃣",
@@ -348,7 +349,13 @@ Ls.hmn = {
 	"mt_xowa": "there are bugs in iOS preventing background playback using this format; please use caf or mp3 instead",
 	"mt_tint": "background level (0-100) on the seekbar$Nto make buffering less distracting",
 	"mt_eq": "enables the equalizer and gain control;$N$Nboost &lt;code&gt;0&lt;/code&gt; = standard 100% volume (unmodified)$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = standard stereo (unmodified)$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% left-right crossfeed$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = vocal removal :^)$N$Nenabling the equalizer makes gapless albums fully gapless, so leave it on with all the values at zero (except width = 1) if you care about that",
-	"mt_drc": "enables the dynamic range compressor (volume flattener / brickwaller); will also enable EQ to balance the spaghetti, so set all EQ fields except for 'width' to 0 if you don't want it$N$Nlowers the volume of audio above THRESHOLD dB; for every RATIO dB past THRESHOLD there is 1 dB of output, so default values of tresh -24 and ratio 12 means it should never get louder than -22 dB and it is safe to increase the equalizer boost to 0.8, or even 1.8 with ATK 0 and a huge RLS like 90 (only works in firefox; RLS is max 1 in other browsers)$N$N(see wikipedia, they explain it much better)",
+	"mt_drc": "enables the dynamic range compressor (volume flattener / brickwaller); will also enable EQ to balance the spaghetti, so set all EQ fields except for 'width' to 0 if you don't want it$N$Nlowers the volume of audio above THRESHOLD dB; for every RATIO dB past THRESHOLD there is 1 dB of output, so default values of 'tresh' -24 and 'ratio' 12 means it should never get louder than -22 dB and it is safe to increase the equalizer boost to 0.8, or even 1.8 with ATK 0 and a huge RLS like 90 (only works in firefox; RLS is max 1 in other browsers)$N$N(see wikipedia, they explain it much better)",
+	"mt_ss": "`enables skip-silence; multiplies playback speed by `ffwd` near the start/end of songs when volume is under `vol` and the playback position is within the first `start`% or the last `end`% of the track",
+	"mt_ssvt": "skip-silence volume threshold (0-255)\">min.vol",
+	"mt_ssts": "skip-silence active threshold (% of track, start)\">start",
+	"mt_sste": "skip-silence active threshold (% of track, end)\">end",
+	"mt_ssrt": "skip-silence volume/speed ramp up/down time\">atk",
+	"mt_sssm": "skip-silence playback speed multiplier\">ffwd",
 
 	"mb_play": "play",
 	"mm_hashplay": "play this audio file?",
@@ -477,7 +484,7 @@ Ls.hmn = {
 
 	"mk_noname": "type a name into the text field on the left before you do that :p",
 	"nmd_i1": "also add the file extension you want, for example <code>.md</code>",
-	"nmd_i2": "you can only create <code>.md</code> files because you don't have the delete-permission",
+	"nmd_i2": "you can only create <code>.{0}</code> files because you don't have the delete-permission",
 
 	"tv_load": "Loading text document:\n\n{0}\n\n{1}% ({2} of {3} MiB loaded)",
 	"tv_xe1": "could not load textfile:\n\nerror ",

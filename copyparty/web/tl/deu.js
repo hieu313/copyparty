@@ -264,8 +264,8 @@ Ls.deu = {
 	"cdt_lim": "max. Anz. Dateien, die in einem Ordner gezeigt werden sollen",
 	"cdt_ask": "beim Runterscrollen nach $NAktion fragen statt mehr,$NDateien zu laden",
 	"cdt_hsort": "Menge an Sortierregeln (&lt;code&gt;,sorthref&lt;/code&gt;) in Media-URLs enthalten sein sollen. Ein Wert von 0 sorgt dafür, dass Sortierregeln in Media-URLs ignoriert werden",
-	"cdt_ren": "spezielles Rechtsklick-Menü aktivieren, das Browser-Menü ist weiterhin mit Shift + Rechtsklick erreichbar",
-	"cdt_rdb": "normales Rechtsklick-Menü anzeigen, wenn das benutzerdefinierte bereits offen ist und erneut rechts geklickt wird", //m
+	"cdt_ren": "spezielles Rechtsklick-Menü aktivieren, das Browser-Menü ist weiterhin mit Shift + Rechtsklick erreichbar\">aktivieren",
+	"cdt_rdb": "normales Rechtsklick-Menü anzeigen, wenn das benutzerdefinierte bereits offen ist und erneut rechts geklickt wird\">x2", //m
 
 	"tt_entree": "Navpane anzeigen (Ordnerbaum Sidebar)$NHotkey: B",
 	"tt_detree": "Breadcrumbs anzeigen$NHotkey: B",
@@ -320,6 +320,12 @@ Ls.deu = {
 	"mt_tint": "Hintergrundlevel (0-100) auf der Seekbar$Num Buffern weniger ablenkend zu machen",
 	"mt_eq": "Aktiviert Equalizer und Lautstärkeregelung;$N$Nboost &lt;code&gt;0&lt;/code&gt; = Standard 100% Lautstärke (unverändert)$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = Standard Stereo (unverändert)$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% Links-Rechts-Crossfeed$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = Mono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = Gesangsentfernung :^)$N$NDer Equalizer macht nahtlose Alben vollständig nahtlos, also lass' ihn mit allen Werten auf Null (außer width = 1) aktiviert, wenn dir das wichtig ist",
 	"mt_drc": "Aktiviert den Dynamic Range Compressor (Lautstärkeglättung/-begrenzung); aktiviert auch den Equalizer zum Ausgleich, setze alle EQ-Felder außer 'width' auf 0, wenn du das nicht willst$N$Nsenkt die Lautstärke von Audio über SCHWELLENWERT dB; für jedes VERHÄLTNIS dB über SCHWELLENWERT gibt es 1 dB Ausgabe, also bedeuten Standardwerte von tresh -24 und ratio 12, dass es nie lauter als -22 dB werden sollte und der Equalizer-Boost sicher auf 0.8 oder sogar 1.8 mit ATK 0 und einem großen RLS wie 90 erhöht werden kann (funktioniert nur in Firefox; in anderen Browsern ist RLS max. 1)$N$N(siehe Wikipedia, dort wird es viel besser erklärt)",
+	"mt_ss": "`Aktiviert Stille-Überspringen; multipliziert die Wiedergabegeschwindigkeit mit `vor`, nahe Anfang/Ende von Titeln, wenn die Lautstärke unter `laut` liegt und die Position innerhalb der ersten `anf`% oder letzten `end`% ist", //m
+	"mt_ssvt": "Lautstärkeschwelle (0-255)\">laut", //m
+	"mt_ssts": "Aktiv-Schwelle (% Titel, Anfang)\">anf", //m
+	"mt_sste": "Aktiv-Schwelle (% Titel, Ende)\">end", //m
+	"mt_ssrt": "Ein/Ausblendzeit Lautstärke/Geschwindigkeit\">atk", //m
+	"mt_sssm": "Wiedergabegeschwindigkeits-Multiplikator\">vor", //m
 
 	"mb_play": "Abspielen",
 	"mm_hashplay": "Diese Audiodatei abspielen?",

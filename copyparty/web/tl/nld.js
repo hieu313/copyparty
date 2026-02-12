@@ -264,8 +264,8 @@ Ls.nld = {
 	"cdt_lim": "Max aantal bestanden laten zien in een map",
 	"cdt_ask": "Als helemaal naar beneden gescrolld bent,$Nin plaats van meer inladen,$Nvraag wat het moet doen",
 	"cdt_hsort": "Hoeveel sorteerregels (&lt;code&gt;,sorthref&lt;/code&gt;) moeten er in media-URL's worden opgenomen? Als je dit op 0 instelt, worden de sorteerregels in medialinks ook genegeerd wanneer erop geklikt word.",
-	"cdt_ren": "Aangepast rechtermuisknopmenu inschakelen, het normale menu blijft beschikbaar met shift + rechtermuisknop", //m
-	"cdt_rdb": "toon het normale rechtermuisknopmenu wanneer het aangepaste al open is en opnieuw wordt geklikt", //m
+	"cdt_ren": "Aangepast rechtermuisknopmenu inschakelen, het normale menu blijft beschikbaar met shift + rechtermuisknop\">inschakelen", //m
+	"cdt_rdb": "toon het normale rechtermuisknopmenu wanneer het aangepaste al open is en opnieuw wordt geklikt\">x2", //m
 
 	"tt_entree": "Laat navpane zien (directoryboom zijbalk)$NHotkey: B",
 	"tt_detree": "Laat breadcrumbs zien$NHotkey: B",
@@ -320,6 +320,12 @@ Ls.nld = {
 	"mt_tint": "Achtergrond helderheid (0-100) op de zoekbalk om bufferen minder storend te maken",
 	"mt_eq": "Schakelt de equalizer en gain-control in;$N$Nboost &lt;code&gt;0&lt;/code&gt; = standaard 100% volume (ongeweijzigd)$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = standaard stereo (ongeweijzigd)$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% links-rechts crossfeed$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = stemverwijdering :^)$N$NDoor de equalizer in te schakelen, worden gapless albums volledig gapless. Laat hem dus aanstaan met alle waarden op nul (behalve width = 1) als je dat belangrijk vindt.",
 	"mt_drc": "Schakelt de dynamic range compressor in (volume flattener / brickwaller); schakelt ook EQ in om de spaghetti te balanceren, dus zet alle EQ velden behalve ‘width’ op 0 als je dat niet wilt.$N$Nverlaagt het volume van audio boven THRESHOLD dB; voor elke RATIO dB voorbij THRESHOLD is er 1 dB output, dus standaardwaarden van tresh -24 en ratio 12 betekenen dat het nooit luider dan -22 dB zou moeten worden en het is veilig om de equalizer boost te verhogen tot 0.8, of zelfs 1.8 met ATK 0 en een enorme RLS zoals 90 (werkt alleen in firefox; RLS is max 1 in andere browsers)$N$N(zie wikipedia, die legt het veel beter uit)",
+	"mt_ss": "`Schakelt stilte-overslaan in; vermenigvuldigt afspeelsnelheid met `vrs` nabij begin/einde wanneer volume onder `vol` is en positie binnen de eerste `beg`% of laatste `eind`%", //m
+	"mt_ssvt": "Volumedrempel (0-255)\">vol", //m
+	"mt_ssts": "Actieve drempel (% track, begin)\">beg", //m
+	"mt_sste": "Actieve drempel (% track, einde)\">eind", //m
+	"mt_ssrt": "Op/aflooptijd volume/snelheid\">atk", //m
+	"mt_sssm": "Vermenigvuldiger afspeelsnelheid\">vrs", //m
 
 	"mb_play": "Afspelen",
 	"mm_hashplay": "Deze audio bestand afspelen?",

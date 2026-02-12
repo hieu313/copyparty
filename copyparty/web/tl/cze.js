@@ -268,8 +268,8 @@ Ls.cze = {
 	"cdt_lim": "maximální počet souborů k zobrazení ve složce",
 	"cdt_ask": "při posunování na konec,$Nmísto načítání více souborů,$N se zeptat co dělat",
 	"cdt_hsort": "kolik pravidel řazení (&lt;code&gt;,sorthref&lt;/code&gt;) zahrnout do media-URL. Nastavení na 0 bude také ignorovat pravidla řazení zahrnutá v media odkazech při kliknutí na ně",
-	"cdt_ren": "povolit vlastní kontextovou nabídku, běžnou nabídku lze otevřít podržením klávesy shift a kliknutím pravým tlačítkem", //m
-	"cdt_rdb": "zobrazit běžné menu pravého tlačítka, když je vlastní již otevřené a znovu se klikne pravým", //m
+	"cdt_ren": "povolit vlastní kontextovou nabídku, běžnou nabídku lze otevřít podržením klávesy shift a kliknutím pravým tlačítkem\">povolit", //m
+	"cdt_rdb": "zobrazit běžné menu pravého tlačítka, když je vlastní již otevřené a znovu se klikne pravým\">x2", //m
 
 	"tt_entree": "zobrazit navigační panel (postranní strom adresářů)$NKlávesová zkratka: B",
 	"tt_detree": "zobrazit drobečkovou navigaci$NKlávesová zkratka: B",
@@ -324,6 +324,12 @@ Ls.cze = {
 	"mt_tint": "úroveň pozadí (0-100) na posuvníku$Nabyste učinili ukládání do vyrovnávací paměti méně rušivým",
 	"mt_eq": "povoluje ekvalizér a ovládání zisku;$N$Nboost &lt;code&gt;0&lt;/code&gt; = standardní 100% hlasitost (nezměněno)$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = standardní stereo (nezměněno)$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% levý-pravý crossfeed$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = odstranění vokálů :^)$N$Npovolení ekvalizéru činí alba bez mezer zcela bez mezer, takže to nechte zapnuté se všemi hodnotami na nule (kromě width = 1), pokud vám na tom záleží",
 	"mt_drc": "povoluje kompresor dynamického rozsahu (vyrovnávač hlasitosti / brickwaller); také povolí EQ pro vyvážení špaget, takže nastavte všechna EQ pole kromě 'width' na 0, pokud to nechcete$N$Nsnižuje hlasitost zvuku nad THRESHOLD dB; pro každý RATIO dB za THRESHOLD je 1 dB výstupu, takže výchozí hodnoty tresh -24 a ratio 12 znamenají, že by nikdy nemělo být hlasitější než -22 dB a je bezpečné zvýšit boost ekvalizéru na 0.8, nebo dokonce 1.8 s ATK 0 a obrovským RLS jako 90 (funguje pouze ve firefoxu; RLS je max 1 v jiných prohlížečích)$N$N(viz wikipedia, vysvětlují to mnohem lépe)",
+	"mt_ss": "`povolí přeskočení ticha; násobí rychlost přehrávání `rych` u začátku/konce skladeb, když je hlasitost pod `hl` a pozice je v prvních `zač`% nebo posledních `kon`%", //m
+	"mt_ssvt": "prahová hlasitost (0-255)\">hl", //m
+	"mt_ssts": "aktivní práh (% stopy, začátek)\">zač", //m
+	"mt_sste": "aktivní práh (% stopy, konec)\">kon", //m
+	"mt_ssrt": "doba náběhu/útlumu hlasitosti/rychlosti\">atk", //m
+	"mt_sssm": "násobič rychlosti přehrávání\">rych", //m
 
 	"mb_play": "přehrát",
 	"mm_hashplay": "přehrát tento audio soubor?",

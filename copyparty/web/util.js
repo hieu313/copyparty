@@ -1561,6 +1561,13 @@ var tt = (function () {
         if (!msg)
             return;
 
+        if (msg.startsWith('`')) {
+            var x = false;
+            msg = msg.slice(1);
+            while (msg.indexOf('`') + 1)
+                msg = msg.replace('`', (x = !x) ? '<code>' : '</code>')
+        }
+
         r.el = this;
         var pos = this.getBoundingClientRect(),
             dir = this.getAttribute('ttd') || '',

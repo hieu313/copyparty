@@ -264,8 +264,8 @@ Ls.swe = {
 	"cdt_lim": "högsta antal filer att visa in en mapp",
 	"cdt_ask": "när du når botten av vyn,$Nbe om en åtgärd istället för att ladda fler filer",
 	"cdt_hsort": "hur många sorteringsregler (&lt;code&gt;,sorthref&lt;/code&gt;) att inkludera i media-URL:er. Sätts detta till 0 kommer regler i klickade medialänkar även att ignoreras",
-	"cdt_ren": "aktivera anpassad högerklicksmeny, den vanliga menyn är tillgänglig med shift + högerklick", //m
-	"cdt_rdb": "visa den vanliga högerklicksmenyn när den anpassade redan är öppen och man högerklickar igen", //m
+	"cdt_ren": "aktivera anpassad högerklicksmeny, den vanliga menyn är tillgänglig med shift + högerklick\">aktivera", //m
+	"cdt_rdb": "visa den vanliga högerklicksmenyn när den anpassade redan är öppen och man högerklickar igen\">x2", //m
 
 	"tt_entree": "visa trädvy$NSnabbtangent: B",
 	"tt_detree": "visa brödsmulor$NSnabbtangent: B",
@@ -320,6 +320,12 @@ Ls.swe = {
 	"mt_tint": "nivå på bakgrundsfärg (0-100) på uppspelningsreglaget;$Ngör buffring mindre distraherande",
 	"mt_eq": "aktiverar utjämning och förstärkning;$N$Nboost &lt;code&gt;0&lt;/code&gt; = standard 100%-volym (omodifierad)$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = standard stereo (omodifierad)$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% vänster-höger crossfeed$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = tar bort sång :^)$N$Nnär utjämningen är aktiverad blir gaplösa album verkligen gaplösa, så låt den stå påslagen med alla värden satta till 0 (förutom width = 1) om du bryr dig om det",
 	"mt_drc": "aktiverar dynamikkompressorn (volymtillplattning / brickwaller); aktiverar även utjämnaren för att balansera röran, så sätt alla fält i utjämnaren förutom 'width' till 0 om du inte vill ha den$N$Nsänker all volym över THRESHOLD dB; för varje RATIO dB över THRESHOLD blir det 1 dB av output, så standardvärdena tresh = -24 och ratio = 12 innebär att volymen aldrig bör bli högre än -22 dB och det är säkert att höja utjämnarens boost till 0.8, eller t.o.m. 1.8 med ATK 0 och ett högt RLS-värde t.ex. 90 (fungerar endast i firefox; RLS är låst till högst 1 i andra webbläsare)$N$N(se wikipedia för en bättre förklaring)",
+	"mt_ss": "`aktiverar tystnadshopp; multiplicerar uppspelningshastigheten med `sn` nära start/slut när volymen är under `vol` och positionen är inom första `sta`% eller sista `slt`%", //m
+	"mt_ssvt": "volymtröskel (0-255)\">vol", //m
+	"mt_ssts": "aktiv tröskel (% spår, start)\">sta", //m
+	"mt_sste": "aktiv tröskel (% spår, slut)\">slt", //m
+	"mt_ssrt": "upp/ned-rampningstid volym/hastighet\">atk", //m
+	"mt_sssm": "uppspelningshastighetsmultiplikator\">sn", //m
 
 	"mb_play": "play",
 	"mm_hashplay": "spela upp den här ljudfilen?",

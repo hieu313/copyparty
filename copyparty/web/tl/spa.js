@@ -263,8 +263,8 @@ Ls.spa = {
 	"cdt_lim": "número máximo de archivos a mostrar en una carpeta",
 	"cdt_ask": "al llegar al final,$Nen lugar de cargar más archivos,$Npreguntar qué hacer",
 	"cdt_hsort": "cuántas reglas de ordenación (&lt;code&gt;,sorthref&lt;/code&gt;) incluir en las URLs de medios. Ponerlo a 0 también ignorará las reglas de ordenación incluidas en los enlaces de medios al hacer clic en ellos",
-	"cdt_ren": "habilitar menú contextual personalizado, el menú normal sigue siendo accesible con shift + clic derecho", //m
-	"cdt_rdb": "mostrar el menú normal de clic derecho cuando el personalizado ya está abierto y se vuelve a hacer clic", //m
+	"cdt_ren": "habilitar menú contextual personalizado, el menú normal sigue siendo accesible con shift + clic derecho\">activar", //m
+	"cdt_rdb": "mostrar el menú normal de clic derecho cuando el personalizado ya está abierto y se vuelve a hacer clic\">x2", //m
 
 	"tt_entree": "mostrar panel de navegación (barra lateral con árbol de directorios)$NAtajo: B",
 	"tt_detree": "mostrar breadcrumbs$NAtajo: B",
@@ -319,6 +319,12 @@ Ls.spa = {
 	"mt_tint": "nivel de fondo (0-100) en la barra de búsqueda$Npara hacer el buffering menos molesto",
 	"mt_eq": "activa el ecualizador y el control de ganancia;$N$Nganancia &lt;code&gt;0&lt;/code&gt; = volumen estándar 100% (sin modificar)$N$Nancho &lt;code&gt;1 &nbsp;&lt;/code&gt; = estéreo estándar (sin modificar)$Nancho &lt;code&gt;0.5&lt;/code&gt; = 50% de crossfeed izq-der$Nancho &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nganancia &lt;code&gt;-0.8&lt;/code&gt; y ancho &lt;code&gt;10&lt;/code&gt; = eliminación de voz :^)$N$Nactivar el ecualizador hace que los álbumes sin pausas sean completamente sin pausas, así que déjalo activado con todos los valores a cero (excepto ancho = 1) si eso te importa",
 	"mt_drc": "activa el compresor de rango dinámico (aplanador de volumen / brickwaller); también activará el EQ para equilibrar el espagueti, así que pon todos los campos de EQ excepto 'ancho' a 0 si no lo quieres$N$Nbaja el volumen del audio por encima de THRESHOLD dB; por cada RATIO dB pasado THRESHOLD hay 1 dB de salida, así que los valores por defecto de umbral -24 y ratio 12 significan que nunca debería sonar más fuerte de -22 dB y es seguro aumentar la ganancia del ecualizador a 0.8, o incluso 1.8 con ATK 0 y un RLS enorme como 90 (solo funciona en firefox; RLS es máx. 1 en otros navegadores)$N$N(ver wikipedia, lo explican mucho mejor)",
+	"mt_ss": "`activa salto de silencio; multiplica la velocidad por `av` cerca del inicio/fin cuando el volumen está bajo `vol` y la posición está en los primeros `ini`% o últimos `fin`%", //m
+	"mt_ssvt": "umbral de volumen (0-255)\">vol", //m
+	"mt_ssts": "umbral activo (% pista, inicio)\">ini", //m
+	"mt_sste": "umbral activo (% pista, fin)\">fin", //m
+	"mt_ssrt": "tiempo de rampa volumen/velocidad\">atk", //m
+	"mt_sssm": "multiplicador de velocidad de reproducción\">av", //m
 
 	"mb_play": "reproducir",
 	"mm_hashplay": "¿reproducir este archivo de audio?",

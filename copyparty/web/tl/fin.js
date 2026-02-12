@@ -264,8 +264,8 @@ Ls.fin = {
 	"cdt_lim": "tiedostojen enimmäismäärä näytettäväksi hakemistossa",
 	"cdt_ask": "sivun lopussa, sen sijaan että lataa $Nautomaattisesti lisää tiedostoja, kysy mitä tehdä",
 	"cdt_hsort": "kuinka monta lajittelusääntöä (&lt;code&gt;,sorthref&lt;/code&gt;) sisällyttää media-URL:eihin. Tämän asettaminen nollaan jättää myös huomioimatta media-linkeissä sisällytetyt lajittelusäännöt kun napsautat niitä",
-	"cdt_ren": "ota käyttöön mukautettu valikko, tavallinen valikko on käytettävissä painamalla shift ja napsauttamalla oikealla", //m
-	"cdt_rdb": "näytä tavallinen oikean painikkeen valikko, kun mukautettu on jo auki ja oikeaa painiketta painetaan uudelleen", //m
+	"cdt_ren": "ota käyttöön mukautettu valikko, tavallinen valikko on käytettävissä painamalla shift ja napsauttamalla oikealla\">aktivoi", //m
+	"cdt_rdb": "näytä tavallinen oikean painikkeen valikko, kun mukautettu on jo auki ja oikeaa painiketta painetaan uudelleen\">x2", //m
 
 	"tt_entree": "näytä navigointipaneeli$NPikanäppäin: B",
 	"tt_detree": "näytä linkkipolku$NPikanäppäin: B",
@@ -320,6 +320,12 @@ Ls.fin = {
 	"mt_tint": "taustan taso (0-100) liukupalkissa$Ntehden puskuroinnista vähemmän häiritsevän",
 	"mt_eq": "aktivoi taajuuskorjaimen ja vahvistussäätimen;$N$Nvahvistus &lt;code&gt;0&lt;/code&gt; = normaali 100% äänenvoimakkuus (muokkaamaton)$N$Nleveys &lt;code&gt;1 &nbsp;&lt;/code&gt; = normaali stereo (muokkaamaton)$Nleveys &lt;code&gt;0.5&lt;/code&gt; = 50% vasen-oikea ristisyöttö$Nleveys &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nvahvistus &lt;code&gt;-0.8&lt;/code&gt; &amp; leveys &lt;code&gt;10&lt;/code&gt; = laulun poisto :^)$N$Nequalizerin käyttöönotto tekee saumattomista albumeista täysin saumattomia, joten jätä se päälle kaikilla arvoilla nollassa (paitsi leveys = 1) jos välität siitä",
 	"mt_drc": "aktivoi dynaamisen alueen kompressorin; ottaa myös käyttöön taajuuskorjaimen tasapainottamaan spagettia, joten aseta kaikki EQ-kentät paitsi 'leveys' nollaan jos et halua sitä$N$Nalentaa äänenvoimakkuutta KYNNYS dB:n yläpuolella; jokaisesta SUHDE dB:stä KYNNYKSEN yli tulee 1 dB ulos, joten oletusarvot kynnys -24 ja suhde 12 tarkoittaa ettei sen pitäisi koskaan tulla kovempaa kuin -22 dB ja on turvallista nostaa equalizerin vahvistus 0.8:aan, tai jopa 1.8:aan ATK 0:lla ja valtavalla RLS:llä kuten 90 (toimii vain firefoxissa; RLS on max 1 muissa selaimissa)$N$N(katso wikipedia, he selittävät sen paljon paremmin)",
+	"mt_ss": "`ottaa käyttöön hiljaisuuden ohituksen; moninkertaistaa toistonopeuden `pik` lähellä kappaleen alkua/loppua, kun äänenvoimakkuus on alle `vol` ja sijainti on ensimmäisessä `alk`% tai viimeisessä `lop`%", //m
+	"mt_ssvt": "äänenvoimakkuuden kynnys (0-255)\">vol", //m
+	"mt_ssts": "aktiivikynnys (% kappale, alku)\">alk", //m
+	"mt_sste": "aktiivikynnys (% kappale, loppu)\">lop", //m
+	"mt_ssrt": "äänenvoim./nopeuden nousu/laskuaika\">atk", //m
+	"mt_sssm": "toistonopeuden kerroin\">pik", //m
 
 	"mb_play": "toista",
 	"mm_hashplay": "soita tämä äänitiedosto?",

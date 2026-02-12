@@ -264,8 +264,8 @@ Ls.ita = {
 	"cdt_lim": "numero massimo di file da mostrare in una cartella",
 	"cdt_ask": "quando scorri verso il fondo,$Ninvece di caricare più file,$Nchiedi cosa fare",
 	"cdt_hsort": "quante regole di ordinamento (&lt;code&gt;,sorthref&lt;/code&gt;) includere negli URL multimediali. Impostandolo a 0 ignorerà anche le regole di ordinamento incluse nei link multimediali quando li clicchi",
-	"cdt_ren": "abilita il menu contestuale personalizzato, il menu normale è accessibile con shift + clic destro", //m
-	"cdt_rdb": "mostra il menu normale con il tasto destro quando quello personalizzato è già aperto e si clicca di nuovo", //m
+	"cdt_ren": "abilita il menu contestuale personalizzato, il menu normale è accessibile con shift + clic destro\">abilita", //m
+	"cdt_rdb": "mostra il menu normale con il tasto destro quando quello personalizzato è già aperto e si clicca di nuovo\">x2", //m
 
 	"tt_entree": "mostra pannello nav (barra laterale albero directory)$NTasto rapido: B",
 	"tt_detree": "mostra breadcrumb$NTasto rapido: B",
@@ -320,6 +320,12 @@ Ls.ita = {
 	"mt_tint": "livello sfondo (0-100) sulla barra di ricerca$Nper rendere il buffering meno distraente",
 	"mt_eq": "abilita l'equalizzatore e controllo guadagno;$N$Nboost &lt;code&gt;0&lt;/code&gt; = volume standard 100% (non modificato)$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = stereo standard (non modificato)$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% crossfeed sinistra-destra$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = rimozione vocale :^)$N$Nabilitando l'equalizzatore rende gli album senza interruzioni completamente senza interruzioni, quindi lascialo acceso con tutti i valori a zero (eccetto width = 1) se ti importa di quello",
 	"mt_drc": "abilita il compressore gamma dinamica (appiattitore volume / brickwaller); abiliterà anche EQ per bilanciare gli spaghetti, quindi imposta tutti i campi EQ eccetto 'width' a 0 se non lo vuoi$N$NAbbassa il volume dell'audio sopra THRESHOLD dB; per ogni RATIO dB oltre THRESHOLD c'è 1 dB di output, quindi i valori di default di tresh -24 e ratio 12 significa che non dovrebbe mai diventare più forte di -22 dB ed è sicuro aumentare il boost equalizzatore a 0.8, o anche 1.8 con ATK 0 e un RLS enorme come 90 (funziona solo in firefox; RLS è max 1 in altri browser)$N$N(vedi wikipedia, lo spiegano molto meglio)",
+	"mt_ss": "`abilita il salto del silenzio; moltiplica la velocità di riproduzione per `av` vicino a inizio/fine quando il volume è sotto `vol` e la posizione è nei primi `ini`% o ultimi `fin`%", //m
+	"mt_ssvt": "soglia volume (0-255)\">vol", //m
+	"mt_ssts": "soglia attiva (% traccia, inizio)\">ini", //m
+	"mt_sste": "soglia attiva (% traccia, fine)\">fin", //m
+	"mt_ssrt": "tempo rampa volume/velocità\">atk", //m
+	"mt_sssm": "moltiplicatore velocità riproduzione\">av", //m
 
 	"mb_play": "riproduci",
 	"mm_hashplay": "riprodurre questo file audio?",

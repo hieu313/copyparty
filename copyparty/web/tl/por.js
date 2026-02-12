@@ -264,8 +264,8 @@ Ls.por = {
 	"cdt_lim": "número máximo de arquivos para mostrar em uma pasta",
 	"cdt_ask": "ao rolar para o final,$Nem vez de carregar mais arquivos,$Nperguntar o que fazer",
 	"cdt_hsort": "quantas regras de ordenação (&lt;code&gt;,sorthref&lt;/code&gt;) incluir em URLs de mídia. Definir isso para 0 também ignorará as regras de ordenação incluídas em links de mídia quando você clicar neles",
-	"cdt_ren": "ativar menu de clique direito personalizado, o menu normal permanece acessível com shift + clique direito",
-	"cdt_rdb": "mostrar o menu padrão do botão direito quando o menu personalizado já estiver aberto e houver um novo clique",
+	"cdt_ren": "ativar menu de clique direito personalizado, o menu normal permanece acessível com shift + clique direito\">ativar",
+	"cdt_rdb": "mostrar o menu padrão do botão direito quando o menu personalizado já estiver aberto e houver um novo clique\">x2", //m
 
 	"tt_entree": "mostrar painel de navegação (árvore de diretórios)$NHotkey: B",
 	"tt_detree": "mostrar breadcrumbs$NHotkey: B",
@@ -320,6 +320,12 @@ Ls.por = {
 	"mt_tint": "nível de fundo (0-100) na barra de busca$Npara tornar o buffer menos distrativo",
 	"mt_eq": "ativa o equalizador e o controle de ganho;$N$Nimpulsão &lt;code&gt;0&lt;/code&gt; = volume padrão de 100% (não modificado)$N$Nlargura &lt;code&gt;1 &nbsp;&lt;/code&gt; = estéreo padrão (não modificado)$Nlargura &lt;code&gt;0.5&lt;/code&gt; = 50% de crossfeed esquerda-direita$Nlargura &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nimpulsão &lt;code&gt;-0.8&lt;/code&gt; & largura &lt;code&gt;10&lt;/code&gt; = remoção de vocal :^)$N$Natvar o equalizador torna os álbuns sem interrupções totalmente sem interrupções, então deixe-o ligado com todos os valores em zero (exceto largura = 1) se você se importa com isso",
 	"mt_drc": "ativa o compressor de faixa dinâmica (nivelador de volume / brickwaller); também ativará o EQ para equilibrar o spaghetti, então defina todos os campos EQ exceto 'width' para 0 se você não quiser$N$Nabaixa o volume do áudio acima do THRESHOLD dB; para cada RATIO dB após o THRESHOLD há 1 dB de saída, então os valores padrão de tresh -24 e ratio 12 significam que nunca deve ficar mais alto que -22 dB e é seguro aumentar o impulso do equalizador para 0.8, ou até 1.8 com ATK 0 e um enorme RLS como 90 (só funciona no firefox; RLS é no máximo 1 em outros navegadores)$N$N(veja a wikipedia, eles explicam muito melhor)",
+	"mt_ss": "`ativa pular silêncio; multiplica a velocidade por `av` perto do início/fim quando o volume está abaixo de `vol` e a posição está nos primeiros `ini`% ou últimos `fim`%", //m
+	"mt_ssvt": "limiar de volume (0-255)\">vol", //m
+	"mt_ssts": "limiar ativo (% faixa, início)\">ini", //m
+	"mt_sste": "limiar ativo (% faixa, fim)\">fim", //m
+	"mt_ssrt": "tempo de rampa volume/velocidade\">atk", //m
+	"mt_sssm": "multiplicador de velocidade de reprodução\">av", //m
 
 	"mb_play": "reproduzir",
 	"mm_hashplay": "reproduzir este arquivo de áudio?",

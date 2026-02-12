@@ -261,8 +261,8 @@ Ls.nor = {
 	"cdt_lim": "maks antall filer å vise per mappe",
 	"cdt_ask": "vis knapper for å laste flere filer nederst på siden istedenfor å gradvis laste mer av mappen når man scroller ned",
 	"cdt_hsort": "antall sorterings-regler (&lt;code&gt;,sorthref&lt;/code&gt;) som skal inkluderes når media-URL'er genereres. Hvis denne er 0 så vil sorterings-regler i URL'er hverken bli generert eller lest",
-	"cdt_ren": "bruk egendefinert høyreklikkmeny (den vanlige menyen er tilgjengelig med shift + høyreklikk)",
-	"cdt_rdb": "høyreklikk to ganger for å vise den vanlige høyreklikkmenyen",
+	"cdt_ren": "bruk egendefinert høyreklikkmeny (den vanlige menyen er tilgjengelig med shift + høyreklikk)\">aktiv",
+	"cdt_rdb": "høyreklikk to ganger for å vise den vanlige høyreklikkmenyen\">x2",
 
 	"tt_entree": "bytt til mappehierarki$NSnarvei: B",
 	"tt_detree": "bytt til tradisjonell sti-visning$NSnarvei: B",
@@ -317,6 +317,12 @@ Ls.nor = {
 	"mt_tint": "nivå av bakgrunnsfarge på søkestripa (0-100),$Ngjør oppdateringer mindre distraherende",
 	"mt_eq": "aktiver tonekontroll og forsterker;$N$Nboost &lt;code&gt;0&lt;/code&gt; = normal volumskala$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = normal stereo$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% blanding venstre-høyre$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = instrumental :^)$N$Nreduserer også dødtid imellom sangfiler",
 	"mt_drc": "aktiver volum-utjevning (dynamic range compressor); vil også aktivere tonejustering, så sett alle EQ-feltene bortsett fra 'width' til 0 hvis du ikke vil ha noe EQ$N$Nfilteret vil dempe volumet på alt som er høyere enn TRESH dB; for hver RATIO dB over grensen er det 1dB som treffer høyttalerne, så standardverdiene tresh -24 og ratio 12 skal bety at volumet ikke går høyere enn -22 dB, slik at man trygt kan øke boost-verdien i equalizer'n til rundt 0.8, eller 1.8 kombinert med ATK 0 og RLS 90 (bare mulig i firefox; andre nettlesere tar ikke høyere RLS enn 1)$N$Nwikipedia forklarer dette mye bedre forresten",
+	"mt_ss": "`spoler forbi stillhet i sanger; spiller `ffwd` ganger raskere nær start/slutt av sangen når volum er under `vol` og posisjonen er innenfor de første `start`% eller siste `slutt`% av sangen", //m
+	"mt_ssvt": "volumterskel (0-255)\">volum",
+	"mt_ssts": "aktiv innenfor første % av sangen\">start",
+	"mt_sste": "aktiv innenfor siste % av sangen\">slutt",
+	"mt_ssrt": "hvor fort volum/tempo skal justeres\">atk",
+	"mt_sssm": "avspillingshastighetsmultiplikator\">ffwd",
 
 	"mb_play": "lytt",
 	"mm_hashplay": "spill denne sangen?",

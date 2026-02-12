@@ -268,8 +268,8 @@ Ls.vie = {
 	"cdt_lim": "số tệp tối đa hiển thị trong thư mục",
 	"cdt_ask": "khi cuộn xuống cuối,$Nthay vì tải thêm tệp,$Nhỏi người dùng muốn làm gì",
 	"cdt_hsort": "số lượng luật sắp xếp(&lt;code&gt;,sorthref&lt;/code&gt;) được đưa vào URL media. Đặt bằng 0 cũng sẽ bỏ qua các quy tắc sắp xếp trong liên kết media khi nhấp vào chúng",
-	"cdt_ren": "bật menu chuột phải tùy chỉnh, menu mặc định vẫn truy cập được bằng shift + chuột phải", //m
-	"cdt_rdb": "hiển thị menu chuột phải thông thường khi menu tùy chỉnh đã mở và nhấp chuột phải lần nữa", //m
+	"cdt_ren": "bật menu chuột phải tùy chỉnh, menu mặc định vẫn truy cập được bằng shift + chuột phải\">bật", //m
+	"cdt_rdb": "hiển thị menu chuột phải thông thường khi menu tùy chỉnh đã mở và nhấp chuột phải lần nữa\">x2", //m
 
 	"tt_entree": "hiển thị thanh điều hướng (cây thư mục)$NPhím tắt: B",
 	"tt_detree": "hiển thị đường dẫn$NPhím tắt: B",
@@ -329,6 +329,13 @@ Ls.vie = {
 	"mt_eq": "bật bộ cân bằng âm thanh và bộ tăng ích;$N$Nboost &lt;code&gt;0 &nbsp;&lt;/code&gt; = âm lượng chuẩn 100% (không chỉnh)$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = stereo chuẩn (không chỉnh)$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% pha trái-phải$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = loại bỏ lời hát :^)$N$Nbật EQ giúp cho album được phát liền mạch không ngắt quãng, nên giữ các giá trị bằng 0 (trừ width = 1) nếu bạn không muốn thay đổi âm thanh gốc",
 
 	"mt_drc": "bật bộ nén dải động (làm phẳng âm lượng / brickwaller); cũng bật EQ để cân bằng, nên đặt tất cả EQ trừ 'width' = 0 nếu không muốn$N$Ngiảm âm thanh trên THRESHOLD dB; với mỗi RATIO dB vượt THRESHOLD thì có 1 dB đầu ra, ví dụ tresh -24 và ratio 12 => âm lượng không vượt -22 dB, có thể tăng EQ boost lên 0.8 hoặc 1.8 với ATK 0 và RLS lớn 90 (chỉ Firefox; RLS max 1 trên browser khác)$N$NXem Wikipedia để hiểu chi tiết hơn",
+
+	"mt_ss": "`bật bỏ qua im lặng; nhân tốc độ phát với `nh` gần đầu/cuối khi âm lượng dưới `am` và vị trí trong `dau`% đầu hoặc `cuoi`% cuối", //m
+	"mt_ssvt": "ngưỡng âm lượng (0-255)\">am", //m
+	"mt_ssts": "ngưỡng hoạt động (% bài, đầu)\">dau", //m
+	"mt_sste": "ngưỡng hoạt động (% bài, cuối)\">cuoi", //m
+	"mt_ssrt": "thời gian tăng/giảm âm lượng/tốc độ\">atk", //m
+	"mt_sssm": "hệ số tốc độ phát\">nh", //m
 
 	"mb_play": "phát",
 	"mm_hashplay": "phát bản nhạc này?",

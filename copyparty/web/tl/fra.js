@@ -264,8 +264,8 @@ Ls.fra = {
 	"cdt_lim": "nombre maximum de fichiers à afficher dans un dossier",
 	"cdt_ask": "lorsque vous faites défiler vers le bas,$Nau lieu de charger plus de fichiers,$Ndemander quoi faire",
 	"cdt_hsort": "combien de règles de tri (&lt;code&gt;,sorthref&lt;/code&gt;) à inclure dans les media-URLs. Définir cette valeur à 0 ignorera également les règles de tri incluses dans les liens média lorsque vous cliquez dessus.",
-	"cdt_ren": "activer le menu contextuel personnalisé, le menu normal reste accessible avec shift + clic droit", //m
-	"cdt_rdb": "afficher le menu clic droit normal lorsque le menu personnalisé est déjà ouvert et qu’on clique à nouveau", //m
+	"cdt_ren": "activer le menu contextuel personnalisé, le menu normal reste accessible avec shift + clic droit\">activer", //m
+	"cdt_rdb": "afficher le menu clic droit normal lorsque le menu personnalisé est déjà ouvert et qu’on clique à nouveau\">x2", //m
 
 	"tt_entree": "afficher le panneau de navigation (arborescence des dossiers)$NHotkey: B",
 	"tt_detree": "afficher le fil d’Ariane$NHotkey: B",
@@ -320,6 +320,12 @@ Ls.fra = {
 	"mt_tint": "niveau d’arrière-plan (0–100) de la barre de progression$Npour rendre la mise en mémoire tampon moins gênante",
 	"mt_eq": "active l'égaliseur et le contrôle de gain;$N$Nboost &lt;code&gt;0&lt;/code&gt; = volume standard 100% (non modifié)$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = stéréo standard (non modifié)$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% de crossfeed gauche-droite$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = suppression vocale :^)$N$Nl'activation de l'égaliseur rend les albums gapless entièrement gapless, alors laissez-le activé avec toutes les valeurs à zéro (sauf largeur = 1) si vous vous en souciez",
 	"mt_drc": "active le compresseur de plage dynamique (aplanisseur de volume / brickwaller); activera également l'EQ pour équilibrer les choses, donc définissez tous les champs EQ sauf 'width' sur 0 si vous ne le voulez pas$N$Ndiminue le volume de l'audio au-dessus de THRESHOLD dB; pour chaque RATIO dB au-delà de THRESHOLD, il y a 1 dB de sortie, donc des valeurs par défaut de tresh -24 et ratio 12 signifient qu'il ne devrait jamais être plus fort que -22 dB et qu'il est sûr d'augmenter le boost de l'égaliseur à 0.8, ou même 1.8 avec ATK 0 et un énorme RLS comme 90 (ne fonctionne que dans firefox; RLS est max 1 dans les autres navigateurs)$N$N(voir wikipedia, ils expliquent cela beaucoup mieux)",
+	"mt_ss": "`active le saut de silence ; multiplie la vitesse de lecture par `av` près du début/fin quand le volume est sous `vol` et la position est dans les `deb`% premiers ou `fin`% derniers", //m
+	"mt_ssvt": "seuil de volume (0-255)\">vol", //m
+	"mt_ssts": "seuil actif (% piste, début)\">deb", //m
+	"mt_sste": "seuil actif (% piste, fin)\">fin", //m
+	"mt_ssrt": "temps de montée/descente volume/vitesse\">atk", //m
+	"mt_sssm": "multiplicateur de vitesse de lecture\">av", //m
 
 	"mb_play": "lecture",
 	"mm_hashplay": "lire ce fichier audio ?",

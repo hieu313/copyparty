@@ -271,8 +271,8 @@ if (1)
 		"cdt_lim": "max number of files to show in a folder",
 		"cdt_ask": "when scrolling to the bottom,$Ninstead of loading more files,$Nask what to do",
 		"cdt_hsort": "how many sorting rules (&lt;code&gt;,sorthref&lt;/code&gt;) to include in media-URLs. Setting this to 0 will also ignore sorting-rules included in media links when clicking them",
-		"cdt_ren": "enable custom right-click menu, you can still access the regular menu by pressing the shift key and right-clicking",
-		"cdt_rdb": "show the regular right-click menu when the custom one is already open and right-clicking again",
+		"cdt_ren": "enable custom right-click menu, you can still access the regular menu by pressing the shift key and right-clicking\">enable",
+		"cdt_rdb": "show the regular right-click menu when the custom one is already open and right-clicking again\">double",
 
 		"tt_entree": "show navpane (directory tree sidebar)$NHotkey: B",
 		"tt_detree": "show breadcrumbs$NHotkey: B",
@@ -328,12 +328,12 @@ if (1)
 		"mt_tint": "background level (0-100) on the seekbar$Nto make buffering less distracting",
 		"mt_eq": "enables the equalizer and gain control;$N$Nboost &lt;code&gt;0&lt;/code&gt; = standard 100% volume (unmodified)$N$Nwidth &lt;code&gt;1 &nbsp;&lt;/code&gt; = standard stereo (unmodified)$Nwidth &lt;code&gt;0.5&lt;/code&gt; = 50% left-right crossfeed$Nwidth &lt;code&gt;0 &nbsp;&lt;/code&gt; = mono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = vocal removal :^)$N$Nenabling the equalizer makes gapless albums fully gapless, so leave it on with all the values at zero (except width = 1) if you care about that",
 		"mt_drc": "enables the dynamic range compressor (volume flattener / brickwaller); will also enable EQ to balance the spaghetti, so set all EQ fields except for 'width' to 0 if you don't want it$N$Nlowers the volume of audio above THRESHOLD dB; for every RATIO dB past THRESHOLD there is 1 dB of output, so default values of 'tresh' -24 and 'ratio' 12 means it should never get louder than -22 dB and it is safe to increase the equalizer boost to 0.8, or even 1.8 with ATK 0 and a huge RLS like 90 (only works in firefox; RLS is max 1 in other browsers)$N$N(see wikipedia, they explain it much better)",
-		"mt_ss": "enables skip silence; multiplies playback speed by &lt;code&gt;sspeed&lt;/code&gt$Nat the start/end of audio tracks when volume is under &lt;code&gt;vthresh&lt;/code&gt$Nand the track is within 0 to &lt;code&gt;sthresh&lt;/code&gt% of the start$Nor &lt;code&gt;100-ethresh&lt;/code&gt to 100% of the end of the track",
-		"mt_ssvt": "skip silence volume threshold (0-255)",
-		"mt_ssts": "skip silence active threshold (% of track, start)",
-		"mt_sste": "skip silence active threshold (% of track, end)",
-		"mt_ssrt": "skip silence volume/speed ramp up/down time",
-		"mt_sssm": "skip silence playback speed multiplier",
+		"mt_ss": "`enables skip-silence; multiplies playback speed by `ffwd` near the start/end of songs when volume is under `vol` and the playback position is within the first `start`% or the last `end`% of the track",
+		"mt_ssvt": "volume threshold (0-255)\">vol",
+		"mt_ssts": "active threshold (% of track, start)\">start",
+		"mt_sste": "active threshold (% of track, end)\">end",
+		"mt_ssrt": "volume/speed ramp up/down time\">atk",
+		"mt_sssm": "playback speed multiplier\">ffwd",
 
 		"mb_play": "play",
 		"mm_hashplay": "play this audio file?",
@@ -1006,7 +1006,7 @@ ebi('op_cfg').innerHTML = (
 	'	</div>\n' +
 	'</div>\n' +
 	'<div><h3>' + L.cl_keytype + '</h3><div><select id="key_notation"></select></div></div>\n' +
-	(!MOBILE ? '<div><h3>' + L.cl_rcm + '</h3><div><a id="rcm_en" class="tgl btn" href="#" tt="' + L.cdt_ren + '">enable</a><a id="rcm_db" class="tgl btn" href="#" tt="' + L.cdt_rdb + '">double</a></div></div>' : '') +
+	(!MOBILE ? '<div><h3>' + L.cl_rcm + '</h3><div><a id="rcm_en" class="tgl btn" href="#" tt="' + L.cdt_ren + '</a><a id="rcm_db" class="tgl btn" href="#" tt="' + L.cdt_rdb + '</a></div></div>' : '') +
 	'<div><h3>' + L.cl_hiddenc + ' &nbsp;' + (MOBILE ? '<a href="#" id="hcolsh">' + L.cl_hidec + '</a> / ' : '') + '<a href="#" id="hcolsr">' + L.cl_reset + '</a></h3><div id="hcols"></div></div>'
 );
 
@@ -2715,8 +2715,7 @@ var afilt = (function () {
 		"drcv": [-24, 30, 12, 0.01, 0.25],
 		"drch": ['tresh', 'knee', 'ratio', 'atk', 'rls'],
 		"drck": ['threshold', 'knee', 'ratio', 'attack', 'release'],
-		"sscl": ['vthresh', "sthresh", "ethresh", 'sspeed', 'rspeed'],
-		"sstt": [L.mt_ssvt, L.mt_ssts, L.mt_sste, L.mt_ssrt, L.mt_sssm],
+		"sscl": [L.mt_ssvt, L.mt_ssts, L.mt_sste, L.mt_ssrt, L.mt_sssm],
 		"sscv": [1, 5, 5, 5.0, 0.2],
 		"drcn": null,
 		"filters": [],
@@ -3108,7 +3107,7 @@ var afilt = (function () {
 		'<a id="au_ss" class="tgl btn" href="#" tt="' + L.mt_ss + '">' + L.enable + '</a></td>'];
 
 	for (var a = 0; a < r.sscl.length; a++) {
-		html.push('<td tt="' + r.sstt[a] + '">' + r.sscl[a] + '</td>');
+		html.push('<td tt="' + r.sscl[a] + '</td>');
 		h2.push('<td><input type="text" class="ssconf_v" ' + NOAC + ' k="' + a + '" value="' + r.sscv[a] + '" /></td>');
 	}
 

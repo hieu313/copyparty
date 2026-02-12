@@ -264,8 +264,8 @@ Ls.epo = {
 	"cdt_lim": "maks. nombro de dosieroj por montri en dosierujo",
 	"cdt_ask": "je malsupro de paĝo, peti por ago$Nanstataŭ ŝarĝi pli da dosieroj",
 	"cdt_hsort": "kiom da ordigo-reguloj (&lt;code&gt;,sorthref&lt;/code&gt;) inkludi en adreso de la paĝo. Se agordita kiel 0, reguloj, inkluditaj en la adreso, estos ignoritaj",
-	"cdt_ren": "ebligi propran dekstra-klakan menuon, la normala menuo restas alirebla per MAJ + dekstra klako",
-	"cdt_rdb": "montri la normalan dekstraklakan menuon, kiam la propra jam estas malfermita kaj oni denove dekstre klakas",
+	"cdt_ren": "ebligi propran dekstra-klakan menuon, la normala menuo restas alirebla per MAJ + dekstra klako\">ŝalti",
+	"cdt_rdb": "montri la normalan dekstraklakan menuon, kiam la propra jam estas malfermita kaj oni denove dekstre klakas\">duobla",
 
 	"tt_entree": "montri arbovidan navig-panelon$NFulmoklavo: B",
 	"tt_detree": "montri paĝnivelan navig-panelon$NFulmoklavo: B",
@@ -320,6 +320,12 @@ Ls.epo = {
 	"mt_tint": "travideblo (0-100) de ludadbreto$Nvi povas ŝanĝi ĝin, se ĝi aspektas tro distre dum ŝargado",
 	"mt_eq": "ŝaltas ekvalizilon kaj stirilon de plifortigado;$N$Nboost (plifortigado) &lt;code&gt;0&lt;/code&gt; = senmodifa 100%a laŭteco$N$Nwidth (larĝo) &lt;code&gt;1 &nbsp;&lt;/code&gt; = senmodifa dukanala sono$Nwidth (larĝo) &lt;code&gt;0.5&lt;/code&gt; = 50% miksado inter maldekstra kaj dekstra kanaloj$Nwidth (larĝo) &lt;code&gt;0 &nbsp;&lt;/code&gt; = unukanala sono$N$Nboost &lt;code&gt;-0.8&lt;/code&gt; &amp; width &lt;code&gt;10&lt;/code&gt; = senvokigo :^)$N$Nŝaltita ekvalizilo ankaŭ forigas paŭzojn inter muzikaĵoj en senpaŭzaj albumoj, agordi ĉion kiel 0 (sed 'width' kiel 1), se vi volas nur tion",
 	"mt_drc": "ŝaltas kompresoron de dinamiko (glatigas laŭtecon de muzikaĵoj); ankaŭ ŝaltas ekvalizilon, do agordu ĉion (sed 'width') kiel 0, se vi ne volas ĝin; $N$Nplimalgrandigas laŭtecon de aŭdio super sojlo-valoro ('tresh') da dB; ĉiu proporcio-valoro ('ratio') da dB post 'tresh' 1 dB estos eligita, do implicitaj valoroj (tresh = -24, ratio = 12) faras, ke laŭteco neniam pli grandas ol -22 dB; tiel estas sendanĝera agordi 'boost'on kiel 0.8 aŭ eĉ 1.8 dum ATK = 0 kaj grandega RLS, kiel 90 (funkcias nur en Firefox, RLS estas maksimume 1 en aliaj retumiloj)$N$N(rigardu vikipedion, ĝi klariĝas pli bone)",
+	"mt_ss": "`ebligas salti silenton; multobligas la ludrapidon per `rap` ĉe komenco/fino de kantoj kiam la laŭteco estas sub `laŭt` kaj la pozicio estas ene de la unuaj `kom`% aŭ lastaj `fin`%", //m
+	"mt_ssvt": "laŭteca sojlo (0-255)\">laŭt", //m
+	"mt_ssts": "aktiva sojlo (% trako, komenco)\">kom", //m
+	"mt_sste": "aktiva sojlo (% trako, fino)\">fin", //m
+	"mt_ssrt": "laŭteco/rapido rampotempo\">atk", //m
+	"mt_sssm": "ludrapida multiplikilo\">rap", //m
 
 	"mb_play": "ludi",
 	"mm_hashplay": "ludi ĉi tiun aŭdiodosieron?",
