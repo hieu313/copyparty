@@ -1487,6 +1487,11 @@ input.ssconf_v {
 #au_drc {
 	padding: .4em .3em;
 }
+#au_ss.on {
+    width: 3em;
+	height: 1em;
+	overflow: hidden;
+}
 #ico1 {
 	cursor: pointer;
 }

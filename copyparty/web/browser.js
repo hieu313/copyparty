@@ -1742,6 +1742,7 @@ function MPlayer() {
 		}
 	};
 	r.fade_out = function () {
+		mpss.stop();
 		r.fvol = r.vol;
 		r.fdir = -0.05 * r.vol * (CHROME ? 2 : 1);
 		r.ftid = r.au.tid;
@@ -1768,8 +1769,10 @@ function MPlayer() {
 			if (isNum(t))
 				r.au.currentTime = Math.max(t, 0);
 		}
-		else if (r.fvol > r.vol)
+		else if (r.fvol > r.vol) {
 			r.fvol = r.vol;
+			mpss.go();
+		}
 		else
 			done = false;
 
@@ -2601,8 +2604,6 @@ var mpui = (function () {
 			// occasionally draw buffered regions
 			if (nth % 5 == 0)
 				pbar.drawbuf();
-
-			if (!IE && afilt.ssen) skipSilence();
 		}
 
 		// preload next song
@@ -2793,6 +2794,7 @@ var afilt = (function () {
 
 		r.drcv = jread('au_drcv', r.drcv);
 		r.sscv = jread('au_sscv', r.sscv);
+		mpss.load();
 	}
 	catch (ex) { }
 
@@ -2810,6 +2812,7 @@ var afilt = (function () {
 	};
 
 	r.stop = function () {
+		mpss.stop();
 		if (r.filters.length)
 			for (var a = 0; a < r.filters.length; a++)
 				r.filters[a].disconnect();
@@ -2875,12 +2878,15 @@ var afilt = (function () {
 
 		mp.acs.connect(r.filters.length ?
 			r.filters[r.filters.length - 1] : actx.destination);
+
+		if (!au.paused)
+			mpss.go();
 	}
 
 	function add_ss() {
-		r.filters.push(mp.au._gnod = actx.createGain());
-		r.filters.push(mp.au._analyser = actx.createAnalyser());
-		mp.au._analyser.fftSize = 256;
+		r.filters.push(mp.ssg = actx.createGain());
+		r.filters.push(mp.ssa = actx.createAnalyser());
+		mp.ssa.fftSize = 256;
 	}
 
 	function add_eq() {
@@ -3048,6 +3054,7 @@ var afilt = (function () {
 
 			r.sscv[n] = v;
 			jwrite('au_sscv', r.sscv);
+			mpss.load();
 		}
 		catch (ex) {
 			err = true;
@@ -3288,6 +3295,7 @@ function play(tid, is_ev, seek) {
 		if (mpl.waves)
 			pbar.loadwaves(url.replace(/\bth=(opus|mp3)&/, '') + '&th=p');
 
+		mpss.go();
 		mpui.progress_updater();
 		pbar.onresize();
 		vbar.onresize();
@@ -10018,57 +10026,43 @@ function reload_browser() {
 	dsel_init();
 })();
 
-var ssint = null;
 
-function skipSilence() {
-	var ae = mp.au;
-	var ssconf = afilt.sscv;
+var mpss = (function() {
+	var r = {}, config, ssint, npaint = 0;
 
-	var config = {
-		vthresh: ssconf[0],
-		sthresh: ssconf[1],
-		etresh: ssconf[2],
-		sspeed: ssconf[3],
-		rspeed: ssconf[4],
-		loopInterval: 25
+	r.load = function () {
+		if (!mp || !mp.ssg)
+			return false;
+
+		config = {
+			vthresh: afilt.sscv[0],
+			sthresh: afilt.sscv[1],
+			etresh: afilt.sscv[2],
+			sspeed: afilt.sscv[3],
+			rspeed: afilt.sscv[4],
+			loopInterval: 25,
+		};
+		return true;
 	};
 
-	if (!ae._gnod)
-		return;
-
-	if (!ae._ssa) {
-		ae._ssa = true;
-
-		ae.addEventListener('play', startLoop);
-		ae.addEventListener('pause', stopLoop);
-		ae.addEventListener('ended', stopLoop);
-
-		ae.addEventListener('durationchange', function() {
-			if (ae._gnod) ae._gnod.gain.value = 1.0;
-			ae.playbackRate = 1.0;
-		});
-
-		if (!ae.paused && !ae.ended) {
-			startLoop();
-		}
-	}
-
-	function startLoop() {
-		if (!ssint) { 
+	r.go = function () {
+		if (!ssint && afilt.ssen && r.load())
 			ssint = setInterval(detectSilence, config.loopInterval);
-		}
-	}
+	};
 
-	function stopLoop() {
-		if (ssint) {
-			clearInterval(ssint);
-			ssint = null;
-		}
-		if(ae._gnod) ae._gnod.gain.value = 1.0;
-		ae.playbackRate = 1.0;
-	}
+	r.stop = function () {
+		clearInterval(ssint);
+		ssint = null;
+		if (!mp) return;
+		if (mp.ssg) mp.ssg.gain.value = 1.0;
+		if (mp.au && mp.au._ss) mp.au.playbackRate = 1.0;
+		if (mp.au2 && mp.au2._ss) mp.au2.playbackRate = 1.0;
+	};
 
 	function detectSilence() {
+		var ae = mp.au;
+		ae._ss = true;
+
 		var duration = ae.duration || 0;
 	
 		var slimit = duration * (config.sthresh / 100);
@@ -10080,13 +10074,18 @@ function skipSilence() {
 		var is_silent = false;
 
 		if (in_limits) {
-			var analyser = ae._analyser;
+			var analyser = mp.ssa;
 			var da = new Uint8Array(analyser.frequencyBinCount);
 			analyser.getByteFrequencyData(da);
 
 			var maxvol = 0;
 			for (var i = 0; i < da.length; i++) {
 				if (da[i] > maxvol) maxvol = da[i];
+			}
+
+			if (++npaint > 4) {
+				npaint = 0;
+				ebi('au_ss').innerHTML = maxvol;
 			}
 
 			if (maxvol < config.vthresh) {
@@ -10100,15 +10099,17 @@ function skipSilence() {
 			if (Math.abs(ae.playbackRate - tspeed) > 0.01) {
 				ae.playbackRate += (tspeed - ae.playbackRate) * config.rspeed;
 			}
-			if (Math.abs(ae._gnod.gain.value - tvol) > 0.01) {
-				ae._gnod.gain.value += (tvol - ae._gnod.gain.value) * config.rspeed;
+			if (Math.abs(mp.ssg.gain.value - tvol) > 0.01) {
+				mp.ssg.gain.value += (tvol - mp.ssg.gain.value) * config.rspeed;
 			}
 		} else {
 			ae.playbackRate = 1.0;
-			ae._gnod.gain.value = 1.0;
+			mp.ssg.gain.value = 1.0;
 		}
 	}
-}
+
+	return r;
+})();
 
 treectl.hydrate();
 
