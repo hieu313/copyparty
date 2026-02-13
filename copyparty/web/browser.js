@@ -1731,6 +1731,7 @@ function MPlayer() {
 	r.ftimer = null;
 	r.fade_in = function () {
 		r.nopause();
+		start_actx();
 		r.fvol = 0;
 		r.fdir = 0.025 * r.vol * (CHROME ? 1.5 : 1);
 		if (r.au) {
@@ -2836,10 +2837,12 @@ var afilt = (function () {
 			bcfg_set('au_eq', r.eqen = false);
 			bcfg_set('au_drc', r.drcen = false);
 		}
-		else if (v === true && r.drcen && !r.eqen)
+		else if (v === true && (r.drcen || r.ssen) && !r.eqen)
 			bcfg_set('au_eq', r.eqen = true);
-		else if (v === false && !r.eqen)
+		else if (v === false && !r.eqen) {
 			bcfg_set('au_drc', r.drcen = false);
+			bcfg_set('au_ss', r.ssen = false);
+		}
 
 		r.drcn = null;
 
@@ -2856,6 +2859,9 @@ var afilt = (function () {
 		au.id = au.id || Date.now();
 		mp.acs = r.acst[au.id] = r.acst[au.id] || actx.createMediaElementSource(au);
 
+		if (r.ssen)
+			add_ss();
+
 		if (r.eqen)
 			add_eq();
 
@@ -2869,6 +2875,12 @@ var afilt = (function () {
 
 		mp.acs.connect(r.filters.length ?
 			r.filters[r.filters.length - 1] : actx.destination);
+	}
+
+	function add_ss() {
+		r.filters.push(mp.au._gnod = actx.createGain());
+		r.filters.push(mp.au._analyser = actx.createAnalyser());
+		mp.au._analyser.fftSize = 256;
 	}
 
 	function add_eq() {
@@ -10021,28 +10033,13 @@ function skipSilence() {
 		loopInterval: 25
 	};
 
+	if (!ae._gnod)
+		return;
+
 	if (!ae._ssa) {
-		var ctx = new AudioContext();
-	
-		var asrc = ctx.createMediaElementSource(ae);
-		var analyser = ctx.createAnalyser();
-		var gnod = ctx.createGain();
-
-		analyser.fftSize = 256;
-		asrc.connect(analyser);
-		analyser.connect(gnod);
-		gnod.connect(ctx.destination);
-
-		ae._analyser = analyser;
-		ae._gnod = gnod;
-		ae._actx = ctx;
 		ae._ssa = true;
 
-		ae.addEventListener('play', function() {
-			if (ctx.state === 'suspended') ctx.resume();
-			startLoop();
-		});
-
+		ae.addEventListener('play', startLoop);
 		ae.addEventListener('pause', stopLoop);
 		ae.addEventListener('ended', stopLoop);
 
