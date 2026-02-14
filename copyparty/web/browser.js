@@ -2730,7 +2730,10 @@ var afilt = (function () {
 	};
 
 	function setvis(vis) {
-		ebi('audio_eq').parentNode.style.display = ebi('audio_drc').parentNode.style.display = (vis ? '' : 'none');
+		ebi('audio_eq').parentNode.style.display =
+		ebi('audio_drc').parentNode.style.display =
+		ebi('audio_ss').parentNode.style.display =
+		(vis ? '' : 'none');
 	}
 
 	setvis(ACtx);
