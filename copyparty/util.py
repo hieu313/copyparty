@@ -2978,6 +2978,8 @@ def shut_socket(log: "NamedLogger", sck: socket.socket, timeout: int = 3) -> Non
             sck.shutdown(socket.SHUT_RDWR)
         except:
             pass
+    except OSError as ex:
+        log("shut(%d): ok; client has already disconnected; %s" % (fd, ex.errno), "90")
     except Exception as ex:
         log("shut({}): {}".format(fd, ex), "90")
     finally:

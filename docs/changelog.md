@@ -1,4 +1,18 @@
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  
+# 2026-0131-2001  `v1.20.6`  one safeguard too many
+
+## 🧪 new features
+
+* #1264 now possible to grant the `get` permission when creating a share 95b827f1
+  * the button was already there, but until now it did nothing
+
+## 🩹 bugfixes
+
+* a safeguard (24141b49) added in [v1.20.5](https://github.com/9001/copyparty/releases/tag/v1.20.5) was too strict and would block requests from certain reverseproxies, specifically anything that adds `X-Forwarded-HTTP-Version` 72224d29
+
+
+
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  
 # 2026-0130-2145  `v1.20.5`  fast again
 
 <img src="https://github.com/9001/copyparty/raw/hovudstraum/docs/logo.svg" width="250" align="right"/>

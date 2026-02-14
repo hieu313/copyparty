@@ -805,6 +805,10 @@ class Sftpd(object):
             self.bound.append(ip)
         except Exception as ex:
             if ip == "0.0.0.0" and "::" in self.bound:
+                try:
+                    srv.close()  # type: ignore
+                except:
+                    pass
                 return  # dualstack
             self.log("could not listen on (%s,%s): %r" % (ip, port, ex), 3)
 
