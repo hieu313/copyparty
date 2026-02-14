@@ -38,6 +38,25 @@ cat >initcfg <<'EOF'
 % /cfg
 EOF
 
+# the bootstrap
+cat >cpp.sh <<'EOF'
+#!/bin/ash
+set -e
+[ "$DI_PREPARTY" ] && {
+  p="$DI_PREPARTY"
+  [ "$p" = "${p##*/}" ] || {
+    echo "ERROR: DI_PREPARTY must be filename only"
+    exit 1
+  }
+  echo "running DI_PREPARTY (/cfg/$p)"
+  /bin/ash "/cfg/$p" || { e=$?
+    echo "ERROR: DI_PREPARTY returned error $e"
+    exit $e
+  }
+}
+exec /usr/bin/python3 -m copyparty "$@"
+EOF
+
 # unpack sfx and dive in
 python3 copyparty-sfx.py --version
 cd /tmp/pe-copyparty.0

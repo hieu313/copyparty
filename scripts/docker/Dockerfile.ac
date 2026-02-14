@@ -19,4 +19,4 @@ RUN     ash innvikler.sh ac
 
 WORKDIR /state
 EXPOSE  3923
-ENTRYPOINT ["python3", "-m", "copyparty", "-c", "/z/initcfg"]
+ENTRYPOINT ["/bin/ash", "/z/cpp.sh", "-c", "/z/initcfg"]
