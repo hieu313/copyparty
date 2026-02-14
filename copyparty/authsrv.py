@@ -2941,7 +2941,7 @@ class AuthSrv(object):
             t += "\n"
 
         if have_symdup and self.args.fika:
-            t = "WARNING: disabling fika due to symlink-based dedup in at least one volume; consider --reflink or --hardlink"
+            t = "WARNING: disabling fika due to symlink-based dedup in at least one volume; uploads/deletes will be blocked during filesystem-indexing. Consider --reflink or --hardlink"
             # self.args.fika = self.args.fika.replace("m", "").replace("d", "")  # probably not enough
             self.args.fika = ""
 
