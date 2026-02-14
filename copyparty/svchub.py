@@ -35,14 +35,14 @@ from .mtag import HAVE_FFMPEG, HAVE_FFPROBE, HAVE_MUTAGEN
 from .pwhash import HAVE_ARGON2
 from .tcpsrv import TcpSrv
 from .th_srv import (
-    HAVE_AVIF,
+    H_PIL_AVIF,
+    H_PIL_HEIF,
+    H_PIL_WEBP,
     HAVE_FFMPEG,
     HAVE_FFPROBE,
-    HAVE_HEIF,
     HAVE_PIL,
     HAVE_RAW,
     HAVE_VIPS,
-    HAVE_WEBP,
     ThumbSrv,
 )
 from .up2k import Up2k
@@ -370,10 +370,6 @@ class SvcHub(object):
         if not args.no_thumb:
             t = ", ".join(self.args.th_dec) or "(None available)"
             self.log("thumb", "decoder preference: {}".format(t))
-
-            if "pil" in self.args.th_dec and not HAVE_WEBP:
-                msg = "disabling webp thumbnails because either libwebp is not available or your Pillow is too old"
-                self.log("thumb", msg, c=3)
 
             if self.args.th_dec:
                 self.thumbsrv = ThumbSrv(self)
@@ -954,14 +950,14 @@ class SvcHub(object):
             (HAVE_SQLITE3, "sqlite", "sessions and file/media indexing"),
             (HAVE_PIL, "pillow", "image thumbnails (plenty fast)"),
             (HAVE_VIPS, "vips", "image thumbnails (faster, eats more ram)"),
-            (HAVE_WEBP, "pillow-webp", "create thumbnails as webp files"),
+            (H_PIL_WEBP, "pillow-webp", "create thumbnails as webp files"),
             (HAVE_FFMPEG, "ffmpeg", t_ff + ", good-but-slow image thumbnails"),
             (HAVE_FFPROBE, "ffprobe", t_ff + ", read audio/media tags"),
             (HAVE_MUTAGEN, "mutagen", "read audio tags (ffprobe is better but slower)"),
             (HAVE_ARGON2, "argon2", "secure password hashing (advanced users only)"),
             (HAVE_ZMQ, "pyzmq", "send zeromq messages from event-hooks"),
-            (HAVE_HEIF, "pillow-heif", "read .heif images with pillow (rarely useful)"),
-            (HAVE_AVIF, "pillow-avif", "read .avif images with pillow (rarely useful)"),
+            (H_PIL_HEIF, "pillow-heif", "read .heif pics with pillow (rarely useful)"),
+            (H_PIL_AVIF, "pillow-avif", "read .avif pics with pillow (rarely useful)"),
             (HAVE_RAW, "rawpy", "read RAW images"),
         ]
         if ANYWIN:

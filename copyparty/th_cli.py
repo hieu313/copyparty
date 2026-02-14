@@ -8,7 +8,7 @@ import stat
 from .__init__ import TYPE_CHECKING
 from .authsrv import VFS
 from .bos import bos
-from .th_srv import EXTS_AC, HAVE_JXL, HAVE_WEBP, thumb_path
+from .th_srv import EXTS_AC, H_PIL_JXL, H_PIL_WEBP, thumb_path
 from .util import Cooldown, Pebkac
 
 if True:  # pylint: disable=using-constant-test
@@ -53,8 +53,8 @@ class ThumbCli(object):
 
         # defer args.th_ff_jpg, can change at runtime
         nonpil = next((x for x in self.args.th_dec if x in ("vips", "ff")), None)
-        self.can_webp = HAVE_WEBP or nonpil
-        self.can_jxl = HAVE_JXL or nonpil
+        self.can_webp = H_PIL_WEBP or nonpil
+        self.can_jxl = H_PIL_JXL or nonpil
 
     def log(self, msg: str, c: Union[int, str] = 0) -> None:
         self.log_func("thumbcli", msg, c)

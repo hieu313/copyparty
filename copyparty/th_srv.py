@@ -46,10 +46,10 @@ if PY2:
 
 HAVE_PIL = False
 HAVE_PILF = False
-HAVE_HEIF = False
-HAVE_AVIF = False
-HAVE_WEBP = False
-HAVE_JXL = False
+H_PIL_HEIF = False
+H_PIL_AVIF = False
+H_PIL_WEBP = False
+H_PIL_JXL = False
 
 TH_CH = {"j": "jpg", "p": "png", "w": "webp", "x": "jxl"}
 
@@ -131,7 +131,7 @@ try:
             raise Exception()
 
         Image.new("RGB", (2, 2)).save(BytesIO(), format="webp")
-        HAVE_WEBP = True
+        H_PIL_WEBP = True
     except:
         pass
 
@@ -145,7 +145,7 @@ try:
             pass
 
         Image.new("RGB", (2, 2)).save(BytesIO(), format="jxl")
-        HAVE_JXL = True
+        H_PIL_JXL = True
     except:
         pass
 
@@ -159,7 +159,7 @@ try:
             from pyheif_pillow_opener import register_heif_opener
 
         register_heif_opener()
-        HAVE_HEIF = True
+        H_PIL_HEIF = True
     except:
         pass
 
@@ -168,12 +168,12 @@ try:
             raise Exception()
 
         if ".avif" in Image.registered_extensions():
-            HAVE_AVIF = True
+            H_PIL_AVIF = True
             raise Exception()
 
         import pillow_avif  # noqa: F401  # pylint: disable=unused-import
 
-        HAVE_AVIF = True
+        H_PIL_AVIF = True
     except:
         pass
 
@@ -309,19 +309,19 @@ class ThumbSrv(object):
             ]
         ]
 
-        if not HAVE_HEIF:
+        if not H_PIL_HEIF:
             for f in "heif heifs heic heics".split(" "):
                 self.fmt_pil.discard(f)
 
-        if not HAVE_AVIF:
+        if not H_PIL_AVIF:
             for f in "avif avifs".split(" "):
                 self.fmt_pil.discard(f)
 
-        if not HAVE_WEBP:
+        if not H_PIL_WEBP:
             for f in "webp".split(" "):
                 self.fmt_pil.discard(f)
 
-        if not HAVE_JXL:
+        if not H_PIL_JXL:
             for f in "jxl".split(" "):
                 self.fmt_pil.discard(f)
 
@@ -514,7 +514,7 @@ class ThumbSrv(object):
                         ext in self.fmt_ffa or ext in self.fmt_ffv
                     )
 
-                    if lib == "pil" and ext in self.fmt_pil:
+                    if lib == "pil" and ext in self.fmt_pil and tex in self.fmt_pil:
                         funs.append(self.conv_pil)
                     elif lib == "vips" and ext in self.fmt_vips:
                         funs.append(self.conv_vips)
