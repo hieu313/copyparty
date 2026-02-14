@@ -329,7 +329,7 @@ Ls.cze = {
 	"mt_ssvt": "prahová hlasitost (0-255)\">hl", //m
 	"mt_ssts": "aktivní práh (% stopy, začátek)\">zač", //m
 	"mt_sste": "aktivní práh (% stopy, konec)\">kon", //m
-	"mt_ssrt": "doba náběhu/útlumu hlasitosti/rychlosti\">atk", //m
+	"mt_ssrt": "doba náběhu/útlumu hlasitosti/rychlosti\">fade", //m
 	"mt_sssm": "násobič rychlosti přehrávání\">rych", //m
 
 	"mb_play": "přehrát",

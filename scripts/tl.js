@@ -357,7 +357,7 @@ Ls.hmn = {
 	"mt_ssvt": "volume threshold (0-255)\">vol",
 	"mt_ssts": "active threshold (% of track, start)\">start",
 	"mt_sste": "active threshold (% of track, end)\">end",
-	"mt_ssrt": "volume/speed ramp up/down time\">atk",
+	"mt_ssrt": "volume/speed ramp up/down time\">fade",
 	"mt_sssm": "playback speed multiplier\">ffwd",
 
 	"mb_play": "play",

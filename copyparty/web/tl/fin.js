@@ -325,7 +325,7 @@ Ls.fin = {
 	"mt_ssvt": "äänenvoimakkuuden kynnys (0-255)\">vol", //m
 	"mt_ssts": "aktiivikynnys (% kappale, alku)\">alk", //m
 	"mt_sste": "aktiivikynnys (% kappale, loppu)\">lop", //m
-	"mt_ssrt": "äänenvoim./nopeuden nousu/laskuaika\">atk", //m
+	"mt_ssrt": "äänenvoim./nopeuden nousu/laskuaika\">häiv", //m
 	"mt_sssm": "toistonopeuden kerroin\">pik", //m
 
 	"mb_play": "toista",
