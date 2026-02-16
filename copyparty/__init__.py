@@ -108,6 +108,7 @@ web/tl/epo.js
 web/tl/fin.js
 web/tl/fra.js
 web/tl/grc.js
+web/tl/hun.js
 web/tl/ita.js
 web/tl/jpn.js
 web/tl/kor.js

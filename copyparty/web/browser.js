@@ -691,6 +691,7 @@ var LANGN = [
 	["fin", "Suomi"],
 	["fra", "français"],
 	["grc", "Ελληνικά"],
+	["hun", "Magyar"],
 	["ita", "Italiano"],
 	["jpn", "日本語"],
 	["kor", "한국어"],
