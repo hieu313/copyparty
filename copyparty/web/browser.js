@@ -2888,9 +2888,9 @@ var afilt = (function () {
 	}
 
 	function add_ss() {
-		r.filters.push(mp.ssg = actx.createGain());
-		r.filters.push(mp.ssa = actx.createAnalyser());
-		mp.ssa.fftSize = 256;
+		r.filters.push(afilt.ssg = actx.createGain());
+		r.filters.push(afilt.ssa = actx.createAnalyser());
+		afilt.ssa.fftSize = 256;
 	}
 
 	function add_eq() {
@@ -10035,7 +10035,7 @@ var mpss = (function() {
 	var r = {}, config, ssint, npaint = 0;
 
 	r.load = function () {
-		if (!mp || !mp.ssg)
+		if (!afilt.ssg)
 			return false;
 
 		config = {
@@ -10058,7 +10058,7 @@ var mpss = (function() {
 		clearInterval(ssint);
 		ssint = null;
 		if (!mp) return;
-		if (mp.ssg) mp.ssg.gain.value = 1.0;
+		if (afilt.ssg) afilt.ssg.gain.value = 1.0;
 		if (mp.au && mp.au._ss) mp.au.playbackRate = 1.0;
 		if (mp.au2 && mp.au2._ss) mp.au2.playbackRate = 1.0;
 	};
@@ -10067,6 +10067,7 @@ var mpss = (function() {
 		var ae = mp.au;
 		ae._ss = true;
 
+		var gain = afilt.ssg.gain;
 		var duration = ae.duration || 0;
 	
 		var slimit = duration * (config.sthresh / 100);
@@ -10078,7 +10079,7 @@ var mpss = (function() {
 		var is_silent = false;
 
 		if (in_limits) {
-			var analyser = mp.ssa;
+			var analyser = afilt.ssa;
 			var da = new Uint8Array(analyser.frequencyBinCount);
 			analyser.getByteFrequencyData(da);
 
@@ -10103,12 +10104,12 @@ var mpss = (function() {
 			if (Math.abs(ae.playbackRate - tspeed) > 0.01) {
 				ae.playbackRate += (tspeed - ae.playbackRate) * config.rspeed;
 			}
-			if (Math.abs(mp.ssg.gain.value - tvol) > 0.01) {
-				mp.ssg.gain.value += (tvol - mp.ssg.gain.value) * config.rspeed;
+			if (Math.abs(gain.value - tvol) > 0.01) {
+				gain.value += (tvol - gain.value) * config.rspeed;
 			}
 		} else {
 			ae.playbackRate = 1.0;
-			mp.ssg.gain.value = 1.0;
+			gain.value = 1.0;
 		}
 	}
 
