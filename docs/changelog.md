@@ -1,4 +1,49 @@
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  
+# 2026-0214-2315  `v1.20.7`  fika
+
+## 🧪 new features
+
+* now possible to upload/delete files while the filesystem-indexer is still busy d44ea245 0ca4c1bd
+  * global-option [fika](https://copyparty.eu/cli/#g-fika) decides which actions to allow while still indexing; default is upload+copy+delete
+  * full deduplication is only guaranteed if this option is set blank, as dupes are allowed while indexing
+* #1266 browsers can request thumbnails as jxl images, and view jxl files in the gallery (thx @intelfx!) b2711e05 720c83b2 93ffc65c a65a30b1 a7a25deb 59de5e2c 16403d8c 48c10178 0e8913c2
+  * only works in browsers which support jxl, which is FINALLY happening ([sure took a while](https://issues.chromium.org/issues/40168998))
+  * some notes on memory/RAM usage though -- it is fine on Alpine Linux, so docker is also fine, just don't enable mimalloc
+    * jxl can be disabled with global-option [th-no-jxl](https://copyparty.eu/cli/#g-th-no-jxl) if necessary on baremetal deployments until libvips fixes this
+* #1265 audioplayer can "skip silence" now (thx @icxes!) 66949989
+* #1287 opensearch support for opds (thx @philips!) 84e687a0
+* #1276 option [rw-edit](https://copyparty.eu/cli/#g-rw-edit) is the list of file-extensions that can be edited as textfiles with only permissions read+write (default is `md` like before); all other files still require read+write+delete 312f48e1 d6928380
+* #1288 option to customize the links copied when selecting files and pressing ctrl-c (thx @icxes!) e5d0a057
+* docker: add env-var [DI_PREPARTY](https://github.com/9001/copyparty/blob/hovudstraum/scripts/docker/devnotes.md#modding-on-the-fly) to run an arbitrary script during startup, for customizations and such bf01ca48
+
+## 🩹 bugfixes
+
+* #1279 the textfile-viewer would refuse to load huge documents when hotlinked f02e9cf6
+* #1280 the custom rightclick-menu was enabled in the textfile viewer fc8a4b8e
+* #1262 logtail now works on windows; would previously take an exclusive-lock on the monitored file, as windows does by default a368fc66
+
+## 🔧 other changes
+
+* volumes are hidden from the treeview if the name starts with a dot 76041fdb
+* #1277 `descript.ion` files no longer require the `e2d` and `e2t` options to be enabled 4cb4e820
+* chunked PUT-uploads are now terminated if they exceed a configured size limit dfadb5a7
+* #1282 improved compatibility with GraalPy (thx @vgskye!) e8609b87
+* #1292 #1296 updated Esperanto translation (thx @slashdevslashurandom!) 418bf2f9 914f84ce
+* thumbnails: use libvips as fallback for rawpy 27ae2e1e
+  * libvips doesn't support .arw files (sony) yet, so still need rawpy
+* make server config slightly easier:
+  * improve xff warnings 96aeb898
+  * warn if config-values are quoted 598df44e
+  * lowercase headernames in configs fd096385
+
+## 🌠 fun facts
+
+* the `fika` option sends the filesystem-indexer on [a coffee break](https://en.wikipedia.org/wiki/Coffee_in_Sweden#Fika)
+* exci wants me to mention aoi yuuki here for some reason :^) so here's [gekisou gungnir](https://www.youtube.com/watch?v=feeFscLH6QE)
+
+
+
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  
 # 2026-0131-2001  `v1.20.6`  one safeguard too many
 
 ## 🧪 new features
