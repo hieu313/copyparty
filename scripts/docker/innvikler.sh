@@ -87,7 +87,6 @@ rm -rf \
 cd /usr/lib/python3.*/site-packages
 rm -rf \
   numpy/*/tests \
-  cryptography/hazmat/bindings/_rust.abi3.so \
   /usr/share/mime/packages/freedesktop.org.xml
 
 cd /usr/lib/python3.*/site-packages/copyparty/
