@@ -2576,6 +2576,10 @@ class HttpCli(object):
                     vfs.flags.get("daw")
                     or "replace" in self.headers
                     or "x-oc-mtime" in self.headers
+                    or (
+                        self.args.dav_port
+                        and self.args.dav_port == self.s.getsockname()[1]
+                    )
                 )
             ) or (
                 not bos.path.exists(os.path.join(fdir, tnam))
