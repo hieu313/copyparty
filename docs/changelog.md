@@ -1,4 +1,31 @@
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  
+# 2026-0222-1507  `v1.20.8`  no265
+
+## 🧪 new features
+
+* #1298 add Hungarian translation (thx @sonacl!) eefb181b f37c3b96
+* #1299 chown now accepts 4-digit values (thx @new-sashok724!) 5a7504fd
+
+## 🩹 bugfixes
+
+* audioplayer skip-silence:
+  * #1303 clamp ffwd to safe values (thx @icxes!) f5e70c7f
+  * fix crash on folderchange f1a433a6
+
+## 🔧 other changes
+
+* due to [legal reasons](https://github.com/9001/copyparty/blob/hovudstraum/docs/bad-codecs.md), the [docker-images](https://github.com/9001/copyparty/blob/hovudstraum/scripts/docker) and [bootable flashdrive](https://a.ocv.me/pub/stuff/edcd001/enterprise-edition/) are now unable to create thumbnails of HEVC/h265 videos and heif/heic images 1bec91d1
+  * this primarily means photos/videos taken with iphones (and maybe some samsung phones)
+  * on the bright side, this has made the docker-images much smaller; `ac` is now half the size it used to be, and `iv` / `dj` are each 97 MiB smaller
+
+## 🌠 fun facts
+
+* if you wanna see your car doing its best impression of a frictionless spherical cow, I can warmly (heh) recommend the icy snowcoated countryroads of viken this weekend
+  * goes oddly well with [sakuraburst - deconstructing nature](https://www.youtube.com/watch?v=MJjO-pwYpJg)
+
+
+
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  
 # 2026-0214-2315  `v1.20.7`  fika
 
 ## 🧪 new features
