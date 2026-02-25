@@ -1440,7 +1440,7 @@ general usage:
 on macos, connect from finder:
 * [Go] -> [Connect to Server...] -> http://192.168.123.1:3923/
 
-to upload or edit files with WebDAV clients, enable the `daw` volflag (because most WebDAV clients expect this) and give your account the delete-permission. This avoids getting several copies of the same file on the server. HOWEVER: This will also make all PUT-uploads overwrite existing files if the user has delete-access, so use with caution.
+to be able to edit existing files, the client must have the Delete-permission, and some webdav clients will also require the [daw](https://copyparty.eu/cli/#g-daw) volflag or global-option (not necessary if the client sends the `x-oc-mtime` header). Without `daw`, those clients will fail to modify existing files and instead create new copies with names like `notes.txt-1771978661.726032-3i9GPghL.txt`. **NOTE:** Enabling `daw` will also make all PUT-uploads overwrite existing files if the user has delete-access, so use with caution.
 
 > note: if you have enabled [IdP authentication](#identity-providers) then that may cause issues for some/most webdav clients; see [the webdav section in the IdP docs](https://github.com/9001/copyparty/blob/hovudstraum/docs/idp.md#connecting-webdav-clients)
 
