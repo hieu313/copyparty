@@ -26,7 +26,7 @@ Ls.chi = {
 
 	"hks": [
 		[
-			"杂项 ", // trailing space to ensure string is not treated as an array of 2 chars
+			"杂项",
 			["ESC", "关闭各种窗口"],
 
 			"文件管理器",
@@ -47,7 +47,7 @@ Ls.chi = {
 			["⇧ ↑/↓", "选择上一个/下一个文件"],
 			["ctrl-A", "选择所有文件 / 文件夹"]
 		], [
-			"导航 ", // trailing space
+			"导航",
 			["B", "切换面包屑导航 / 导航窗格"],
 			["I/K", "上一个/下一个文件夹"],
 			["M", "父文件夹（或折叠当前文件夹）"],

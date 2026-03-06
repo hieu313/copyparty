@@ -6049,7 +6049,7 @@ function hkhelp() {
 		html.push('<table>');
 		for (var a = 0; a < c.length; a++)
 			try {
-				if (c[a].length != 2)
+				if (!Array.isArray(c[a]))
 					html.push('<tr><th colspan="2">' + esc(c[a]) + '</th></tr>');
 				else {
 					var t1 = c[a][0].replace('⇧', '<b>⇧</b>');
