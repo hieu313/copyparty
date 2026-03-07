@@ -156,6 +156,7 @@ BADXFF = " due to dangerous misconfiguration (the http-header specified by --xff
 BADXFF2 = ". Some copyparty features are now disabled as a safety measure.\n\n\n"
 BADXFP = ', or change the copyparty global-option "xf-proto" to another header-name to read this value from. Alternatively, if your reverseproxy is not able to provide a header similar to "X-Forwarded-Proto", then you must tell copyparty which protocol to assume; either "--xf-proto-fb=http" or "--xf-proto-fb=https"'
 BADXFFB = "<b>NOTE: serverlog has a message regarding your reverse-proxy config</b>"
+BADVER = '<a class="r" href="https://github.com/9001/copyparty/security/advisories">Please upgrade copyparty; Your version has a vulnerability</a><p>(only users with permission "a" or "A" can see this message)</p>'
 
 H_CONN_KEEPALIVE = "Connection: Keep-Alive"
 H_CONN_CLOSE = "Connection: Close"
@@ -5625,7 +5626,13 @@ class HttpCli(object):
             no304=self.no304(),
             k304vis=self.args.k304 > 0,
             no304vis=self.args.no304 > 0,
-            msg=BADXFFB if hasattr(self, "bad_xff") else "",
+            msg=(
+                BADVER
+                if self.conn.hsrv.bad_ver and self.can_admin
+                else BADXFFB
+                if hasattr(self, "bad_xff")
+                else ""
+            ),
             ver=S_VERSION if show_ver else "",
             chpw=self.args.chpw and self.uname != "*",
             ahttps="" if self.is_https else "https://" + self.host + self.req,
