@@ -1244,6 +1244,13 @@ class SvcHub(object):
         except:
             raise Exception("invalid --mv-retry [%s]" % (self.args.mv_retry,))
 
+        if self.args.vc_url:
+            zi = max(1, int(self.args.vc_age))
+            if zi < 3 and "api.copyparty.eu" in self.args.vc_url:
+                zi = 3
+                self.log("vc-age too low for copyparty.eu; will use 3 hours")
+            self.args.vc_age = zi
+
         al.js_utc = "false" if al.localtime else "true"
 
         al.tcolor = al.tcolor.lstrip("#")
@@ -1855,7 +1862,7 @@ class SvcHub(object):
                         self.log("ver-chk", t % (S_VERSION, zs), 1)
                         self.broker.say("httpsrv.set_bad_ver")
                         if self.args.vc_exit:
-                            self.shutdown()
+                            self.sigterm()
                         return
                     else:
                         t = "%sok; v%s and newer is safe"
