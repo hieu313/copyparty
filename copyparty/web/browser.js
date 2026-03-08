@@ -717,7 +717,7 @@ for (var a = 0; a < LANGN.length; a++)
 function langtest() {
 	var n = LANGS.length - 1;
 	for (var a = 1; a < LANGS.length; a++)
-		import_js(SR + '/.cpr/tl/' + LANGS[a] + '.js', function () { if (!--n) langtest2(); });
+		import_js(SR + '/.cpr/w/tl/' + LANGS[a] + '.js', function () { if (!--n) langtest2(); });
 }
 function langtest2() {
 for (var a = 0; a < LANGS.length; a++) {
@@ -1844,7 +1844,7 @@ function MPlayer() {
 
 		// breaks touchbar-macs
 		console.log('init fau');
-		r.fau = new Audio(SR + '/.cpr/deps/busy.mp3?_=' + TS);
+		r.fau = new Audio(SR + '/.cpr/w/deps/busy.mp3?_=' + TS);
 		r.fau.loop = true;
 		r.fau.play();
 	};
@@ -5027,7 +5027,7 @@ var showfile = (function () {
 		qsr('#prism_css');
 		var el = mknod('link', 'prism_css');
 		el.rel = 'stylesheet';
-		el.href = SR + '/.cpr/deps/prism' + (light ? '' : 'd') + '.css?_=' + TS;
+		el.href = SR + '/.cpr/w/deps/prism' + (light ? '' : 'd') + '.css?_=' + TS;
 		document.head.appendChild(el);
 	};
 
@@ -5240,7 +5240,7 @@ var showfile = (function () {
 				if (!defer)
 					fun(el.firstChild);
 				else
-					import_js(SR + '/.cpr/deps/prism.js', function () { fun(); });
+					import_js(SR + '/.cpr/w/deps/prism.js', function () { fun(); });
 			}
 			if (!txt && r.wrap)
 				el.className = 'wrap';
@@ -9010,7 +9010,7 @@ var globalcss = (function () {
 var sandboxjs = (function () {
 	var ret = '',
 		busy = false,
-		url = SR + '/.cpr/util.js?_=' + TS,
+		url = SR + '/.cpr/w/util.js?_=' + TS,
 		tag = '<script src="' + url + '"></script>';
 
 	return function () {
@@ -9047,7 +9047,7 @@ function show_md(md, name, div, url, depth) {
 		}
 
 		wfp_debounce.n--;
-		return import_js(SR + '/.cpr/deps/marked.js', function () {
+		return import_js(SR + '/.cpr/w/deps/marked.js', function () {
 			show_md(md, name, div, url, 1);
 		});
 	}

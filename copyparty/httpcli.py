@@ -1381,7 +1381,11 @@ class HttpCli(object):
             if self.vpath == ".cpr/metrics":
                 return self.conn.hsrv.metrics.tx(self)
 
-            res_path = "web/" + self.vpath[5:]
+            if self.vpath.startswith(".cpr/w/"):
+                res_path = "web/" + self.vpath[7:]
+            else:
+                res_path = "web/" + self.vpath[5:]
+
             if res_path in RES:
                 ap = self.E.mod_ + res_path
                 if bos.path.exists(ap) or bos.path.exists(ap + ".gz"):
