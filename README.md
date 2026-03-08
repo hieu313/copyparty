@@ -64,7 +64,7 @@ built in Norway 🇳🇴 with contributions from [not-norway](https://github.com
     * [other tricks](#other-tricks)
     * [searching](#searching) - search by size, date, path/name, mp3-tags, ...
 * [server config](#server-config) - using arguments or config files, or a mix of both
-    * [update-checker](#update-checker) - sleep better at night
+    * [version-checker](#version-checker) - sleep better at night
     * [zeroconf](#zeroconf) - announce enabled services on the LAN ([pic](https://user-images.githubusercontent.com/241032/215344737-0eae8d98-9496-4256-9aa8-cd2f6971810d.png))
         * [mdns](#mdns) - LAN domain-name and feature announcer
         * [ssdp](#ssdp) - windows-explorer announcer
@@ -1314,7 +1314,7 @@ using arguments or config files, or a mix of both:
 * or if you prefer plaintext, https://copyparty.eu/helptext.txt
 
 
-## update-checker
+## version-checker
 
 sleep better at night  by telling copyparty to periodically check whether your version has a [known vulnerability](https://github.com/9001/copyparty/security/advisories)
 
