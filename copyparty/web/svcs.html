@@ -55,7 +55,7 @@
             <p>if you can, install <a href="https://winfsp.dev/rel/">winfsp</a>+<a href="https://downloads.rclone.org/rclone-current-windows-amd64.zip">rclone</a> and then paste this in cmd:</p>
             <pre>
                 rclone config create {{ aname }}-dav webdav url=http{{ s }}://{{ rip }}{{ hport }} vendor=owncloud pacer_min_sleep=0.01ms{% if accs %} user={{ b_un }} pass=<b>{{ pw }}</b>{% endif %}
-                rclone mount --vfs-cache-mode writes --dir-cache-time 5s {{ aname }}-dav:{{ rvp }} <b>W:</b>
+                rclone mount --vfs-cache-mode writes --dir-cache-time 5s --network-mode {{ aname }}-dav:{{ rvp }} <b>W:</b>
             </pre>
             <ul>
                 {%- if s %}
@@ -149,7 +149,7 @@
                 {%- else %}
                 rclone config create {{ aname }}-ftp ftp host={{ rip }} port={{ args.ftp }} pass=k user={% if accs %}<b>{{ pw }}</b>{% else %}anonymous{% endif %} tls=false
                 {%- endif %}
-                rclone mount --vfs-cache-mode writes --dir-cache-time 5s {{ aname }}-ftp:{{ rvp }} <b>W:</b>
+                rclone mount --vfs-cache-mode writes --dir-cache-time 5s --network-mode {{ aname }}-ftp:{{ rvp }} <b>W:</b>
             </pre>
             {%- endif %}
             {%- if args.ftps %}
@@ -160,7 +160,7 @@
                 {%- else %}
                 rclone config create {{ aname }}-ftps ftp host={{ rip }} port={{ args.ftps }} pass=k user={% if accs %}<b>{{ pw }}</b>{% else %}anonymous{% endif %} tls=false explicit_tls=true
                 {%- endif %}
-                rclone mount --vfs-cache-mode writes --dir-cache-time 5s {{ aname }}-ftps:{{ rvp }} <b>W:</b>
+                rclone mount --vfs-cache-mode writes --dir-cache-time 5s --network-mode {{ aname }}-ftps:{{ rvp }} <b>W:</b>
             </pre>
             {%- endif %}
             <ul>
