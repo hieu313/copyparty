@@ -413,6 +413,7 @@ IMPLICATIONS = [
     ["tftpvv", "tftpv"],
     ["nodupem", "nodupe"],
     ["no_dupe_m", "no_dupe"],
+    ["nohtml", "noscript"],
     ["sftpvv", "sftpv"],
     ["smbw", "smb"],
     ["smb1", "smb"],
@@ -474,7 +475,7 @@ MIMES = {
 }
 
 
-def _add_mimes() -> None:
+def _add_mimes() -> set[str]:
     # `mimetypes` is woefully unpopulated on windows
     # but will be used as fallback on linux
 
@@ -511,8 +512,11 @@ font ttc=collection
             ext, mime = em.split("=")
             MIMES[ext] = "{}/{}".format(k, mime)
 
+    ptn = re.compile("html|script|tension|wasm|xml")
+    return {x for x in MIMES.values() if not ptn.search(x)}
 
-_add_mimes()
+
+SAFE_MIMES = _add_mimes()
 
 
 EXTS: dict[str, str] = {v: k for k, v in MIMES.items()}
@@ -3501,6 +3505,13 @@ def guess_mime(
             ret += "; charset=utf-8"
 
     return ret
+
+
+def safe_mime(mime: str) -> str:
+    if "text/" in mime or "xml" in mime:
+        return "text/plain; charset=utf-8"
+    else:
+        return "application/octet-stream"
 
 
 def getalive(pids: list[int], pgid: int) -> list[int]:

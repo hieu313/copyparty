@@ -1074,7 +1074,12 @@ class AuthSrv(object):
         self.indent = ""
         self.is_lxc = args.c == ["/z/initcfg"]
 
+        oh = "X-Content-Type-Options: nosniff\r\n"
+        if self.args.http_vary:
+            oh += "Vary: %s\r\n" % (self.args.http_vary,)
         self._vf0b = {
+            "oh_g": oh + "\r\n",
+            "oh_f": oh + "\r\n",
             "cachectl": self.args.cachectl,
             "tcolor": self.args.tcolor,
             "du_iwho": self.args.du_iwho,
@@ -2634,8 +2639,17 @@ class AuthSrv(object):
             if head_s and not head_s.endswith("\n"):
                 head_s += "\n"
 
+            zs = "X-Content-Type-Options: nosniff\r\n"
             if "norobots" in vol.flags:
                 head_s += META_NOBOTS
+                zs += "X-Robots-Tag: noindex, nofollow\r\n"
+            if self.args.http_vary:
+                zs += "Vary: %s\r\n" % (self.args.http_vary,)
+            vol.flags["oh_g"] = zs + "\r\n"
+
+            if "noscript" in vol.flags:
+                zs += "Content-Security-Policy: script-src 'none';\r\n"
+            vol.flags["oh_f"] = zs + "\r\n"
 
             ico_url = vol.flags.get("ufavico")
             if ico_url:
