@@ -3312,20 +3312,22 @@ class AuthSrv(object):
         cur.close()
         db.close()
 
+        old_accs = self.idp_accs.copy()
         self.idp_accs.clear()
         self.idp_usr_gh.clear()
 
         gsep = self.args.idp_gsep
+        groupless = (None, [""])
         n = []
         for uname, gname in from_cache:
             if level < 3:
                 if uname in self.idp_accs:
                     continue
-                gname = ""
+                if old_accs.get(uname) in groupless:
+                    gname = ""
             gnames = [x.strip() for x in gsep.split(gname)]
             gnames.sort()
 
-            # self.idp_usr_gh[uname] = gname
             self.idp_accs[uname] = gnames
             n.append(uname)
 
