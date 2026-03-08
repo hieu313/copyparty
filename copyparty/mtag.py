@@ -667,7 +667,7 @@ class MTag(object):
                     zb = os.getxattr(abspath, xattr)
                     ret[xattr] = zb.decode("utf-8", "replace")
             except:
-                self.log("failed to read xattrs from [%s]\n%s", abspath, min_ex(), 3)
+                self.log("failed to read xattrs from [%s]\n%s" % (abspath, min_ex()), 3)
         elif "db_xattr_yes" in vf:
             for xattr in vf["db_xattr_yes"]:
                 if "=" in xattr:

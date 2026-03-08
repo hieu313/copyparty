@@ -1248,7 +1248,7 @@ class SvcHub(object):
             zi = max(1, int(self.args.vc_age))
             if zi < 3 and "api.copyparty.eu" in self.args.vc_url:
                 zi = 3
-                self.log("vc-age too low for copyparty.eu; will use 3 hours")
+                self.log("root", "vc-age too low for copyparty.eu; will use 3 hours")
             self.args.vc_age = zi
 
         al.js_utc = "false" if al.localtime else "true"
