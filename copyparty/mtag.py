@@ -133,6 +133,7 @@ class MParser(object):
 def au_unpk(
     log: "NamedLogger", fmt_map: dict[str, str], abspath: str, vn: Optional[VFS] = None
 ) -> str:
+    fd = 0
     ret = ""
     maxsz = 1024 * 1024 * 64
     try:
@@ -186,6 +187,7 @@ def au_unpk(
 
         fsz = 0
         with os.fdopen(fd, "wb") as fo:
+            fd = 0
             while True:
                 buf = fi.read(32768)
                 if not buf:
@@ -200,6 +202,8 @@ def au_unpk(
         return ret
 
     except Exception as ex:
+        if fd:
+            os.close(fd)
         if ret:
             t = "failed to decompress file %r: %r"
             log(t % (abspath, ex))
