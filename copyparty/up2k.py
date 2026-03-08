@@ -661,19 +661,20 @@ class Up2k(object):
 
             for _ in range(2):
                 q = "select ip, at from up where ip > '' order by +at limit 1"
-                hits = cur.execute(q).fetchall()
-                if not hits:
-                    break
+                with self.mutex:
+                    hits = cur.execute(q).fetchall()
+                    if not hits:
+                        break
 
-                remains = hits[0][1] - cutoff
-                if remains > 0:
-                    timeout = min(timeout, now + remains)
-                    break
+                    remains = hits[0][1] - cutoff
+                    if remains > 0:
+                        timeout = min(timeout, now + remains)
+                        break
 
-                q = "update up set ip = '' where ip > '' and at <= %d"
-                cur.execute(q % (cutoff,))
-                zi = cur.rowcount
-                cur.connection.commit()
+                    q = "update up set ip = '' where ip > '' and at <= %d"
+                    cur.execute(q % (cutoff,))
+                    zi = cur.rowcount
+                    cur.connection.commit()
 
                 t = "forget-ip(%d) removed %d IPs from db [/%s]"
                 self.log(t % (maxage, zi, vol.vpath))
