@@ -68,6 +68,7 @@ CBZ_PICS = set("png jpg jpeg gif bmp tga tif tiff webp avif jxl".split())
 CBZ_01 = re.compile(r"(^|[^0-9v])0+[01]\b")
 
 FMT_AU = set("mp3 ogg flac wav".split())
+M4A = set("aac m4a m4b m4r".split())
 
 
 class MParser(object):
@@ -259,7 +260,7 @@ def parse_ffprobe(
     md: dict[str, list[Any]] = {}  # raw tags
 
     is_audio = fmt.get("format_name") in FMT_AU
-    if fmt.get("filename", "").split(".")[-1].lower() in ["m4a", "aac"]:
+    if fmt.get("filename", "").split(".")[-1].lower() in M4A:
         is_audio = True
 
     # if audio file, ensure audio stream appears first

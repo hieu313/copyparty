@@ -1168,7 +1168,7 @@ open the `[🎺]` media-player-settings tab to configure it,
   * `[flac]` converts `flac` and `wav` files into opus (if supported by browser) or mp3
   * `[aac]` converts `aac` and `m4a` files into opus (if supported by browser) or mp3
   * `[oth]` converts all other known formats into opus (if supported by browser) or mp3
-    * `aac|ac3|aif|aiff|alac|alaw|amr|ape|au|dfpwm|dts|flac|gsm|it|m4a|mo3|mod|mp2|mp3|mpc|mptm|mt2|mulaw|ogg|okt|opus|ra|s3m|tak|tta|ulaw|wav|wma|wv|xm|xpk`
+    * `aac|ac3|aif|aiff|alac|alaw|amr|ape|au|dfpwm|dts|flac|gsm|it|m4a|m4b|m4r|mo3|mod|mp2|mp3|mpc|mptm|mt2|mulaw|ogg|okt|opus|ra|s3m|tak|tta|ulaw|wav|wma|wv|xm|xpk`
 * "transcode to":
   * `[opus]` produces an `opus` whenever transcoding is necessary (the best choice on Android and PCs)
   * `[awo]` is `opus` in a `weba` file, good for iPhones (iOS 17.5 and newer) but Apple is still fixing some state-confusion bugs as of iOS 18.2.1
