@@ -349,11 +349,13 @@ class SFTP_Srv(paramiko.SFTPServerInterface):
             cr, cw, cm, cd, _, _, _, _, _ = avn.uaxs[self.uname]
             if r and not cr or w and not cw or m and not cm or d and not cd:
                 raise OSError(errno.EPERM, "permission denied in [/%s]" % (vpath,))
+        else:
+            ap = vn.canonical(rem, False)
 
         if "bcasechk" in vn.flags and not vn.casechk(rem, True):
             raise OSError(errno.ENOENT, "file does not exist case-sensitively")
 
-        return os.path.join(vn.realpath, rem), vn, rem
+        return ap, vn, rem
 
     def list_folder(self, path: str) -> list[SATTR] | int:
         try:
@@ -484,7 +486,7 @@ class SFTP_Srv(paramiko.SFTPServerInterface):
 
         try:
             vn, rem = self.asrv.vfs.get(vp, self.uname, rd, wr)
-            ap = os.path.join(vn.realpath, rem)
+            ap = vn.canonical(rem, False)
             vf = vn.flags
         except Pebkac as ex:
             t = "denied open file [%s], iflag=%s, read=%s, write=%s: %s"

@@ -705,18 +705,22 @@ class VFS(object):
         if rem:
             ap += "/" + rem
 
-        rap = absreal(ap)
+        rap = ""
         if self.shr_files:
             assert self.shr_src  # !rm
-            vn, rem = self.shr_src
-            chk = absreal(os.path.join(vn.realpath, rem))
-            if chk != rap:
-                # not the dir itself; assert file allowed
-                ad, fn = os.path.split(rap)
-                if chk != ad or fn not in self.shr_files:
-                    return "\n\n"
+            if rem and rem not in self.shr_files:
+                return "\n\n"
+            if resolve:
+                rap = absreal(ap)
+                vn, rem = self.shr_src
+                chk = absreal(os.path.join(vn.realpath, rem))
+                if chk != rap:
+                    # not the dir itself; assert file allowed
+                    ad, fn = os.path.split(rap)
+                    if chk != ad or fn not in self.shr_files:
+                        return "\n\n"
 
-        return rap if resolve else ap
+        return (rap or absreal(ap)) if resolve else ap
 
     def _dcanonical_shr(self, rem: str) -> str:
         """resolves until the final component (filename)"""

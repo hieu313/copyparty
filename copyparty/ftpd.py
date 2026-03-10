@@ -200,11 +200,13 @@ class FtpFs(AbstractedFS):
                 cr, cw, cm, cd, _, _, _, _, _ = avfs.uaxs[self.h.uname]
                 if r and not cr or w and not cw or m and not cm or d and not cd:
                     raise FSE(t.format(vpath), 1)
+            else:
+                ap = vfs.canonical(rem, False)
 
             if "bcasechk" in vfs.flags and not vfs.casechk(rem, True):
                 raise FSE("No such file or directory", 1)
 
-            return os.path.join(vfs.realpath, rem), vfs, rem
+            return ap, vfs, rem
         except Pebkac as ex:
             raise FSE(str(ex))
 
