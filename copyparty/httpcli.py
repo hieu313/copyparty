@@ -5644,7 +5644,7 @@ class HttpCli(object):
             no304vis=self.args.no304 > 0,
             msg=(
                 BADVER
-                if self.conn.hsrv.bad_ver and self.can_admin
+                if self.conn.hsrv.bad_ver and avol
                 else BADXFFB
                 if hasattr(self, "bad_xff")
                 else ""

@@ -1871,3 +1871,7 @@ class SvcHub(object):
             except Exception as e:
                 t = "failed to process vulnerability advisory; %s"
                 self.log("ver-chk", t % (min_ex()), 1)
+                try:
+                    os.unlink(fpath)
+                except:
+                    pass
