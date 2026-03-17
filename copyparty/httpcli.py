@@ -4767,7 +4767,7 @@ class HttpCli(object):
         else:
             mime = guess_mime(cdis)
 
-        if mime not in SAFE_MIMES and "nohtml" in self.vn.flags:
+        if mime not in SAFE_MIMES and "nohtml" in self.vn.flags and oh_k != "oh_g":
             mime = safe_mime(mime)
 
         self.out_headers["Accept-Ranges"] = "bytes"
