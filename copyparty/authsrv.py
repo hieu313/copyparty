@@ -1939,7 +1939,7 @@ class AuthSrv(object):
             vol.all_vps.sort(key=lambda x: len(x[0]), reverse=True)
             vol.root = vfs
 
-        zs = "du_iwho emb_all ls_q_m neversymlink"
+        zs = "du_iwho emb_all ls_q_m neversymlink oh_f oh_g"
         k_ign = set(zs.split())
         for vol in vfs.all_vols.values():
             unknown_flags = set()
