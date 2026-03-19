@@ -196,7 +196,14 @@ class SvcHub(object):
         self.log_div = 10 ** (6 - args.log_tdec)
         self.log_efmt = "%02d:%02d:%02d.%0{}d".format(args.log_tdec)
         self.log_dfmt = "%04d-%04d-%06d.%0{}d".format(args.log_tdec)
-        self.log = self._log_disabled if args.q else self._log_enabled
+
+        if args.q:
+            self.log = self._log_disabled
+        elif args.lo and args.flo == 2 and not self.no_ansi:
+            self.log = self._log_en_f2
+        else:
+            self.log = self._log_enabled
+
         if args.lo:
             self._setup_logfile(printed)
 
@@ -1713,6 +1720,69 @@ class SvcHub(object):
                 self.logf.write(msg)
                 if not self.args.no_logflush:
                     self.logf.flush()
+
+    def _log_en_f2(self, src: str, msg: str, c: Union[int, str] = 0) -> None:
+        with self.log_mutex:
+            dt = datetime.now(self.tz)
+            if dt.day != self.cday or dt.month != self.cmon:
+                if self.args.log_date:
+                    zs = dt.strftime(self.args.log_date)
+                    self.log_efmt = "%s %s" % (zs, self.log_efmt.split(" ")[-1])
+                zs = "{}\n" if self.no_ansi else "\033[36m{}\033[0m\n"
+                zs = zs.format(dt.strftime("%Y-%m-%d"))
+                print(zs, end="")
+                self._set_next_day(dt)
+                if self.logf:
+                    self.logf.write(zs)
+
+            ts = self.log_efmt % (
+                dt.hour,
+                dt.minute,
+                dt.second,
+                dt.microsecond // self.log_div,
+            )
+
+            # logfile:
+            if not c:
+                fmt = "%s %-21s  LOG: %s\n"
+            elif c == 1:
+                fmt = "%s %-21s CRIT: %s\n"
+            elif c == 3:
+                fmt = "%s %-21s WARN: %s\n"
+            elif c == 6:
+                fmt = "%s %-21s  BTW: %s\n"
+            else:
+                fmt = "%s %-21s  LOG: %s\n"
+            fsrc = RE_ANSI.sub("", src) if "\033" in src else src
+            fmsg = RE_ANSI.sub("", msg) if "\033" in msg else msg
+            fmsg = fmt % (ts, fsrc, fmsg)
+
+            # stdout ansi:
+            fmt = "\033[36m%s \033[33m%-21s \033[0m%s\n"
+            if not c:
+                pass
+            elif isinstance(c, int):
+                msg = "\033[3%sm%s\033[0m" % (c, msg)
+            elif "\033" not in c:
+                msg = "\033[%sm%s\033[0m" % (c, msg)
+            else:
+                msg = "%s%s\033[0m" % (c, msg)
+
+            msg = fmt % (ts, src, msg)
+            try:
+                print(msg, end="")
+            except UnicodeEncodeError:
+                try:
+                    print(msg.encode("utf-8", "replace").decode(), end="")
+                except:
+                    print(msg.encode("ascii", "replace").decode(), end="")
+            except OSError as ex:
+                if ex.errno != errno.EPIPE:
+                    raise
+
+            self.logf.write(fmsg)
+            if not self.args.no_logflush:
+                self.logf.flush()
 
     def pr(self, *a: Any, **ka: Any) -> None:
         try:
