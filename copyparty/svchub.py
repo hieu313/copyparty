@@ -1145,7 +1145,7 @@ class SvcHub(object):
             vsa = [x.upper() for x in vsa if x]
             setattr(al, k + "_set", set(vsa))
 
-        zs = "dav_ua1 sus_urls nonsus_urls ua_nodav ua_nodoc ua_nozip"
+        zs = "dav_ua1 lf_url sus_urls nonsus_urls ua_nodav ua_nodoc ua_nozip"
         for k in zs.split(" "):
             vs = getattr(al, k)
             if not vs or vs == "no":

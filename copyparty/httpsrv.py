@@ -56,6 +56,7 @@ except SyntaxError:
     sys.exit(1)
 
 from .httpconn import HttpConn
+from .ico import Ico
 from .metrics import Metrics
 from .mtag import HAVE_FFMPEG
 from .th_cli import ThumbCli
@@ -137,6 +138,7 @@ class HttpSrv(object):
         self.aclose: dict[str, int] = {}
 
         self.thumbcli: Optional[ThumbCli] = None
+        self.ico: Ico = Ico(self.args)
 
         dli: dict[str, tuple[float, int, "VFS", str, str]] = {}  # info
         dls: dict[str, tuple[float, int]] = {}  # state

@@ -228,7 +228,6 @@ class HttpCli(object):
         self.args = conn.args  # mypy404
         self.E: EnvParams = self.args.E
         self.asrv = conn.asrv  # mypy404
-        self.ico = conn.ico  # mypy404
         self.thumbcli = conn.hsrv.thumbcli
         self.u2fh = conn.u2fh  # mypy404
         self.pipes = conn.pipes  # mypy404
@@ -534,7 +533,7 @@ class HttpCli(object):
                 else:
                     self.keepalive = False
 
-        ptn: Optional[Pattern[str]] = self.conn.lf_url  # mypy404
+        ptn = self.conn.lf_url
         self.do_log = not ptn or not ptn.search(self.req)
 
         if self.args.ihead and self.do_log:
@@ -5285,7 +5284,7 @@ class HttpCli(object):
         # chrome cannot handle more than ~2000 unique SVGs
         # so url-param "raster" returns a png/webp instead
         # (useragent-sniffing kinshi due to caching proxies)
-        mime, ico = self.ico.get(txt, not small, "raster" in self.uparam)
+        mime, ico = self.conn.hsrv.ico.get(txt, not small, "raster" in self.uparam)
 
         lm = formatdate(self.E.t0)
         self.reply(ico, mime=mime, headers={"Last-Modified": lm})
