@@ -24,7 +24,7 @@ IMG_EXTS = set(["webp", "jpg", "png", "jxl"])
 
 
 class ThumbCli(object):
-    def __init__(self, hsrv: "HttpSrv") -> None:
+    def __init__(self, hsrv: "HttpSrv", c: dict[str, set[str]]) -> None:
         self.broker = hsrv.broker
         self.log_func = hsrv.log
         self.args = hsrv.args
@@ -32,16 +32,6 @@ class ThumbCli(object):
 
         # cache on both sides for less broker spam
         self.cooldown = Cooldown(self.args.th_poke)
-
-        try:
-            c = hsrv.th_cfg
-            if not c:
-                raise Exception()
-        except:
-            c = {
-                k: set()
-                for k in ["thumbable", "pil", "vips", "raw", "ffi", "ffv", "ffa"]
-            }
 
         self.thumbable = c["thumbable"]
         self.fmt_pil = c["pil"]
