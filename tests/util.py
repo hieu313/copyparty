@@ -149,7 +149,7 @@ class Cfg(Namespace):
         ex = "dav_inf dedup dotpart dotsrch hook_v no_dhash no_fastboot no_fpool no_htp no_rescan no_sendfile no_ses no_snap no_up_list no_voldump wram re_dhash see_dots plain_ip"
         ka.update(**{k: True for k in ex.split()})
 
-        ex = "ah_cli ah_gen css_browser dbpath hist ipu js_browser js_other mime mimes no_forget no_hash no_idx nonsus_urls og_tpl og_ua ua_nodoc ua_nozip"
+        ex = "ah_cli ah_gen css_browser dbpath hist ipu js_browser js_other lf_url mime mimes no_forget no_hash no_idx nonsus_urls og_tpl og_ua ua_nodoc ua_nozip"
         ka.update(**{k: None for k in ex.split()})
 
         ex = "gid uid"
@@ -316,6 +316,7 @@ class VHttpSrv(object):
         self.g403 = Garda("")
         self.gurl = Garda("")
 
+        self.ico = Ico(args)
         self.thumbcli = None
         self.u2idx = None
 
@@ -357,7 +358,6 @@ class VHttpConn(object):
 
         Ctor = VHttpSrvUp2k if use_up2k else VHttpSrv
         self.hsrv = Ctor(args, asrv, log)
-        self.ico = Ico(args)
         self.ipr = None
         self.ipa_nm = None
         self.ipar_nm = None
