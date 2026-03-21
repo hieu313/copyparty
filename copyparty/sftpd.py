@@ -659,7 +659,7 @@ class SFTP_Srv(paramiko.SFTPServerInterface):
         self.log("mkdir(%s)" % (vp,))
         try:
             vn, rem = self.asrv.vfs.get(vp, self.uname, False, True)
-            ap = os.path.join(vn.realpath, rem)
+            ap = vn.canonical(rem, False)
             bos.makedirs(ap, vf=vn.flags)  # filezilla expects this
             if attr is not None:
                 paramiko.SFTPServer.set_file_attr(ap, attr)
