@@ -69,8 +69,6 @@ class HttpConn(object):
         self.bans: dict[str, int] = hsrv.bans
         self.aclose: dict[str, int] = hsrv.aclose
 
-        enth = (HAVE_PIL or HAVE_VIPS or HAVE_FFMPEG) and not self.args.no_thumb
-        self.thumbcli: Optional[ThumbCli] = ThumbCli(hsrv) if enth else None  # mypy404
         self.ico: Ico = Ico(self.args)  # mypy404
 
         self.t0: float = time.time()  # mypy404

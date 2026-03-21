@@ -327,6 +327,10 @@ class ThumbSrv(object):
                 self.fmt_pil.discard(f)
 
         self.thumbable: set[str] = set()
+        self._build_thumbable()
+
+    def _build_thumbable(self) -> None:
+        self.thumbable.clear()
 
         if "pil" in self.args.th_dec:
             self.thumbable |= self.fmt_pil
@@ -416,6 +420,10 @@ class ThumbSrv(object):
             pass
 
         return None
+
+    def _rebuild_thumbable(self) -> None:
+        self._build_thumbable()
+        self.hub.broker.say("httpsrv.set_th_cfg", self.getcfg(), (self.args.th_no_jxl,))
 
     def getcfg(self) -> dict[str, set[str]]:
         return {
@@ -833,6 +841,21 @@ class ThumbSrv(object):
             t = "thumbnail cannot be created due to legal reasons; https://github.com/9001/copyparty/blob/hovudstraum/docs/bad-codecs.md \033[0;90m\n"
             ret = 321
             c = 3
+
+        elif cmd[-1].lower().endswith(b".jxl") and (
+            "Error selecting an encoder" in serr
+            or "Automatic encoder selection failed" in serr
+            or "Default encoder for format webp" in serr
+            or "Unrecognized option 'effort:v" in serr
+            or "Please choose an encoder manually" in serr
+        ):
+            self.args.th_no_jxl = True
+            self.fmt_ffi.discard("jxl")
+            self.fmt_ffv.discard("jxl")
+            self._rebuild_thumbable()
+            t = "FFmpeg failed because it was compiled without jpegxl; enabling --th-no-jxl to force webp output:\n"
+            ret = 321
+            c = 1
 
         elif (
             (not self.args.th_ff_jpg or time.time() - int(self.args.th_ff_jpg) < 60)

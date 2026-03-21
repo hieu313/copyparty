@@ -146,20 +146,16 @@ class BrokerMp(object):
         returns a Queue object which eventually contains the response if want_retval
         (not-impl here since nothing uses it yet)
         """
-        if dest == "httpsrv.listen":
-            for p in self.procs:
-                p.q_pend.put((0, dest, [args[0], len(self.procs)]))
-
-        elif dest == "httpsrv.set_netdevs":
-            for p in self.procs:
-                p.q_pend.put((0, dest, list(args)))
+        if dest.startswith("httpsrv."):
+            if dest == "httpsrv.listen":
+                for p in self.procs:
+                    p.q_pend.put((0, dest, [args[0], len(self.procs)]))
+            else:
+                for p in self.procs:
+                    p.q_pend.put((0, dest, list(args)))
 
         elif dest == "cb_httpsrv_up":
             self.hub.cb_httpsrv_up()
-
-        elif dest == "httpsrv.set_bad_ver":
-            for p in self.procs:
-                p.q_pend.put((0, dest, list(args)))
 
         else:
             raise Exception("what is " + str(dest))

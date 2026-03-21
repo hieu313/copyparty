@@ -57,6 +57,9 @@ except SyntaxError:
 
 from .httpconn import HttpConn
 from .metrics import Metrics
+from .mtag import HAVE_FFMPEG
+from .th_cli import ThumbCli
+from .th_srv import HAVE_PIL, HAVE_VIPS
 from .u2idx import U2idx
 from .util import (
     E_SCK,
@@ -132,6 +135,8 @@ class HttpSrv(object):
         self.gurl = Garda(self.args.ban_url)
         self.bans: dict[str, int] = {}
         self.aclose: dict[str, int] = {}
+
+        self.thumbcli: Optional[ThumbCli] = None
 
         dli: dict[str, tuple[float, int, "VFS", str, str]] = {}  # info
         dls: dict[str, tuple[float, int]] = {}  # state
@@ -230,15 +235,19 @@ class HttpSrv(object):
             if self.args.log_thrs:
                 start_log_thrs(self.log, self.args.log_thrs, nid)
 
-        self.th_cfg: dict[str, set[str]] = {}
-        Daemon(self.post_init, "hsrv-init2")
+        if (HAVE_PIL or HAVE_VIPS or HAVE_FFMPEG) and not self.args.no_thumb:
+            Daemon(self.post_init, "hsrv-init2")
 
     def post_init(self) -> None:
         try:
             x = self.broker.ask("thumbsrv.getcfg")
-            self.th_cfg = x.get()
+            self.thumbcli = ThumbCli(self, x.get())
         except:
             pass
+
+    def set_th_cfg(self, c: dict[str, set[str]], opts: tuple[bool]) -> None:
+        self.args.th_no_jxl = opts[0]
+        self.thumbcli = ThumbCli(self, c)
 
     def set_bad_ver(self) -> None:
         self.bad_ver = True

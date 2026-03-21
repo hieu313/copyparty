@@ -229,7 +229,7 @@ class HttpCli(object):
         self.E: EnvParams = self.args.E
         self.asrv = conn.asrv  # mypy404
         self.ico = conn.ico  # mypy404
-        self.thumbcli = conn.thumbcli  # mypy404
+        self.thumbcli = conn.hsrv.thumbcli
         self.u2fh = conn.u2fh  # mypy404
         self.pipes = conn.pipes  # mypy404
         self.log_func = conn.log_func  # mypy404

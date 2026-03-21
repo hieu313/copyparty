@@ -316,6 +316,7 @@ class VHttpSrv(object):
         self.g403 = Garda("")
         self.gurl = Garda("")
 
+        self.thumbcli = None
         self.u2idx = None
 
     def cachebuster(self):
