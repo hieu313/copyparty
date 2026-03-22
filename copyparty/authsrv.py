@@ -880,9 +880,6 @@ class VFS(object):
         yield dbv, vrem, rel, fsroot, rfiles, rdirs, vfs_virt
 
         for rdir, _ in rdirs:
-            if not dots_ok and rdir.startswith("."):
-                continue
-
             wrel = (rel + "/" + rdir).lstrip("/")
             wrem = (rem + "/" + rdir).lstrip("/")
             for x in self.walk(
