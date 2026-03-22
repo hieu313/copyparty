@@ -83,7 +83,6 @@ from .util import (
     has_resource,
     hashcopy,
     hidedir,
-    load_dothidden,
     html_bescape,
     html_escape,
     html_sh_esc,
