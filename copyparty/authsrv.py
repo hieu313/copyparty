@@ -1985,6 +1985,10 @@ class AuthSrv(object):
                     [sun] if "m" in s_pr else [],
                     [sun] if "d" in s_pr else [],
                     [sun] if "g" in s_pr else [],
+                    [],  # G
+                    [],  # h
+                    [],  # a
+                    [sun] if "." in s_pr or self.args.ed else [],
                 )
 
                 # don't know the abspath yet + wanna ensure the user
