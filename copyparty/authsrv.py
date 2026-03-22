@@ -709,7 +709,7 @@ class VFS(object):
         if self.shr_files:
             assert self.shr_src  # !rm
             if rem and rem not in self.shr_files:
-                return "\n\n"
+                return "\n\n\0\n\n"
             if resolve:
                 rap = absreal(ap)
                 vn, rem = self.shr_src
@@ -718,7 +718,7 @@ class VFS(object):
                     # not the dir itself; assert file allowed
                     ad, fn = os.path.split(rap)
                     if chk != ad or fn not in self.shr_files:
-                        return "\n\n"
+                        return "\n\n\0\n\n"
 
         return (rap or absreal(ap)) if resolve else ap
 
@@ -737,7 +737,7 @@ class VFS(object):
             if chk != absreal(ap):
                 # not the dir itself; assert file allowed
                 if ad != chk or fn not in self.shr_files:
-                    return "\n\n"
+                    return "\n\n\0\n\n"
 
         return os.path.join(ad, fn)
 
