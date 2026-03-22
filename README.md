@@ -87,6 +87,8 @@ built in Norway 🇳🇴 with contributions from [not-norway](https://github.com
     * [compress uploads](#compress-uploads) - files can be autocompressed on upload
     * [chmod and chown](#chmod-and-chown) - per-volume filesystem-permissions and ownership
     * [other flags](#other-flags)
+    * [descript.ion](#description) - add a description to each file in a folder
+    * [dothidden](#dothidden) - cosmetically hide specific files in a folder
     * [database location](#database-location) - in-volume (`.hist/up2k.db`, default) or somewhere else
     * [metadata from audio files](#metadata-from-audio-files) - set `-e2t` to index tags on upload
         * [metadata from xattrs](#metadata-from-xattrs) - unix extended file attributes
@@ -1875,6 +1877,31 @@ notes:
   * on windows grab this instead `python3 -m pip install --user -U python-magic-bin`
 * `cachectl` changes how webbrowser will cache responses (the `Cache-Control` response-header); default is `no-cache` which will prevent repeated downloading of the same file unless necessary (browser will ask copyparty if the file has changed)
   * adding `?cache` to a link will override this with "fully cache this for 69 seconds"; `?cache=321` is 321 seconds, and `?cache=i` is 7 days
+
+
+## descript.ion
+
+add a description to each file in a folder  by adding them to a textfile named `descript.ion`
+
+see https://copyparty.eu/beta/ for an example -- here's a basic `descript.ion` file:
+
+```
+bookmark.mp3 Taishi feat. Rita - Bookmark Memories
+slowstep.mp3 Taishi feat. 向日葵 - Slow Step -F.L.C.A-
+prsnlzr.mp3 Taishi feat. みとせのりこ - Personalizer
+cosmos.mp3 Taishi feat. Rita - Into the cosmos
+```
+
+
+## dothidden
+
+cosmetically hide specific files in a folder  by adding them to a textfile named `.hidden`
+
+this option is default-disabled; enable the volflag and/or global-option `dothidden`
+
+this is **cosmetic only!** the files are still easily accessible in many ways, for example with download-as-zip/tar, so **do not** rely on this for security.
+
+> also see the [--unlist](https://copyparty.eu/cli/#g-unlist) option which is somewhat similar -- `unlist` applies to the whole volume instead of just one folder; however, while dothidden also affects sftp and ftp, the `unlist` option is http/https-only
 
 
 ## database location
