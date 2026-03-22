@@ -171,6 +171,9 @@ class SvcHub(object):
             args.reflink = True
             args.dav_auth = True
             args.vague_403 = True
+            args.no_html = True
+            args.no_readme = True
+            args.no_logues = True
             args.nih = True
 
         if args.s:
