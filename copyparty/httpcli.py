@@ -6452,13 +6452,18 @@ class HttpCli(object):
         s_rd = "read" in req["perms"]
         s_wr = "write" in req["perms"]
         s_get = "get" in req["perms"]
+        s_dot = "dot" in req["perms"]
         s_axs = [s_rd, s_wr, False, False, s_get]
+        s_axsd = s_axs + [s_dot]
 
         if s_axs == [False] * 5:
             raise Pebkac(400, "select at least one permission")
 
         try:
             vfs, rem = self.asrv.vfs.get(vp, self.uname, *s_axs)
+            can_dot = self.uname in vfs.axs.udot
+            if s_dot and not can_dot:
+                raise Exception()
         except:
             raise Pebkac(400, "you dont have all the perms you tried to grant")
 
@@ -6471,7 +6476,10 @@ class HttpCli(object):
             raise Pebkac(400, "you dont have perms to create shares from this volume")
 
         ap, reals, _ = vfs.ls(rem, self.uname, not self.args.no_scandir, [s_axs])
-        rfns = set([x[0] for x in reals])
+        zsl = [x[0] for x in reals]
+        if not can_dot:
+            zsl = exclude_dotfiles(zsl)
+        rfns = set(zsl)
         for fn in fns:
             if fn not in rfns:
                 raise Pebkac(400, "selected file not found on disk: %r" % (fn,))
@@ -6482,7 +6490,7 @@ class HttpCli(object):
         sexp = req["exp"]
         exp = int(sexp) if sexp else 0
         exp = now + exp * 60 if exp else 0
-        pr = "".join(zc for zc, zb in zip("rwmdg", s_axs) if zb)
+        pr = "".join(zc for zc, zb in zip("rwmdg.", s_axsd) if zb)
 
         q = "insert into sh values (?,?,?,?,?,?,?,?)"
         cur.execute(q, (skey, pw, vp, pr, len(fns), self.uname, now, exp))
@@ -7018,6 +7026,8 @@ class HttpCli(object):
             perms.append("move")
         if self.can_delete:
             perms.append("delete")
+        if self.can_dot:
+            perms.append("dot")
         if self.can_get:
             perms.append("get")
         if self.can_upget:

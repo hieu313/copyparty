@@ -622,6 +622,8 @@ anyone can access these if they know the name, but they normally don't appear in
 
 a client can request to see dotfiles in directory listings if global option `-ed` is specified, or the volume has volflag `dots`, or the user has permission `.`
 
+> for [shares](#shares), the `dots` volflag is ignored
+
 dotfiles do not appear in search results unless one of the above is true, **and** the global option / volflag `dotsrch` is set
 
 > even if user has permission to see dotfiles, they are default-hidden unless `--see-dots` is set, and/or user has enabled the `dotfiles` option in the settings tab
