@@ -413,6 +413,7 @@ IMPLICATIONS = [
     ["tftpvv", "tftpv"],
     ["nodupem", "nodupe"],
     ["no_dupe_m", "no_dupe"],
+    ["no_html", "no_script"],
     ["nohtml", "noscript"],
     ["sftpvv", "sftpv"],
     ["smbw", "smb"],
