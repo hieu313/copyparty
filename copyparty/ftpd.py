@@ -24,6 +24,7 @@ from .util import (
     ODict,
     Pebkac,
     exclude_dotfiles,
+    exclude_dothidden,
     fsenc,
     ipnorm,
     pybin,
@@ -350,7 +351,10 @@ class FtpFs(AbstractedFS):
             vfs_ls.extend(vfs_virt.keys())
 
             if self.uname not in vfs.axs.udot:
-                vfs_ls = exclude_dotfiles(vfs_ls)
+                if "dothidden" in vfs.flags and ".hidden" in [x[0] for x in vfs_ls]:
+                    vfs_ls = exclude_dothidden(vfs_ls, fsroot)
+                else:
+                    vfs_ls = exclude_dotfiles(vfs_ls)
 
             vfs_ls.sort()
             return vfs_ls

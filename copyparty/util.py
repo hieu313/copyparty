@@ -2396,6 +2396,33 @@ def exclude_dotfiles_ls(
     return [x for x in vfs_ls if not x[0].split("/")[-1].startswith(".")]
 
 
+def exclude_dothidden(filepaths: list[str], fsroot: Any) -> list[str]:
+    ret = [x for x in filepaths if not x.split("/")[-1].startswith(".")]
+    filt = load_dothidden(fsroot)
+    if filt:
+        ret = [x for x in ret if x.split("/")[-1] not in filt]
+    return ret
+
+
+def exclude_dothidden_ls(
+    vfs_ls: list[tuple[str, os.stat_result]], fsroot: Any
+) -> list[tuple[str, os.stat_result]]:
+    ret = [x for x in vfs_ls if not x[0].split("/")[-1].startswith(".")]
+    filt = load_dothidden(fsroot)
+    if filt:
+        ret = [x for x in ret if x[0].split("/")[-1] not in filt]
+    return ret
+
+
+def load_dothidden(dpath: str) -> list[str]:
+    try:
+        with open(os.path.join(dpath, ".hidden"), "rb") as f:
+            zsl = f.read().decode("utf-8").splitlines()
+        return [x.strip() for x in zsl]
+    except OSError:
+        return []
+
+
 def odfusion(
     base: Union[ODict[str, bool], ODict["LiteralString", bool]], oth: str
 ) -> ODict[str, bool]:
