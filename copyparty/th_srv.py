@@ -186,6 +186,10 @@ try:
     if os.environ.get("PRTY_NO_VIPS"):
         raise ImportError()
 
+    if "VIPS_CONCURRENCY" not in os.environ:
+        # reduces glibc RAM usage from 4.7 to 3.5 GiB ...yep, still bonkers
+        os.environ["VIPS_CONCURRENCY"] = "1"
+
     HAVE_VIPS = True
     import pyvips
 
@@ -271,6 +275,18 @@ class ThumbSrv(object):
         self.nthr = max(1, self.args.th_mt)
 
         self.exts_spec_unsafe = set(self.args.th_spec_cnv.split(","))
+
+        # libvips can easily gobble up 4 GiB of RAM when generating JXL thumbnails on glibc so let's not
+        self.vips_jxl = False
+        if HAVE_VIPS and self.args.th_vips_jxl == 2:
+            self.vips_jxl = True
+        elif HAVE_VIPS and self.args.th_vips_jxl == 1:
+            try:
+                with open("/proc/self/maps", "rb") as f:
+                    zb = f.read()
+                self.vips_jxl = b"/ld-musl-" in zb and b"mimalloc" not in zb
+            except:
+                pass
 
         self.q: Queue[Optional[tuple[str, str, str, VFS]]] = Queue(self.nthr * 4)
         for n in range(self.nthr):
@@ -535,7 +551,11 @@ class ThumbSrv(object):
 
                     if lib == "pil" and ext in self.fmt_pil and tex in self.fmt_pil:
                         funs.append(self.conv_pil)
-                    elif lib == "vips" and ext in self.fmt_vips:
+                    elif (
+                        lib == "vips"
+                        and ext in self.fmt_vips
+                        and (tex != "jxl" or self.vips_jxl)
+                    ):
                         funs.append(self.conv_vips)
                     elif lib == "raw" and ext in self.fmt_raw:
                         funs.append(self.conv_raw)
@@ -825,7 +845,7 @@ class ThumbSrv(object):
                 b"-q:v",
                 unicode(vn.flags["th_qvx"]).encode("ascii"),  # default=??
                 b"-effort:v",
-                b"8",  # default=7, 1=fast, 9=max, 9~=8 but slower
+                b"7",  # default=7, 1=fast, 9=max, 9~=8 but slower
             ]
         else:
             cmd += [
@@ -854,6 +874,7 @@ class ThumbSrv(object):
 
         elif cmd[-1].lower().endswith(b".jxl") and (
             "Error selecting an encoder" in serr
+            or "find a suitable output format" in serr
             or "Automatic encoder selection failed" in serr
             or "Default encoder for format webp" in serr
             or "Unrecognized option 'effort:v" in serr
