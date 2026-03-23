@@ -264,6 +264,13 @@ class SvcHub(object):
             t = "WARNING: --s-rd-sz (%d) is larger than --iobuf (%d); this may lead to reduced performance"
             self.log("root", t % (args.s_rd_sz, args.iobuf), 3)
 
+        if args.vc_url:
+            zi = max(1, int(args.vc_age))
+            if zi < 3 and "api.copyparty.eu" in args.vc_url:
+                zi = 3
+                self.log("root", "vc-age too low for copyparty.eu; will use 3 hours")
+            args.vc_age = zi
+
         zs = ""
         if args.th_ram_max < 0.22:
             zs = "generate thumbnails"
@@ -1256,13 +1263,6 @@ class SvcHub(object):
             self.args.mv_re_r = float(zf2)
         except:
             raise Exception("invalid --mv-retry [%s]" % (self.args.mv_retry,))
-
-        if self.args.vc_url:
-            zi = max(1, int(self.args.vc_age))
-            if zi < 3 and "api.copyparty.eu" in self.args.vc_url:
-                zi = 3
-                self.log("root", "vc-age too low for copyparty.eu; will use 3 hours")
-            self.args.vc_age = zi
 
         al.js_utc = "false" if al.localtime else "true"
 

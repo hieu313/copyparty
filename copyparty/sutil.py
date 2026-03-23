@@ -5,7 +5,7 @@ import os
 import tempfile
 from datetime import datetime
 
-from .__init__ import CORES
+from .__init__ import CORES, TYPE_CHECKING
 from .authsrv import LEELOO_DALLAS, VFS, AuthSrv
 from .bos import bos
 from .th_cli import ThumbCli
@@ -16,6 +16,9 @@ if True:  # pylint: disable=using-constant-test
     from typing import Any, Generator, Optional
 
     from .util import NamedLogger
+
+if TYPE_CHECKING:
+    from httpsrv import HttpSrv
 
 
 TAR_NO_OPUS = set("aac|m4a|m4b|m4r|mp3|oga|ogg|opus|wma".split("|"))
