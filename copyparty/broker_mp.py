@@ -160,6 +160,13 @@ class BrokerMp(object):
         else:
             raise Exception("what is " + str(dest))
 
+    def say1(self, dest: str, *args: Any) -> None:
+        """
+        send message to one lucky recipient
+        """
+        p = self.procs[0]
+        p.q_pend.put((0, dest, list(args)))
+
     def periodic(self) -> None:
         while True:
             time.sleep(1)

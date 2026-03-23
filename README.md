@@ -771,6 +771,7 @@ to show `/icons/exe.png` and `/icons/elf.gif` as the thumbnail for all `.exe` an
 
 note:
 * heif/heifs/heic/heics images usually require the `libvips` [optional dependency](#optional-dependencies) but this is not possible with the docker-images due to [legal reasons](docs/bad-codecs.md)
+* if you do not want thumbnails to be generated on-the-fly, and instead wish to generate all of them on server startup, then see [thumbnail pregen](#thumbnail-pregen)
 
 config file example:
 
@@ -829,6 +830,7 @@ cool trick: download a folder by appending url-params `?tar&opus` or `?tar&mp3` 
 * and url-param `&nodot` skips dotfiles/dotfolders; they are included by default if your account has permission to see them
 * and url-params `&j` / `&w` produce jpeg/webm thumbnails/spectrograms instead of the original audio/video/images (`&p` for audio waveforms)
   * can also be used to pregenerate thumbnails; combine with `--th-maxage=9999999` or `--th-clean=0`
+    * but now there is also a real [thumbnail pregen](#thumbnail-pregen) so just use that
 
 
 ## uploading
@@ -1904,6 +1906,30 @@ this option is default-disabled; enable the volflag and/or global-option `dothid
 this is **cosmetic only!** the files are still easily accessible in many ways, for example with download-as-zip/tar, so **do not** rely on this for security.
 
 > also see the [--unlist](https://copyparty.eu/cli/#g-unlist) option which is somewhat similar -- `unlist` applies to the whole volume instead of just one folder; however, while dothidden also affects sftp and ftp, the `unlist` option is http/https-only
+
+
+## thumbnail pregen
+
+if you want to pre-generate everything on startup  (usually a bad idea);
+
+by default, thumbnails are created on-the-fly when a client needs it, and then cached on the server for [--th-maxage](https://copyparty.eu/cli/#g-th-maxage) seconds (default is one week), so most thumbnails only need to be created once, and are then eventually deleted from the cache to preserver disk space
+
+but if you need every thumbnail instantly available when a folder is viewed, then first increase the thumbnail expiration time to something really big, and then set global-option `th-pregen` and volflag `th_pregen` to a comma-separated list of thumbnail formats to automatically generate on server startup;
+
+the full list of all possible formats is: `j,jf,jf3,j3,w,wf,wf3,w3,x,xf,xf3,x3,opus,mp3,flac,wav` and I'll explain what those mean soon
+
+* `j` = jpeg cropped, `jf` = jpeg uncropped, `jf3` = jpeg uncropped triplesize, `j3` jpeg cropped triplesize
+* `w` = webm cropped, `wf` = webm uncropped, ..., `x` = jxl cropped, `xf` = jxl uncropped, ...
+* and yes, audio-transcodes are technically thumbnails according to copyparty -- don't think too much about it ( ﾟ ヮﾟ)
+  * unlike thumbnails, the expiry time for audio-transcodes is configured with [--ac-maxage](https://copyparty.eu/cli/#g-ac-maxage)
+
+anyways, obviously you **do not** want to pregenerate flac/wav because they're HUGE, and everything else also gets pretty big because it all adds up;
+
+* each regular thumbnail ( j, jf, w, wf, x, xf ) takes about 16 KiB of disk space
+* each triplesize thumb ( j3, jf3, w3, wf3, x3, xf3 ) takes about 96 KiB
+* each opus / mp3 audiotranscode takes... idk, 6 MiB? depends on song length
+
+so a thousand pictures converted to every possible regular-size image format (`j,jf,w,wf,x,xf`) takes **96 MiB,** and every possible 3x-size (`jf3,j3,wf3,w3,xf3,x3`) takes **562 MiB,** alternatively **658 MiB** in total for all, so that's why the default is to *not* pregenerate on startup, but instead do on-demand with a cache
 
 
 ## database location

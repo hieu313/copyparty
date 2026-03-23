@@ -256,6 +256,9 @@ class ThumbSrv(object):
         self.args = hub.args
         self.log_func = hub.log
 
+        self.log = self._log
+        self.nextlog = 0
+
         self.poke_cd = Cooldown(self.args.th_poke)
 
         self.mutex = threading.Lock()
@@ -345,7 +348,14 @@ class ThumbSrv(object):
             for zss in [self.fmt_ffi, self.fmt_ffv, self.fmt_ffa]:
                 self.thumbable |= zss
 
-    def log(self, msg: str, c: Union[int, str] = 0) -> None:
+    def _log(self, msg: str, c: Union[int, str] = 0) -> None:
+        self.log_func("thumb", msg, c)
+
+    def _slog(self, msg: str, c: Union[int, str] = 0) -> None:
+        now = time.time()
+        if c in (0, 6) and now < self.nextlog:
+            return
+        self.nextlog = now + self.args.th_pre_rl
         self.log_func("thumb", msg, c)
 
     def shutdown(self) -> None:
