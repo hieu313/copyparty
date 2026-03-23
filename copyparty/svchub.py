@@ -35,6 +35,7 @@ from .cert import ensure_cert
 from .fsutil import ramdisk_chk
 from .mtag import HAVE_FFMPEG, HAVE_FFPROBE, HAVE_MUTAGEN
 from .pwhash import HAVE_ARGON2
+from .sutil import close_pools as sutil_close_pools
 from .tcpsrv import TcpSrv
 from .th_srv import (
     H_PIL_AVIF,
@@ -488,6 +489,8 @@ class SvcHub(object):
         if args.ipr:
             for nm in args.ipr_u.values():
                 nm.mutex = threading.Lock()
+
+        self._reload_thumbsrv()
 
     def _db_onfail_ses(self) -> None:
         self.args.no_ses = True
@@ -1478,7 +1481,16 @@ class SvcHub(object):
                 self.log("root", "reload done")
             t += "\n\nchanges to global options (if any) require a restart of copyparty to take effect"
             self.broker.reload()
+            self._reload_thumbsrv()
         return t
+
+    def _reload_thumbsrv(self) -> None:
+        if not self.thumbsrv:
+            return
+        vols = list(self.asrv.vfs.all_nodes.values())
+        if next((x for x in vols if x.flags.get("th_pregen", "")), None):
+            fun = getattr(self.broker, "say1", self.broker.say)
+            fun("httpsrv.pregen_thumbs")
 
     def _reload_sessions(self) -> None:
         with self.asrv.mutex:
@@ -1564,6 +1576,7 @@ class SvcHub(object):
 
             if self.thumbsrv:
                 self.thumbsrv.shutdown()
+                sutil_close_pools()
 
                 for n in range(200):  # 10s
                     time.sleep(0.05)

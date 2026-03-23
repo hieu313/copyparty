@@ -150,6 +150,7 @@ def vf_vmap() -> dict[str, str]:
         "tail_tmax",
         "tail_who",
         "tcolor",
+        "th_pregen",
         "th_qv",
         "th_qvx",
         "th_spec_p",
@@ -317,6 +318,7 @@ flagcats = {
         "aconvt": "convert-to-audio timeout in seconds",
         "th_spec_p=1": "make spectrograms? 0=never 1=fallback 2=always",
         "ext_th=s=/b.png": "use /b.png as thumbnail for file-extension s",
+        "th_pregen=w,wf": "pregenerate thumbs for these formats",
     },
     "handlers\n(better explained in --help-handlers)": {
         "on404=PY": "handle 404s by executing PY file",

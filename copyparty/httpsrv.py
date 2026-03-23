@@ -55,10 +55,12 @@ except SyntaxError:
     )
     sys.exit(1)
 
+from .authsrv import LEELOO_DALLAS
 from .httpconn import HttpConn
 from .ico import Ico
 from .metrics import Metrics
 from .mtag import HAVE_FFMPEG
+from .sutil import gfilter2
 from .th_cli import ThumbCli
 from .th_srv import HAVE_PIL, HAVE_VIPS
 from .u2idx import U2idx
@@ -657,3 +659,73 @@ class HttpSrv(object):
 
         self.tdli = dli
         self.tdls = dls
+
+    def pregen_thumbs(self) -> None:
+        Daemon(self._pregen_thumbs, "th_pregen")
+
+    def _pregen_thumbs(self) -> None:
+        def log(msg, n):
+            self.log("thumb-pregen", msg, n)
+
+        if getattr(self, "_pregen", False):
+            log("already running", 1)
+            return
+
+        self._pregen = True
+
+        for n in range(9999999):
+            x = self.broker.ask("up2k.is_busy")
+            zb, zi = x.get()
+            if zi:
+                break
+            if not n:
+                log("waiting for up2k to finish initializing", 6)
+            time.sleep(1 if n < 10 else 5 if n < 300 else 15)
+
+        if not self.thumbcli:
+            log("no thumbcli", 1)
+            return
+
+        if self.args.th_pre_rl:
+            try:
+                self.broker.hub.thumbsrv.log = self.broker.hub.thumbsrv._slog
+            except:
+                pass
+
+        nfiles = 0
+        t0 = time.time()
+        scandir = not self.args.no_scandir
+        for vn in self.asrv.vfs.all_nodes.values():
+            fmts = vn.flags.get("th_pregen", "")
+            if not fmts:
+                continue
+            log("starting for volume /%s" % (vn.vpath,), 6)
+            g = vn.walk("x", "/", [], LEELOO_DALLAS, [True], 2, scandir, False, False)
+            g = gfilter2(g, self, vn.vpath, fmts.split(","))
+            for f in g:
+                nfiles += 1
+                if not nfiles % 256:
+                    now = time.time()
+                    for n in range(9999999):
+                        x = self.broker.ask("up2k.is_busy")
+                        zb, zi = x.get()
+                        if not zb:
+                            if n:
+                                t0 += time.time() - now
+                            break
+                        if not n:
+                            log("waiting for up2k to finish indexing", 6)
+                        time.sleep(5)
+
+        if self.args.th_pre_rl:
+            try:
+                self.broker.hub.thumbsrv.log = self.broker.hub.thumbsrv._log
+            except:
+                pass
+
+        t = "finished; %d files in %d seconds"
+        log(t % (nfiles, time.time() - t0), 6)
+        self._pregen = False
+
+        if self.args.exit == "thgen":
+            self.broker.say("sigterm")

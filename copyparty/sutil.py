@@ -6,11 +6,11 @@ import tempfile
 from datetime import datetime
 
 from .__init__ import CORES
-from .authsrv import VFS, AuthSrv
+from .authsrv import LEELOO_DALLAS, VFS, AuthSrv
 from .bos import bos
 from .th_cli import ThumbCli
 from .th_srv import TH_CH
-from .util import UTC, vjoin, vol_san
+from .util import UTC, sigblock, vjoin, vol_san
 
 if True:  # pylint: disable=using-constant-test
     from typing import Any, Generator, Optional
@@ -42,6 +42,17 @@ class StreamArc(object):
         self.stopped = True
 
 
+_pools = {}
+
+
+def close_pools() -> None:
+    for p in list(_pools):
+        try:
+            p.shutdown(wait=False, cancel_futures=True)
+        except:
+            pass
+
+
 def gfilter(
     fgen: Generator[dict[str, Any], None, None],
     thumbcli: ThumbCli,
@@ -52,7 +63,8 @@ def gfilter(
     from concurrent.futures import ThreadPoolExecutor
 
     pend = []
-    with ThreadPoolExecutor(max_workers=CORES) as tp:
+    with ThreadPoolExecutor(max_workers=CORES, initializer=sigblock) as tp:
+        _pools[tp] = 1
         try:
             for f in fgen:
                 task = tp.submit(enthumb, thumbcli, uname, vtop, f, fmt)
@@ -79,6 +91,61 @@ def gfilter(
                 except:
                     pass
             thumbcli.log("gfilter flushed")
+        _pools.pop(tp, None)
+
+
+def gfilter2(
+    fgen: Generator[
+        tuple[
+            "VFS",
+            str,
+            str,
+            str,
+            list[tuple[str, os.stat_result]],
+            list[tuple[str, os.stat_result]],
+            dict[str, "VFS"],
+        ],
+        None,
+        None,
+    ],
+    hsrv: "HttpSrv",
+    vtop: str,
+    fmts: list[str],
+) -> Generator[dict[str, Any], None, None]:
+    from concurrent.futures import ThreadPoolExecutor
+
+    pend = []
+    with ThreadPoolExecutor(max_workers=CORES, initializer=sigblock) as tp:
+        _pools[tp] = 1
+        for _, _, vpath, apath, files, rd, vd in fgen:
+            if "/.hist/" in vpath:
+                continue
+            fnames = [n[0] for n in files]
+            vpaths = [vpath + "/" + n for n in fnames] if vpath else fnames
+            for vp, fi in zip(vpaths, files):
+                for fmt in fmts:
+                    try:
+                        f = {"vp": vp, "st": fi[1]}
+                        task = tp.submit(
+                            enthumb, hsrv.thumbcli, LEELOO_DALLAS, vtop, f, fmt
+                        )
+                        pend.append((task, f))
+                        if pend[0][0].done() or len(pend) > CORES * 4:
+                            task, f = pend.pop(0)
+                            try:
+                                f = task.result(600)
+                            except:
+                                pass
+                            yield f
+                    except:
+                        pass
+        for task, f in pend:
+            try:
+                f = task.result(600)
+            except:
+                pass
+            yield f
+        _pools.pop(tp, None)
 
 
 def enthumb(

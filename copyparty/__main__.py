@@ -1660,7 +1660,7 @@ def add_shutdown(ap):
     ap2 = ap.add_argument_group("shutdown options")
     ap2.add_argument("--ign-ebind", action="store_true", help="continue running even if it's impossible to listen on some of the requested endpoints")
     ap2.add_argument("--ign-ebind-all", action="store_true", help="continue running even if it's impossible to receive connections at all")
-    ap2.add_argument("--exit", metavar="WHEN", type=u, default="", help="shutdown after \033[33mWHEN\033[0m has finished; [\033[32mcfg\033[0m] config parsing, [\033[32midx\033[0m] volscan + multimedia indexing")
+    ap2.add_argument("--exit", metavar="WHEN", type=u, default="", help="shutdown after \033[33mWHEN\033[0m has finished; [\033[32mcfg\033[0m] config parsing, [\033[32midx\033[0m] volscan + multimedia indexing, [\033[32mthgen\033[0m] thumbnail-pregen")
 
 
 def add_logging(ap):
@@ -1726,6 +1726,8 @@ def add_thumbnail(ap):
     ap2.add_argument("--th-poke", metavar="SEC", type=int, default=300, help="activity labeling cooldown -- avoids doing keepalive pokes (updating the mtime) on thumbnail folders more often than \033[33mSEC\033[0m seconds")
     ap2.add_argument("--th-clean", metavar="SEC", type=int, default=43200, help="cleanup interval; 0=disabled")
     ap2.add_argument("--th-maxage", metavar="SEC", type=int, default=604800, help="max folder age -- folders which haven't been poked for longer than \033[33m--th-poke\033[0m seconds will get deleted every \033[33m--th-clean\033[0m seconds")
+    ap2.add_argument("--th-pregen", metavar="F,F", type=u, default="", help="pregenerate thumbnails on startup; \033[33mF,F\033[0m is comma-separated list of formats; example: [\033[32mj,jf,w,w3,wf,wf3,x,xf\033[0m] NOTE: remember to set \033[33m--th-maxage 123456789\033[0m (volflag=th_pregen)")
+    ap2.add_argument("--th-pre-rl", metavar="SEC", type=int, default=30, help="while pregen is running, ratelimit the thumbnailer logger to one message every \033[33mSEC\033[0m seconds (only works with \033[33m-j1\033[0m); set 0 to disable ratelimit")
     ap2.add_argument("--th-covers", metavar="N,N", type=u, default="folder.png,folder.jpg,cover.png,cover.jpg", help="folder thumbnails to stat/look for; enabling \033[33m-e2d\033[0m will make these case-insensitive, and try them as dotfiles (.folder.jpg), and also automatically select thumbnails for all folders that contain pics, even if none match this pattern")
     ap2.add_argument("--th-spec-p", metavar="N", type=u, default=1, help="for music, do spectrograms or embedded coverart? [\033[32m0\033[0m]=only-art, [\033[32m1\033[0m]=prefer-art, [\033[32m2\033[0m]=only-spec")
     # https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html
