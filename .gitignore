@@ -51,3 +51,19 @@ result-*
 
 # IDEA config
 .idea/
+
+
+# [link-manager] agent configs
+.cursor
+.codex
+.agent
+.claude
+.opencode
+plans
+docs
+CLAUDE.md
+GEMINI.md
+repomix-output.xml
+.repomixignore
+AGENTS.md
+release-manifest.json
